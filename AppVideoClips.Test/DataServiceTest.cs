@@ -1,11 +1,12 @@
 ﻿namespace AppVideoClips.Test
 {
     [TestClass]
-    public sealed class DataServiceTest
+    public class ClipServiceTests_DDE
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Should_Search_By_Theme()
         {
+
         }
     }
 }
