@@ -1,5 +1,6 @@
 using AppVideoClips.Lib;
 using System.Text;
+using FontAwesome.Sharp;
 namespace AppVideoClips
 {
     public partial class FormMain : Form
@@ -19,6 +20,30 @@ namespace AppVideoClips
             {
                 panelUpper_DDE.MouseDown += PanelTopCustom_MouseDown;
                 panelUpper_DDE.MouseMove += PanelTopCustom_MouseMove;
+            }
+            catch { }
+
+            // assign FontAwesome icons to picture boxes
+            try
+            {
+                pictureBoxLoad_DDE.Image = CreateFaIconBitmap(IconChar.FolderOpen, 40, Color.White);
+                pictureBoxSave_DDE.Image = CreateFaIconBitmap(IconChar.FileExport, 40, Color.White);
+                pictureBoxManagement_DDE.Image = CreateFaIconBitmap(IconChar.Book, 40, Color.White);
+                pictureBoxAbout_DDE.Image = CreateFaIconBitmap(IconChar.InfoCircle, 40, Color.White);
+                pictureBoxSort_DDE.Image = CreateFaIconBitmap(IconChar.SortAmountDown, 34, Color.White);
+                pictureBoxFilter_DDE.Image = CreateFaIconBitmap(IconChar.Filter, 40, Color.White);
+                pictureBoxSearch_DDE.Image = CreateFaIconBitmap(IconChar.Search, 40, Color.White);
+            }
+            catch { }
+
+            // add context menu to copy selected row
+            try
+            {
+                var cms = new ContextMenuStrip();
+                var miCopyRow = new ToolStripMenuItem("Копировать строку");
+                miCopyRow.Click += (s, e) => CopySelectedRowToClipboard();
+                cms.Items.Add(miCopyRow);
+                dataGridViewBase_DDE.ContextMenuStrip = cms;
             }
             catch { }
 
@@ -47,6 +72,34 @@ namespace AppVideoClips
             {
                 // ignore if designer control not yet created in some contexts
             }
+        }
+
+        private Bitmap CreateFaIconBitmap(IconChar iconChar, int size, Color color)
+        {
+            using var ipb = new IconPictureBox();
+            ipb.IconChar = iconChar;
+            ipb.IconColor = color;
+            ipb.IconSize = size;
+            ipb.BackColor = Color.Transparent;
+            ipb.Size = new Size(size, size);
+            var bmp = new Bitmap(size, size);
+            ipb.DrawToBitmap(bmp, new Rectangle(0, 0, size, size));
+            return bmp;
+        }
+
+        private void CopySelectedRowToClipboard()
+        {
+            try
+            {
+                if (dataGridViewBase_DDE.SelectedRows.Count == 0) return;
+                var row = dataGridViewBase_DDE.SelectedRows[0];
+                var parts = new List<string>();
+                for (int i = 0; i < row.Cells.Count; i++) parts.Add(row.Cells[i].Value?.ToString() ?? string.Empty);
+                var line = string.Join(";", parts);
+                Clipboard.SetText(line);
+                toolTipButtons_DDE.Show("Строка скопирована в буфер обмена", dataGridViewBase_DDE, 2000);
+            }
+            catch { }
         }
 
         // add method expected by designer
@@ -115,11 +168,62 @@ namespace AppVideoClips
                 if (dataGridViewBase_DDE.Columns.Count > 6) dataGridViewBase_DDE.Columns[6].Width = 900;
                 buttonReset_DDE.Enabled = true;
 
+                // populate filter menu dynamically with headers from CSV
+                try
+                {
+                    фильтрToolStripMenuItem.DropDownItems.Clear();
+                    // Add reset filter item
+                    var reset = new ToolStripMenuItem("Сбросить фильтр");
+                    reset.Click += ResetFilter_Click;
+                    фильтрToolStripMenuItem.DropDownItems.Add(reset);
+                    фильтрToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+
+                    for (int c = 0; c < columns; c++)
+                    {
+                        var header = matrix[0, c] ?? $"Столбец {c}";
+                        var item = new ToolStripMenuItem(header) { Tag = c };
+                        item.Click += FilterByColumn_Click;
+                        фильтрToolStripMenuItem.DropDownItems.Add(item);
+                    }
+                }
+                catch { }
+
             }
             catch
             {
                 MessageBox.Show("Возникла проблема с открытием файла", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void FilterByColumn_Click(object? sender, EventArgs e)
+        {
+            if (!(sender is ToolStripMenuItem it) || matrix == null || matrix.Length == 0) return;
+            if (!(it.Tag is int col)) return;
+            string fv = textBoxFilter_DDE.Text ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(fv))
+            {
+                MessageBox.Show("Введите критерий для фильтрации", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            for (int r = 1; r < rows; r++)
+            {
+                var cell = matrix[r, col] ?? string.Empty;
+                dataGridViewBase_DDE.Rows[r].Visible = cell.IndexOf(fv, StringComparison.OrdinalIgnoreCase) >= 0;
+            }
+        }
+
+        private void ResetFilter_Click(object? sender, EventArgs e)
+        {
+            try
+            {
+                for (int r = 1; r < dataGridViewBase_DDE.Rows.Count; r++)
+                {
+                    if (!dataGridViewBase_DDE.Rows[r].IsNewRow)
+                        dataGridViewBase_DDE.Rows[r].Visible = true;
+                }
+            }
+            catch { }
         }
 
         private void buttonSave_DDE_Click(object sender, EventArgs e)
