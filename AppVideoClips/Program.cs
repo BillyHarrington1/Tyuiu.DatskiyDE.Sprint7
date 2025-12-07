@@ -7,7 +7,7 @@ namespace AppVideoClips
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainProgramm_DDE());
+            Application.Run(new FormMain());
         }
     }
 }

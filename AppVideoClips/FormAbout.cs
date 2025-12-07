@@ -2,9 +2,9 @@
 
 namespace AppVideoClips
 {
-    public partial class AboutMe_DDE : Form
+    public partial class FormAbout : Form
     {
-        public AboutMe_DDE()
+        public FormAbout()
         {
             InitializeComponent();
         }

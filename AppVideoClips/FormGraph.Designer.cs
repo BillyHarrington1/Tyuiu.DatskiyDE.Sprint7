@@ -3,7 +3,7 @@ using LiveChartsCore.SkiaSharpView;
 
 namespace AppVideoClips
 {
-    partial class StatsForm_DDE
+    partial class FormGraph
     {
         private CartesianChart cartesianChart_DDE;
 

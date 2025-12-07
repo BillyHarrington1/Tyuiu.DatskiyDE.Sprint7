@@ -1,6 +1,6 @@
 ﻿namespace AppVideoClips
 {
-    partial class AboutMe_DDE
+    partial class FormAbout
     {
         PictureBox pictureBox_DDE;
         Label labelText_DDE;

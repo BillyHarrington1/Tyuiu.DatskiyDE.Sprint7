@@ -1,209 +1,163 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text;
-
+using System.Linq;
+using System.IO;
 namespace AppVideoClips.Lib
 {
-    // =========================================
-    // 🎬 МОДЕЛЬ ВИДЕОКЛИПА
-    // =========================================
-    public class VideoClip
+    public class DataService
     {
-        public int Id { get; set; }
-        public string Code { get; set; } = "";
-        public DateTime RecordedDate { get; set; } = DateTime.MinValue;
-        public int DurationSeconds { get; set; }
-        public string Theme { get; set; } = "";
-        public decimal Cost { get; set; }
 
-        public string ActorLastName { get; set; } = "";
-        public string ActorFirstName { get; set; } = "";
-        public string ActorPatronymic { get; set; } = "";
-        public string ActorRole { get; set; } = "";
-    }
-
-    // =========================================
-    // 📄 CSV СЕРВИС
-    // =========================================
-    public static class CsvService
-    {
-        public static IList<VideoClip> ReadFromCsv(string path)
+        public string[,] LoadDataSet(string path)
         {
-            var list = new List<VideoClip>();
-            if (!File.Exists(path)) return list;
+            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
+                throw new FileNotFoundException("Файл не найден", path);
 
-            using var sr = new StreamReader(path, Encoding.UTF8);
-            sr.ReadLine(); // Пропуск заголовка
-
-            string? line;
-            while ((line = sr.ReadLine()) != null)
+            string[] lines;
+            try
             {
-                var fields = ParseCsvLine(line);
-                if (fields.Count < 10) continue;
+                lines = File.ReadAllLines(path, Encoding.GetEncoding(1251));
+            }
+            catch
+            {
+                // fallback to UTF8 if 1251 unsupported or fails
+                lines = File.ReadAllLines(path, Encoding.UTF8);
+            }
 
-                list.Add(new VideoClip
+            var nonEmpty = lines.Where(l => !string.IsNullOrWhiteSpace(l)).ToArray();
+            if (nonEmpty.Length == 0)
+                return new string[0, 0];
+
+            // Detect separator - prefer semicolon if present, otherwise comma
+            char sep = nonEmpty[0].Contains(';') ? ';' : ',';
+
+            int columns = nonEmpty.Max(l => SplitCsvLine(l, sep).Length);
+            int rows = nonEmpty.Length;
+            string[,] basa = new string[rows, columns];
+
+            for (int i = 0; i < nonEmpty.Length; i++)
+            {
+                var parts = SplitCsvLine(nonEmpty[i], sep);
+                for (int j = 0; j < columns; j++)
                 {
-                    Id = int.Parse(fields[0]),
-                    Code = fields[1],
-                    RecordedDate = DateTime.Parse(fields[2]),
-                    DurationSeconds = int.Parse(fields[3]),
-                    Theme = fields[4],
-                    Cost = decimal.Parse(fields[5], CultureInfo.InvariantCulture),
-                    ActorLastName = fields[6],
-                    ActorFirstName = fields[7],
-                    ActorPatronymic = fields[8],
-                    ActorRole = fields[9]
-                });
+                    if (j < parts.Length)
+                    {
+                        // Trim surrounding quotes and whitespace
+                        var v = parts[j].Trim();
+                        if (v.Length >= 2 && v.StartsWith("\"") && v.EndsWith("\""))
+                            v = v.Substring(1, v.Length - 2);
+                        basa[i, j] = v;
+                    }
+                    else
+                    {
+                        basa[i, j] = string.Empty;
+                    }
+                }
             }
 
-            return list;
+            return basa;
         }
 
-        public static void WriteToCsv(string path, IEnumerable<VideoClip> clips)
+        private static string[] SplitCsvLine(string line, char separator)
         {
-            using var sw = new StreamWriter(path, false, Encoding.UTF8);
-
-            sw.WriteLine("Id,Code,RecordedDate,DurationSeconds,Theme,Cost,ActorLastName,ActorFirstName,ActorPatronymic,ActorRole");
-
-            foreach (var v in clips)
-            {
-                sw.WriteLine(
-                    $"{v.Id}," +
-                    $"{Escape(v.Code)}," +
-                    $"{v.RecordedDate:yyyy-MM-dd}," +
-                    $"{v.DurationSeconds}," +
-                    $"{Escape(v.Theme)}," +
-                    $"{v.Cost.ToString(CultureInfo.InvariantCulture)}," +
-                    $"{Escape(v.ActorLastName)}," +
-                    $"{Escape(v.ActorFirstName)}," +
-                    $"{Escape(v.ActorPatronymic)}," +
-                    $"{Escape(v.ActorRole)}"
-                );
-            }
-        }
-
-        private static List<string> ParseCsvLine(string line)
-        {
+            // Simple split that respects quoted values
             var result = new List<string>();
             var sb = new StringBuilder();
             bool inQuotes = false;
 
-            foreach (char c in line)
+            for (int i = 0; i < line.Length; i++)
             {
-                if (c == '"') inQuotes = !inQuotes;
-                else if (c == ',' && !inQuotes)
+                char c = line[i];
+                if (c == '"')
+                {
+                    inQuotes = !inQuotes;
+                    sb.Append(c);
+                    continue;
+                }
+
+                if (c == separator && !inQuotes)
                 {
                     result.Add(sb.ToString());
                     sb.Clear();
                 }
-                else sb.Append(c);
+                else
+                {
+                    sb.Append(c);
+                }
             }
 
             result.Add(sb.ToString());
-            return result;
+            return result.ToArray();
         }
 
-        private static string Escape(string value)
+        public string[,] SortUbyv(string[,] basa, int column)
         {
-            if (value.Contains(",")) return $"\"{value}\"";
-            return value;
-        }
-    }
-
-    // =========================================
-    // 📦 КАТАЛОГ ВИДЕОКЛИПОВ + СТАТИСТИКА
-    // =========================================
-    public class VideoCatalog
-    {
-        private readonly List<VideoClip> _items = new();
-
-        public IReadOnlyList<VideoClip> Items => _items;
-
-        public void Load(string path)
-        {
-            _items.Clear();
-            _items.AddRange(CsvService.ReadFromCsv(path));
-        }
-
-        public void Save(string path)
-        {
-            CsvService.WriteToCsv(path, _items);
-        }
-
-        public void Add(VideoClip clip)
-        {
-            clip.Id = _items.Any() ? _items.Max(x => x.Id) + 1 : 1;
-            _items.Add(clip);
-        }
-
-        public void Update(VideoClip clip)
-        {
-            var old = _items.First(x => x.Id == clip.Id);
-            _items.Remove(old);
-            _items.Add(clip);
-        }
-
-        public void Delete(int id)
-        {
-            var item = _items.FirstOrDefault(x => x.Id == id);
-            if (item != null)
-                _items.Remove(item);
-        }
-
-        public IEnumerable<VideoClip> Search(string query)
-        {
-            return _items.Where(x =>
-                x.Code.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-                x.Theme.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-                x.ActorLastName.Contains(query, StringComparison.OrdinalIgnoreCase));
-        }
-
-        // ===== 📊 СТАТИСТИКА =====
-        public int Count() => _items.Count;
-
-        public int TotalDuration() => _items.Sum(x => x.DurationSeconds);
-
-        public decimal SumCost() => _items.Sum(x => x.Cost);
-
-        public decimal AvgCost() =>
-            _items.Any() ? _items.Average(x => x.Cost) : 0;
-
-        public decimal MinCost() =>
-            _items.Any() ? _items.Min(x => x.Cost) : 0;
-
-        public decimal MaxCost() =>
-            _items.Any() ? _items.Max(x => x.Cost) : 0;
-
-        public Dictionary<string, int> DurationHistogram(int step = 60)
-        {
-            return _items
-                .GroupBy(x => (x.DurationSeconds / step) * step)
-                .ToDictionary(
-                    g => $"{g.Key}-{g.Key + step} сек",
-                    g => g.Count());
-        }
-    }
-
-    // =========================================
-    // 🔧 ОБЩИЙ DATA SERVICE
-    // =========================================
-    public static class DataService
-    {
-        public static readonly VideoCatalog Catalog = new();
-
-        public static string DefaultCsvPath =>
-            Path.Combine(AppContext.BaseDirectory, "videoclips.csv");
-
-        public static void EnsureDefaultFileExists()
-        {
-            if (!File.Exists(DefaultCsvPath))
+            int[] door = new int[basa.GetLength(0) - 1];
+            door[door.Length - 1] = Convert.ToInt32(basa[basa.GetLength(0) - 1, column]);
+            for (int i = 0; i < door.Length - 1; i++)
             {
-                File.WriteAllText(DefaultCsvPath,
-                    "Id,Code,RecordedDate,DurationSeconds,Theme,Cost,ActorLastName,ActorFirstName,ActorPatronymic,ActorRole\n");
+                door[i] = Convert.ToInt32(basa[i + 1, column]);
             }
+
+            Array.Sort(door, (x, y) => y.CompareTo(x));
+
+            string[,] SortedBasa = new string[basa.GetLength(0), basa.GetLength(1)];
+
+            for (int i = 0; i < SortedBasa.GetLength(1); i++)
+            {
+                SortedBasa[0, i] = basa[0, i];
+            }
+
+            for (int i = 0; i < SortedBasa.GetLength(0) - 1; i++)
+            {
+                for (int j = 1; j < basa.GetLength(0); j++)
+                {
+                    if (door[i] == Convert.ToInt32(basa[j, column]))
+                    {
+                        for (int c = 0; c < SortedBasa.GetLength(1); c++)
+                        {
+                            SortedBasa[i + 1, c] = basa[j, c];
+                        }
+                        basa[j, column] = "-1";
+                        break;
+                    }
+                }
+            }
+            return SortedBasa;
+        }
+
+
+        public string[,] SortVozr(string[,] basa, int column)
+        {
+            int[] input = new int[basa.GetLength(0) - 1];
+            input[input.Length - 1] = Convert.ToInt32(basa[basa.GetLength(0) - 1, column]);
+            for (int i = 0; i < input.Length - 1; i++)
+            {
+                input[i] = Convert.ToInt32(basa[i + 1, column]);
+            }
+            Array.Sort(input, (x, y) => x.CompareTo(y));
+            string[,] sortedmx = new string[basa.GetLength(0), basa.GetLength(1)];
+
+            for (int i = 0; i < sortedmx.GetLength(1); i++)
+            {
+                sortedmx[0, i] = basa[0, i];
+            }
+
+            for (int i = 0; i < sortedmx.GetLength(0) - 1; i++)
+            {
+                for (int j = 1; j < basa.GetLength(0); j++)
+                {
+                    if (input[i] == Convert.ToInt32(basa[j, column]))
+                    {
+                        for (int c = 0; c < sortedmx.GetLength(1); c++)
+                        {
+                            sortedmx[i + 1, c] = basa[j, c];
+                        }
+                        basa[j, column] = "-1";
+                        break;
+                    }
+                }
+            }
+            return sortedmx;
         }
     }
 }
