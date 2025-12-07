@@ -31,20 +31,20 @@
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            openFileDialogMain_GAM = new OpenFileDialog();
-            panelUpper_GAM = new Panel();
+            openFileDialogMain_DDE = new OpenFileDialog();
+            panelUpper_DDE = new Panel();
             buttonMenu_DDE = new Button();
             pictureBoxSort_DDE = new PictureBox();
-            buttonReset_GAM = new Button();
+            buttonReset_DDE = new Button();
             menuStripSort_DDE = new MenuStrip();
             toolStripMenuItemMain_DDE = new ToolStripMenuItem();
-            сортировкаToolStripMenuItemMain_GAM = new ToolStripMenuItem();
-            столбецВесToolStripMenuItem = new ToolStripMenuItem();
-            столбецIDToolStripMenuItem = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_SortDuration = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_ColumnWeight = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_ColumnID = new ToolStripMenuItem();
             поУбываниюToolStripMenuItem = new ToolStripMenuItem();
-            столбецДлительностьToolStripMenuItem = new ToolStripMenuItem();
-            столбецВесToolStripMenuItem1 = new ToolStripMenuItem();
-            столбецДатаToolStripMenuItem1 = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_ColumnDuration_Dec = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_ColumnWeight_Dec = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_ColumnID_Dec = new ToolStripMenuItem();
             pictureBoxAbout_DDE = new PictureBox();
             pictureBoxSave_DDE = new PictureBox();
             pictureBoxManagement_DDE = new PictureBox();
@@ -53,69 +53,67 @@
             buttonSave_DDE = new Button();
             buttonManagement_DDE = new Button();
             buttonLoad_DDE = new Button();
-            panelDown_GAM = new Panel();
+            panelDown_DDE = new Panel();
             buttonGraph_DDE = new Button();
             textBoxFilter_DDE = new TextBox();
             textBoxSearch_DDE = new TextBox();
-            buttonLeft_GAM = new Button();
-            buttonRight_GAM = new Button();
             buttonSearch_DDE = new Button();
             pictureBoxSearch_DDE = new PictureBox();
             pictureBoxFilter_DDE = new PictureBox();
             menuStripMain_DDE = new MenuStrip();
             фильтрToolStripMenuItem = new ToolStripMenuItem();
-            названиеToolStripMenuItem = new ToolStripMenuItem();
-            весToolStripMenuItem = new ToolStripMenuItem();
-            длительностьToolStripMenuItem = new ToolStripMenuItem();
-            форматToolStripMenuItem = new ToolStripMenuItem();
-            категорияToolStripMenuItem = new ToolStripMenuItem();
-            iDToolStripMenuItem = new ToolStripMenuItem();
-            panelMiddle_GAM = new Panel();
-            groupBoxBase_GAM = new GroupBox();
-            dataGridViewBase_GAM = new DataGridView();
-            saveFileDialogMain_GAM = new SaveFileDialog();
-            toolTipButtons_GAM = new ToolTip(components);
-            panelUpper_GAM.SuspendLayout();
+            ToolStripMenuItem_DDE_FilterName = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_FilterWeight = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_FilterDuration = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_FilterFormat = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_FilterCategory = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE_FilterID = new ToolStripMenuItem();
+            panelMiddle_DDE = new Panel();
+            groupBoxBase_DDE = new GroupBox();
+            dataGridViewBase_DDE = new DataGridView();
+            saveFileDialogMain_DDE = new SaveFileDialog();
+            toolTipButtons_DDE = new ToolTip(components);
+            panelUpper_DDE.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSort_DDE).BeginInit();
             menuStripSort_DDE.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxAbout_DDE).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSave_DDE).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxManagement_DDE).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLoad_DDE).BeginInit();
-            panelDown_GAM.SuspendLayout();
+            panelDown_DDE.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSearch_DDE).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxFilter_DDE).BeginInit();
             menuStripMain_DDE.SuspendLayout();
-            panelMiddle_GAM.SuspendLayout();
-            groupBoxBase_GAM.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewBase_GAM).BeginInit();
+            panelMiddle_DDE.SuspendLayout();
+            groupBoxBase_DDE.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBase_DDE).BeginInit();
             SuspendLayout();
             // 
-            // openFileDialogMain_GAM
+            // openFileDialogMain_DDE
             // 
-            openFileDialogMain_GAM.FileName = "openFileDialog1";
+            openFileDialogMain_DDE.FileName = "openFileDialog1";
             // 
-            // panelUpper_GAM
+            // panelUpper_DDE
             // 
-            panelUpper_GAM.BackColor = Color.FromArgb(60, 60, 60);
-            panelUpper_GAM.Controls.Add(buttonMenu_DDE);
-            panelUpper_GAM.Controls.Add(pictureBoxSort_DDE);
-            panelUpper_GAM.Controls.Add(buttonReset_GAM);
-            panelUpper_GAM.Controls.Add(menuStripSort_DDE);
-            panelUpper_GAM.Controls.Add(pictureBoxAbout_DDE);
-            panelUpper_GAM.Controls.Add(pictureBoxSave_DDE);
-            panelUpper_GAM.Controls.Add(pictureBoxManagement_DDE);
-            panelUpper_GAM.Controls.Add(pictureBoxLoad_DDE);
-            panelUpper_GAM.Controls.Add(buttonAbout_DDE);
-            panelUpper_GAM.Controls.Add(buttonSave_DDE);
-            panelUpper_GAM.Controls.Add(buttonManagement_DDE);
-            panelUpper_GAM.Controls.Add(buttonLoad_DDE);
-            panelUpper_GAM.Dock = DockStyle.Top;
-            panelUpper_GAM.Location = new Point(0, 0);
-            panelUpper_GAM.Margin = new Padding(4, 3, 4, 3);
-            panelUpper_GAM.Name = "panelUpper_GAM";
-            panelUpper_GAM.Size = new Size(938, 97);
-            panelUpper_GAM.TabIndex = 0;
+            panelUpper_DDE.BackColor = Color.FromArgb(60, 60, 60);
+            panelUpper_DDE.Controls.Add(buttonMenu_DDE);
+            panelUpper_DDE.Controls.Add(pictureBoxSort_DDE);
+            panelUpper_DDE.Controls.Add(buttonReset_DDE);
+            panelUpper_DDE.Controls.Add(menuStripSort_DDE);
+            panelUpper_DDE.Controls.Add(pictureBoxAbout_DDE);
+            panelUpper_DDE.Controls.Add(pictureBoxSave_DDE);
+            panelUpper_DDE.Controls.Add(pictureBoxManagement_DDE);
+            panelUpper_DDE.Controls.Add(pictureBoxLoad_DDE);
+            panelUpper_DDE.Controls.Add(buttonAbout_DDE);
+            panelUpper_DDE.Controls.Add(buttonSave_DDE);
+            panelUpper_DDE.Controls.Add(buttonManagement_DDE);
+            panelUpper_DDE.Controls.Add(buttonLoad_DDE);
+            panelUpper_DDE.Dock = DockStyle.Top;
+            panelUpper_DDE.Location = new Point(0, 0);
+            panelUpper_DDE.Margin = new Padding(4, 3, 4, 3);
+            panelUpper_DDE.Name = "panelUpper_DDE";
+            panelUpper_DDE.Size = new Size(938, 97);
+            panelUpper_DDE.TabIndex = 0;
             // 
             // buttonMenu_DDE
             // 
@@ -128,11 +126,11 @@
             buttonMenu_DDE.Size = new Size(154, 39);
             buttonMenu_DDE.TabIndex = 6;
             buttonMenu_DDE.Text = "Главное меню";
-            toolTipButtons_GAM.SetToolTip(buttonMenu_DDE, "Вернуться в главное меню");
+            toolTipButtons_DDE.SetToolTip(buttonMenu_DDE, "Вернуться в главное меню");
             buttonMenu_DDE.UseVisualStyleBackColor = false;
-            buttonMenu_DDE.Click += buttonMenu_GAM_Click;
-            buttonMenu_DDE.MouseEnter += buttonMenu_GAM_MouseEnter;
-            buttonMenu_DDE.MouseLeave += buttonMenu_GAM_MouseLeave;
+            buttonMenu_DDE.Click += buttonMenu_DDE_Click;
+            buttonMenu_DDE.MouseEnter += buttonMenu_DDE_MouseEnter;
+            buttonMenu_DDE.MouseLeave += buttonMenu_DDE_MouseLeave;
             // 
             // pictureBoxSort_DDE
             // 
@@ -144,24 +142,25 @@
             pictureBoxSort_DDE.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxSort_DDE.TabIndex = 5;
             pictureBoxSort_DDE.TabStop = false;
+            pictureBoxSort_DDE.Click += pictureBoxSort_DDE_Click;
             // 
-            // buttonReset_GAM
+            // buttonReset_DDE
             // 
-            buttonReset_GAM.BackColor = Color.Transparent;
-            buttonReset_GAM.BackgroundImageLayout = ImageLayout.Zoom;
-            buttonReset_GAM.Enabled = false;
-            buttonReset_GAM.FlatAppearance.BorderSize = 0;
-            buttonReset_GAM.FlatStyle = FlatStyle.Flat;
-            buttonReset_GAM.Location = new Point(355, 7);
-            buttonReset_GAM.Margin = new Padding(4, 3, 4, 3);
-            buttonReset_GAM.Name = "buttonReset_GAM";
-            buttonReset_GAM.Size = new Size(37, 37);
-            buttonReset_GAM.TabIndex = 4;
-            toolTipButtons_GAM.SetToolTip(buttonReset_GAM, "Вернуть таблицу к исходному виду");
-            buttonReset_GAM.UseVisualStyleBackColor = false;
-            buttonReset_GAM.Click += buttonReset_GAM_Click;
-            buttonReset_GAM.MouseEnter += buttonReset_GAM_MouseEnter;
-            buttonReset_GAM.MouseLeave += buttonReset_GAM_MouseLeave;
+            buttonReset_DDE.BackColor = Color.Transparent;
+            buttonReset_DDE.BackgroundImageLayout = ImageLayout.Zoom;
+            buttonReset_DDE.Enabled = false;
+            buttonReset_DDE.FlatAppearance.BorderSize = 0;
+            buttonReset_DDE.FlatStyle = FlatStyle.Flat;
+            buttonReset_DDE.Location = new Point(355, 7);
+            buttonReset_DDE.Margin = new Padding(4, 3, 4, 3);
+            buttonReset_DDE.Name = "buttonReset_DDE";
+            buttonReset_DDE.Size = new Size(37, 37);
+            buttonReset_DDE.TabIndex = 4;
+            toolTipButtons_DDE.SetToolTip(buttonReset_DDE, "Вернуть таблицу к исходному виду");
+            buttonReset_DDE.UseVisualStyleBackColor = false;
+            buttonReset_DDE.Click += buttonReset_DDE_Click;
+            buttonReset_DDE.MouseEnter += buttonReset_DDE_MouseEnter;
+            buttonReset_DDE.MouseLeave += buttonReset_DDE_MouseLeave;
             // 
             // menuStripSort_DDE
             // 
@@ -179,61 +178,61 @@
             // toolStripMenuItemMain_DDE
             // 
             toolStripMenuItemMain_DDE.BackColor = Color.FromArgb(120, 120, 120);
-            toolStripMenuItemMain_DDE.DropDownItems.AddRange(new ToolStripItem[] { сортировкаToolStripMenuItemMain_GAM, столбецВесToolStripMenuItem, столбецIDToolStripMenuItem });
+            toolStripMenuItemMain_DDE.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItem_DDE_SortDuration, ToolStripMenuItem_DDE_ColumnWeight, ToolStripMenuItem_DDE_ColumnID });
             toolStripMenuItemMain_DDE.ForeColor = SystemColors.ControlText;
             toolStripMenuItemMain_DDE.Name = "toolStripMenuItemMain_DDE";
             toolStripMenuItemMain_DDE.Size = new Size(110, 20);
             toolStripMenuItemMain_DDE.Text = "По возрастанию";
             // 
-            // сортировкаToolStripMenuItemMain_GAM
+            // ToolStripMenuItem_DDE_SortDuration
             // 
-            сортировкаToolStripMenuItemMain_GAM.Name = "сортировкаToolStripMenuItemMain_GAM";
-            сортировкаToolStripMenuItemMain_GAM.Size = new Size(211, 22);
-            сортировкаToolStripMenuItemMain_GAM.Text = "Столбец \"Длительность\"";
-            сортировкаToolStripMenuItemMain_GAM.Click += сортировкаToolStripMenuItem_Click_1;
+            ToolStripMenuItem_DDE_SortDuration.Name = "ToolStripMenuItem_DDE_SortDuration";
+            ToolStripMenuItem_DDE_SortDuration.Size = new Size(211, 22);
+            ToolStripMenuItem_DDE_SortDuration.Text = "Столбец \"Длительность\"";
+            ToolStripMenuItem_DDE_SortDuration.Click += сортировкаToolStripMenuItem_Click_1;
             // 
-            // столбецВесToolStripMenuItem
+            // ToolStripMenuItem_DDE_ColumnWeight
             // 
-            столбецВесToolStripMenuItem.Name = "столбецВесToolStripMenuItem";
-            столбецВесToolStripMenuItem.Size = new Size(211, 22);
-            столбецВесToolStripMenuItem.Text = "Столбец \"Вес\"";
-            столбецВесToolStripMenuItem.Click += столбецВесToolStripMenuItem_Click;
+            ToolStripMenuItem_DDE_ColumnWeight.Name = "ToolStripMenuItem_DDE_ColumnWeight";
+            ToolStripMenuItem_DDE_ColumnWeight.Size = new Size(211, 22);
+            ToolStripMenuItem_DDE_ColumnWeight.Text = "Столбец \"Вес\"";
+            ToolStripMenuItem_DDE_ColumnWeight.Click += столбецВесToolStripMenuItem_Click;
             // 
-            // столбецIDToolStripMenuItem
+            // ToolStripMenuItem_DDE_ColumnID
             // 
-            столбецIDToolStripMenuItem.Name = "столбецIDToolStripMenuItem";
-            столбецIDToolStripMenuItem.Size = new Size(211, 22);
-            столбецIDToolStripMenuItem.Text = "Столбец \"ID\"";
-            столбецIDToolStripMenuItem.Click += столбецIDToolStripMenuItem_Click;
+            ToolStripMenuItem_DDE_ColumnID.Name = "ToolStripMenuItem_DDE_ColumnID";
+            ToolStripMenuItem_DDE_ColumnID.Size = new Size(211, 22);
+            ToolStripMenuItem_DDE_ColumnID.Text = "Столбец \"ID\"";
+            ToolStripMenuItem_DDE_ColumnID.Click += столбецIDToolStripMenuItem_Click;
             // 
             // поУбываниюToolStripMenuItem
             // 
-            поУбываниюToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { столбецДлительностьToolStripMenuItem, столбецВесToolStripMenuItem1, столбецДатаToolStripMenuItem1 });
+            поУбываниюToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItem_DDE_ColumnDuration_Dec, ToolStripMenuItem_DDE_ColumnWeight_Dec, ToolStripMenuItem_DDE_ColumnID_Dec });
             поУбываниюToolStripMenuItem.ForeColor = SystemColors.ControlText;
             поУбываниюToolStripMenuItem.Name = "поУбываниюToolStripMenuItem";
             поУбываниюToolStripMenuItem.Size = new Size(96, 20);
             поУбываниюToolStripMenuItem.Text = "По убыванию";
             // 
-            // столбецДлительностьToolStripMenuItem
+            // ToolStripMenuItem_DDE_ColumnDuration_Dec
             // 
-            столбецДлительностьToolStripMenuItem.Name = "столбецДлительностьToolStripMenuItem";
-            столбецДлительностьToolStripMenuItem.Size = new Size(211, 22);
-            столбецДлительностьToolStripMenuItem.Text = "Столбец \"Длительность\"";
-            столбецДлительностьToolStripMenuItem.Click += столбецДлительностьToolStripMenuItem_Click;
+            ToolStripMenuItem_DDE_ColumnDuration_Dec.Name = "ToolStripMenuItem_DDE_ColumnDuration_Dec";
+            ToolStripMenuItem_DDE_ColumnDuration_Dec.Size = new Size(211, 22);
+            ToolStripMenuItem_DDE_ColumnDuration_Dec.Text = "Столбец \"Длительность\"";
+            ToolStripMenuItem_DDE_ColumnDuration_Dec.Click += столбецДлительностьToolStripMenuItem_Click;
             // 
-            // столбецВесToolStripMenuItem1
+            // ToolStripMenuItem_DDE_ColumnWeight_Dec
             // 
-            столбецВесToolStripMenuItem1.Name = "столбецВесToolStripMenuItem1";
-            столбецВесToolStripMenuItem1.Size = new Size(211, 22);
-            столбецВесToolStripMenuItem1.Text = "Столбец \"Вес\"";
-            столбецВесToolStripMenuItem1.Click += столбецВесToolStripMenuItem1_Click;
+            ToolStripMenuItem_DDE_ColumnWeight_Dec.Name = "ToolStripMenuItem_DDE_ColumnWeight_Dec";
+            ToolStripMenuItem_DDE_ColumnWeight_Dec.Size = new Size(211, 22);
+            ToolStripMenuItem_DDE_ColumnWeight_Dec.Text = "Столбец \"Вес\"";
+            ToolStripMenuItem_DDE_ColumnWeight_Dec.Click += столбецВесToolStripMenuItem1_Click;
             // 
-            // столбецДатаToolStripMenuItem1
+            // ToolStripMenuItem_DDE_ColumnID_Dec
             // 
-            столбецДатаToolStripMenuItem1.Name = "столбецДатаToolStripMenuItem1";
-            столбецДатаToolStripMenuItem1.Size = new Size(211, 22);
-            столбецДатаToolStripMenuItem1.Text = "Столбец \"ID\"";
-            столбецДатаToolStripMenuItem1.Click += столбецДатаToolStripMenuItem1_Click;
+            ToolStripMenuItem_DDE_ColumnID_Dec.Name = "ToolStripMenuItem_DDE_ColumnID_Dec";
+            ToolStripMenuItem_DDE_ColumnID_Dec.Size = new Size(211, 22);
+            ToolStripMenuItem_DDE_ColumnID_Dec.Text = "Столбец \"ID\"";
+            ToolStripMenuItem_DDE_ColumnID_Dec.Click += столбецДатаToolStripMenuItem1_Click;
             // 
             // pictureBoxAbout_DDE
             // 
@@ -306,11 +305,11 @@
             buttonAbout_DDE.Size = new Size(108, 39);
             buttonAbout_DDE.TabIndex = 0;
             buttonAbout_DDE.Text = "О программе";
-            toolTipButtons_GAM.SetToolTip(buttonAbout_DDE, "Информация о разработчике");
+            toolTipButtons_DDE.SetToolTip(buttonAbout_DDE, "Информация о разработчике");
             buttonAbout_DDE.UseVisualStyleBackColor = false;
-            buttonAbout_DDE.Click += buttonAbout_GAM_Click;
-            buttonAbout_DDE.MouseEnter += buttonAbout_GAM_MouseEnter;
-            buttonAbout_DDE.MouseLeave += buttonAbout_GAM_MouseLeave;
+            buttonAbout_DDE.Click += buttonAbout_DDE_Click;
+            buttonAbout_DDE.MouseEnter += buttonAbout_DDE_MouseEnter;
+            buttonAbout_DDE.MouseLeave += buttonAbout_DDE_MouseLeave;
             // 
             // buttonSave_DDE
             // 
@@ -324,11 +323,11 @@
             buttonSave_DDE.Size = new Size(125, 39);
             buttonSave_DDE.TabIndex = 0;
             buttonSave_DDE.Text = "Сохранить файл";
-            toolTipButtons_GAM.SetToolTip(buttonSave_DDE, "Сохранить измененный файл");
+            toolTipButtons_DDE.SetToolTip(buttonSave_DDE, "Сохранить измененный файл");
             buttonSave_DDE.UseVisualStyleBackColor = false;
-            buttonSave_DDE.Click += buttonSave_GAM_Click;
-            buttonSave_DDE.MouseEnter += buttonSave_GAM_MouseEnter;
-            buttonSave_DDE.MouseLeave += buttonSave_GAM_MouseLeave;
+            buttonSave_DDE.Click += buttonSave_DDE_Click;
+            buttonSave_DDE.MouseEnter += buttonSave_DDE_MouseEnter;
+            buttonSave_DDE.MouseLeave += buttonSave_DDE_MouseLeave;
             // 
             // buttonManagement_DDE
             // 
@@ -343,11 +342,11 @@
             buttonManagement_DDE.Size = new Size(100, 39);
             buttonManagement_DDE.TabIndex = 0;
             buttonManagement_DDE.Text = "Руководство";
-            toolTipButtons_GAM.SetToolTip(buttonManagement_DDE, "Открыть краткое руководство по программе");
+            toolTipButtons_DDE.SetToolTip(buttonManagement_DDE, "Открыть краткое руководство по программе");
             buttonManagement_DDE.UseVisualStyleBackColor = false;
-            buttonManagement_DDE.Click += buttonManagement_GAM_Click;
-            buttonManagement_DDE.MouseEnter += buttonManagement_GAM_MouseEnter;
-            buttonManagement_DDE.MouseLeave += buttonManagement_GAM_MouseLeave;
+            buttonManagement_DDE.Click += buttonManagement_DDE_Click;
+            buttonManagement_DDE.MouseEnter += buttonManagement_DDE_MouseEnter;
+            buttonManagement_DDE.MouseLeave += buttonManagement_DDE_MouseLeave;
             // 
             // buttonLoad_DDE
             // 
@@ -361,30 +360,28 @@
             buttonLoad_DDE.Size = new Size(121, 39);
             buttonLoad_DDE.TabIndex = 0;
             buttonLoad_DDE.Text = "Выбрать файл";
-            toolTipButtons_GAM.SetToolTip(buttonLoad_DDE, "Открыть нужный файл для работы");
+            toolTipButtons_DDE.SetToolTip(buttonLoad_DDE, "Открыть нужный файл для работы");
             buttonLoad_DDE.UseVisualStyleBackColor = false;
-            buttonLoad_DDE.Click += buttonLoad_GAM_Click;
-            buttonLoad_DDE.MouseEnter += buttonLoad_GAM_MouseEnter;
-            buttonLoad_DDE.MouseLeave += buttonLoad_GAM_MouseLeave;
+            buttonLoad_DDE.Click += buttonLoad_DDE_Click;
+            buttonLoad_DDE.MouseEnter += buttonLoad_DDE_MouseEnter;
+            buttonLoad_DDE.MouseLeave += buttonLoad_DDE_MouseLeave;
             // 
-            // panelDown_GAM
+            // panelDown_DDE
             // 
-            panelDown_GAM.BackColor = Color.FromArgb(60, 60, 60);
-            panelDown_GAM.Controls.Add(buttonGraph_DDE);
-            panelDown_GAM.Controls.Add(textBoxFilter_DDE);
-            panelDown_GAM.Controls.Add(textBoxSearch_DDE);
-            panelDown_GAM.Controls.Add(buttonLeft_GAM);
-            panelDown_GAM.Controls.Add(buttonRight_GAM);
-            panelDown_GAM.Controls.Add(buttonSearch_DDE);
-            panelDown_GAM.Controls.Add(pictureBoxSearch_DDE);
-            panelDown_GAM.Controls.Add(pictureBoxFilter_DDE);
-            panelDown_GAM.Controls.Add(menuStripMain_DDE);
-            panelDown_GAM.Dock = DockStyle.Bottom;
-            panelDown_GAM.Location = new Point(0, 475);
-            panelDown_GAM.Margin = new Padding(4, 3, 4, 3);
-            panelDown_GAM.Name = "panelDown_GAM";
-            panelDown_GAM.Size = new Size(938, 57);
-            panelDown_GAM.TabIndex = 1;
+            panelDown_DDE.BackColor = Color.FromArgb(60, 60, 60);
+            panelDown_DDE.Controls.Add(buttonGraph_DDE);
+            panelDown_DDE.Controls.Add(textBoxFilter_DDE);
+            panelDown_DDE.Controls.Add(textBoxSearch_DDE);
+            panelDown_DDE.Controls.Add(buttonSearch_DDE);
+            panelDown_DDE.Controls.Add(pictureBoxSearch_DDE);
+            panelDown_DDE.Controls.Add(pictureBoxFilter_DDE);
+            panelDown_DDE.Controls.Add(menuStripMain_DDE);
+            panelDown_DDE.Dock = DockStyle.Bottom;
+            panelDown_DDE.Location = new Point(0, 475);
+            panelDown_DDE.Margin = new Padding(4, 3, 4, 3);
+            panelDown_DDE.Name = "panelDown_DDE";
+            panelDown_DDE.Size = new Size(938, 57);
+            panelDown_DDE.TabIndex = 1;
             // 
             // buttonGraph_DDE
             // 
@@ -398,11 +395,11 @@
             buttonGraph_DDE.Size = new Size(88, 38);
             buttonGraph_DDE.TabIndex = 3;
             buttonGraph_DDE.Text = "График";
-            toolTipButtons_GAM.SetToolTip(buttonGraph_DDE, "Перейти в среду для отображения графиков");
+            toolTipButtons_DDE.SetToolTip(buttonGraph_DDE, "Перейти в среду для отображения графиков");
             buttonGraph_DDE.UseVisualStyleBackColor = false;
-            buttonGraph_DDE.Click += buttonGraph_GAM_Click;
-            buttonGraph_DDE.MouseEnter += buttonGraph_GAM_MouseEnter;
-            buttonGraph_DDE.MouseLeave += buttonGraph_GAM_MouseLeave;
+            buttonGraph_DDE.Click += buttonGraph_DDE_Click;
+            buttonGraph_DDE.MouseEnter += buttonGraph_DDE_MouseEnter;
+            buttonGraph_DDE.MouseLeave += buttonGraph_DDE_MouseLeave;
             // 
             // textBoxFilter_DDE
             // 
@@ -430,42 +427,6 @@
             textBoxSearch_DDE.Size = new Size(129, 38);
             textBoxSearch_DDE.TabIndex = 2;
             // 
-            // buttonLeft_GAM
-            // 
-            buttonLeft_GAM.Anchor = AnchorStyles.Right;
-            buttonLeft_GAM.BackColor = Color.Transparent;
-            buttonLeft_GAM.BackgroundImageLayout = ImageLayout.Zoom;
-            buttonLeft_GAM.FlatAppearance.BorderSize = 0;
-            buttonLeft_GAM.FlatStyle = FlatStyle.Flat;
-            buttonLeft_GAM.Location = new Point(838, 7);
-            buttonLeft_GAM.Margin = new Padding(4, 3, 4, 3);
-            buttonLeft_GAM.Name = "buttonLeft_GAM";
-            buttonLeft_GAM.Size = new Size(40, 39);
-            buttonLeft_GAM.TabIndex = 0;
-            toolTipButtons_GAM.SetToolTip(buttonLeft_GAM, "Перелистнуть влево");
-            buttonLeft_GAM.UseVisualStyleBackColor = false;
-            buttonLeft_GAM.Click += buttonLeft_GAM_Click;
-            buttonLeft_GAM.MouseEnter += buttonLeft_GAM_MouseEnter;
-            buttonLeft_GAM.MouseLeave += buttonLeft_GAM_MouseLeave;
-            // 
-            // buttonRight_GAM
-            // 
-            buttonRight_GAM.Anchor = AnchorStyles.Right;
-            buttonRight_GAM.BackColor = Color.Transparent;
-            buttonRight_GAM.BackgroundImageLayout = ImageLayout.Zoom;
-            buttonRight_GAM.FlatAppearance.BorderSize = 0;
-            buttonRight_GAM.FlatStyle = FlatStyle.Flat;
-            buttonRight_GAM.Location = new Point(884, 7);
-            buttonRight_GAM.Margin = new Padding(4, 3, 4, 3);
-            buttonRight_GAM.Name = "buttonRight_GAM";
-            buttonRight_GAM.Size = new Size(40, 39);
-            buttonRight_GAM.TabIndex = 0;
-            toolTipButtons_GAM.SetToolTip(buttonRight_GAM, "Перелистнуть вправо");
-            buttonRight_GAM.UseVisualStyleBackColor = false;
-            buttonRight_GAM.Click += buttonRight_GAM_Click;
-            buttonRight_GAM.MouseEnter += buttonRight_GAM_MouseEnter;
-            buttonRight_GAM.MouseLeave += buttonRight_GAM_MouseLeave;
-            // 
             // buttonSearch_DDE
             // 
             buttonSearch_DDE.BackColor = Color.FromArgb(40, 40, 40);
@@ -478,11 +439,11 @@
             buttonSearch_DDE.Size = new Size(88, 39);
             buttonSearch_DDE.TabIndex = 0;
             buttonSearch_DDE.Text = "Поиск";
-            toolTipButtons_GAM.SetToolTip(buttonSearch_DDE, "Выполнить поиск по заданному тексту");
+            toolTipButtons_DDE.SetToolTip(buttonSearch_DDE, "Выполнить поиск по заданному тексту");
             buttonSearch_DDE.UseVisualStyleBackColor = false;
-            buttonSearch_DDE.Click += buttonSearch_GAM_Click;
-            buttonSearch_DDE.MouseEnter += buttonSearch_GAM_MouseEnter;
-            buttonSearch_DDE.MouseLeave += buttonSearch_GAM_MouseLeave;
+            buttonSearch_DDE.Click += buttonSearch_DDE_Click;
+            buttonSearch_DDE.MouseEnter += buttonSearch_DDE_MouseEnter;
+            buttonSearch_DDE.MouseLeave += buttonSearch_DDE_MouseLeave;
             // 
             // pictureBoxSearch_DDE
             // 
@@ -527,86 +488,86 @@
             // фильтрToolStripMenuItem
             // 
             фильтрToolStripMenuItem.BackColor = Color.FromArgb(120, 120, 120);
-            фильтрToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { названиеToolStripMenuItem, весToolStripMenuItem, длительностьToolStripMenuItem, форматToolStripMenuItem, категорияToolStripMenuItem, iDToolStripMenuItem });
+            фильтрToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItem_DDE_FilterName, ToolStripMenuItem_DDE_FilterWeight, ToolStripMenuItem_DDE_FilterDuration, ToolStripMenuItem_DDE_FilterFormat, ToolStripMenuItem_DDE_FilterCategory, ToolStripMenuItem_DDE_FilterID });
             фильтрToolStripMenuItem.ForeColor = SystemColors.ControlText;
             фильтрToolStripMenuItem.Name = "фильтрToolStripMenuItem";
             фильтрToolStripMenuItem.Size = new Size(60, 20);
             фильтрToolStripMenuItem.Text = "Фильтр";
             // 
-            // названиеToolStripMenuItem
+            // ToolStripMenuItem_DDE_FilterName
             // 
-            названиеToolStripMenuItem.Name = "названиеToolStripMenuItem";
-            названиеToolStripMenuItem.Size = new Size(151, 22);
-            названиеToolStripMenuItem.Text = "Название";
-            названиеToolStripMenuItem.Click += названиеToolStripMenuItem_Click;
+            ToolStripMenuItem_DDE_FilterName.Name = "ToolStripMenuItem_DDE_FilterName";
+            ToolStripMenuItem_DDE_FilterName.Size = new Size(151, 22);
+            ToolStripMenuItem_DDE_FilterName.Text = "Название";
+            ToolStripMenuItem_DDE_FilterName.Click += названиеToolStripMenuItem_Click;
             // 
-            // весToolStripMenuItem
+            // ToolStripMenuItem_DDE_FilterWeight
             // 
-            весToolStripMenuItem.Name = "весToolStripMenuItem";
-            весToolStripMenuItem.Size = new Size(151, 22);
-            весToolStripMenuItem.Text = "Вес";
-            весToolStripMenuItem.Click += весToolStripMenuItem_Click;
+            ToolStripMenuItem_DDE_FilterWeight.Name = "ToolStripMenuItem_DDE_FilterWeight";
+            ToolStripMenuItem_DDE_FilterWeight.Size = new Size(151, 22);
+            ToolStripMenuItem_DDE_FilterWeight.Text = "Вес";
+            ToolStripMenuItem_DDE_FilterWeight.Click += весToolStripMenuItem_Click;
             // 
-            // длительностьToolStripMenuItem
+            // ToolStripMenuItem_DDE_FilterDuration
             // 
-            длительностьToolStripMenuItem.Name = "длительностьToolStripMenuItem";
-            длительностьToolStripMenuItem.Size = new Size(151, 22);
-            длительностьToolStripMenuItem.Text = "Длительность";
-            длительностьToolStripMenuItem.Click += длительностьToolStripMenuItem_Click;
+            ToolStripMenuItem_DDE_FilterDuration.Name = "ToolStripMenuItem_DDE_FilterDuration";
+            ToolStripMenuItem_DDE_FilterDuration.Size = new Size(151, 22);
+            ToolStripMenuItem_DDE_FilterDuration.Text = "Длительность";
+            ToolStripMenuItem_DDE_FilterDuration.Click += длительностьToolStripMenuItem_Click;
             // 
-            // форматToolStripMenuItem
+            // ToolStripMenuItem_DDE_FilterFormat
             // 
-            форматToolStripMenuItem.Name = "форматToolStripMenuItem";
-            форматToolStripMenuItem.Size = new Size(151, 22);
-            форматToolStripMenuItem.Text = "Формат";
-            форматToolStripMenuItem.Click += форматToolStripMenuItem_Click;
+            ToolStripMenuItem_DDE_FilterFormat.Name = "ToolStripMenuItem_DDE_FilterFormat";
+            ToolStripMenuItem_DDE_FilterFormat.Size = new Size(151, 22);
+            ToolStripMenuItem_DDE_FilterFormat.Text = "Формат";
+            ToolStripMenuItem_DDE_FilterFormat.Click += форматToolStripMenuItem_Click;
             // 
-            // категорияToolStripMenuItem
+            // ToolStripMenuItem_DDE_FilterCategory
             // 
-            категорияToolStripMenuItem.Name = "категорияToolStripMenuItem";
-            категорияToolStripMenuItem.Size = new Size(151, 22);
-            категорияToolStripMenuItem.Text = "Категория";
-            категорияToolStripMenuItem.Click += категорияToolStripMenuItem_Click;
+            ToolStripMenuItem_DDE_FilterCategory.Name = "ToolStripMenuItem_DDE_FilterCategory";
+            ToolStripMenuItem_DDE_FilterCategory.Size = new Size(151, 22);
+            ToolStripMenuItem_DDE_FilterCategory.Text = "Категория";
+            ToolStripMenuItem_DDE_FilterCategory.Click += категорияToolStripMenuItem_Click;
             // 
-            // iDToolStripMenuItem
+            // ToolStripMenuItem_DDE_FilterID
             // 
-            iDToolStripMenuItem.Name = "iDToolStripMenuItem";
-            iDToolStripMenuItem.Size = new Size(151, 22);
-            iDToolStripMenuItem.Text = "ID";
-            iDToolStripMenuItem.Click += iDToolStripMenuItem_Click;
+            ToolStripMenuItem_DDE_FilterID.Name = "ToolStripMenuItem_DDE_FilterID";
+            ToolStripMenuItem_DDE_FilterID.Size = new Size(151, 22);
+            ToolStripMenuItem_DDE_FilterID.Text = "ID";
+            ToolStripMenuItem_DDE_FilterID.Click += iDToolStripMenuItem_Click;
             // 
-            // panelMiddle_GAM
+            // panelMiddle_DDE
             // 
-            panelMiddle_GAM.BackColor = Color.FromArgb(20, 20, 20);
-            panelMiddle_GAM.BorderStyle = BorderStyle.Fixed3D;
-            panelMiddle_GAM.Controls.Add(groupBoxBase_GAM);
-            panelMiddle_GAM.Dock = DockStyle.Fill;
-            panelMiddle_GAM.Location = new Point(0, 97);
-            panelMiddle_GAM.Margin = new Padding(4, 3, 4, 3);
-            panelMiddle_GAM.Name = "panelMiddle_GAM";
-            panelMiddle_GAM.Size = new Size(938, 378);
-            panelMiddle_GAM.TabIndex = 2;
+            panelMiddle_DDE.BackColor = Color.FromArgb(20, 20, 20);
+            panelMiddle_DDE.BorderStyle = BorderStyle.Fixed3D;
+            panelMiddle_DDE.Controls.Add(groupBoxBase_DDE);
+            panelMiddle_DDE.Dock = DockStyle.Fill;
+            panelMiddle_DDE.Location = new Point(0, 97);
+            panelMiddle_DDE.Margin = new Padding(4, 3, 4, 3);
+            panelMiddle_DDE.Name = "panelMiddle_DDE";
+            panelMiddle_DDE.Size = new Size(938, 378);
+            panelMiddle_DDE.TabIndex = 2;
             // 
-            // groupBoxBase_GAM
+            // groupBoxBase_DDE
             // 
-            groupBoxBase_GAM.Controls.Add(dataGridViewBase_GAM);
-            groupBoxBase_GAM.Dock = DockStyle.Fill;
-            groupBoxBase_GAM.FlatStyle = FlatStyle.Popup;
-            groupBoxBase_GAM.ForeColor = SystemColors.ButtonHighlight;
-            groupBoxBase_GAM.Location = new Point(0, 0);
-            groupBoxBase_GAM.Margin = new Padding(4, 3, 4, 3);
-            groupBoxBase_GAM.Name = "groupBoxBase_GAM";
-            groupBoxBase_GAM.Padding = new Padding(4, 3, 4, 3);
-            groupBoxBase_GAM.Size = new Size(934, 374);
-            groupBoxBase_GAM.TabIndex = 0;
-            groupBoxBase_GAM.TabStop = false;
-            groupBoxBase_GAM.Text = "Данные";
+            groupBoxBase_DDE.Controls.Add(dataGridViewBase_DDE);
+            groupBoxBase_DDE.Dock = DockStyle.Fill;
+            groupBoxBase_DDE.FlatStyle = FlatStyle.Popup;
+            groupBoxBase_DDE.ForeColor = SystemColors.ButtonHighlight;
+            groupBoxBase_DDE.Location = new Point(0, 0);
+            groupBoxBase_DDE.Margin = new Padding(4, 3, 4, 3);
+            groupBoxBase_DDE.Name = "groupBoxBase_DDE";
+            groupBoxBase_DDE.Padding = new Padding(4, 3, 4, 3);
+            groupBoxBase_DDE.Size = new Size(934, 374);
+            groupBoxBase_DDE.TabIndex = 0;
+            groupBoxBase_DDE.TabStop = false;
+            groupBoxBase_DDE.Text = "Данные";
             // 
-            // dataGridViewBase_GAM
+            // dataGridViewBase_DDE
             // 
-            dataGridViewBase_GAM.BackgroundColor = Color.DimGray;
-            dataGridViewBase_GAM.BorderStyle = BorderStyle.Fixed3D;
-            dataGridViewBase_GAM.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
+            dataGridViewBase_DDE.BackgroundColor = Color.DimGray;
+            dataGridViewBase_DDE.BorderStyle = BorderStyle.Fixed3D;
+            dataGridViewBase_DDE.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(224, 224, 224);
             dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -614,9 +575,9 @@
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewBase_GAM.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewBase_GAM.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewBase_GAM.ColumnHeadersVisible = false;
+            dataGridViewBase_DDE.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewBase_DDE.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewBase_DDE.ColumnHeadersVisible = false;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(224, 224, 224);
             dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -624,21 +585,21 @@
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridViewBase_GAM.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewBase_GAM.Dock = DockStyle.Fill;
-            dataGridViewBase_GAM.GridColor = Color.Gray;
-            dataGridViewBase_GAM.Location = new Point(4, 19);
-            dataGridViewBase_GAM.Margin = new Padding(4, 3, 4, 3);
-            dataGridViewBase_GAM.Name = "dataGridViewBase_GAM";
-            dataGridViewBase_GAM.RowHeadersVisible = false;
-            dataGridViewBase_GAM.Size = new Size(926, 352);
-            dataGridViewBase_GAM.TabIndex = 0;
-            dataGridViewBase_GAM.CellContentClick += dataGridViewBase_GAM_CellContentClick;
+            dataGridViewBase_DDE.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewBase_DDE.Dock = DockStyle.Fill;
+            dataGridViewBase_DDE.GridColor = Color.Gray;
+            dataGridViewBase_DDE.Location = new Point(4, 19);
+            dataGridViewBase_DDE.Margin = new Padding(4, 3, 4, 3);
+            dataGridViewBase_DDE.Name = "dataGridViewBase_DDE";
+            dataGridViewBase_DDE.RowHeadersVisible = false;
+            dataGridViewBase_DDE.Size = new Size(926, 352);
+            dataGridViewBase_DDE.TabIndex = 0;
+            dataGridViewBase_DDE.CellContentClick += dataGridViewBase_DDE_CellContentClick;
             // 
-            // toolTipButtons_GAM
+            // toolTipButtons_DDE
             // 
-            toolTipButtons_GAM.ToolTipIcon = ToolTipIcon.Info;
-            toolTipButtons_GAM.ToolTipTitle = "Подсказка";
+            toolTipButtons_DDE.ToolTipIcon = ToolTipIcon.Info;
+            toolTipButtons_DDE.ToolTipTitle = "Подсказка";
             // 
             // FormMain
             // 
@@ -646,17 +607,17 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
             ClientSize = new Size(938, 532);
-            Controls.Add(panelMiddle_GAM);
-            Controls.Add(panelDown_GAM);
-            Controls.Add(panelUpper_GAM);
+            Controls.Add(panelMiddle_DDE);
+            Controls.Add(panelDown_DDE);
+            Controls.Add(panelUpper_DDE);
             MainMenuStrip = menuStripMain_DDE;
             Margin = new Padding(4, 3, 4, 3);
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Каталог видеоклипов";
             WindowState = FormWindowState.Maximized;
-            panelUpper_GAM.ResumeLayout(false);
-            panelUpper_GAM.PerformLayout();
+            panelUpper_DDE.ResumeLayout(false);
+            panelUpper_DDE.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSort_DDE).EndInit();
             menuStripSort_DDE.ResumeLayout(false);
             menuStripSort_DDE.PerformLayout();
@@ -664,63 +625,61 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxSave_DDE).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxManagement_DDE).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLoad_DDE).EndInit();
-            panelDown_GAM.ResumeLayout(false);
-            panelDown_GAM.PerformLayout();
+            panelDown_DDE.ResumeLayout(false);
+            panelDown_DDE.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxSearch_DDE).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxFilter_DDE).EndInit();
             menuStripMain_DDE.ResumeLayout(false);
             menuStripMain_DDE.PerformLayout();
-            panelMiddle_GAM.ResumeLayout(false);
-            groupBoxBase_GAM.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewBase_GAM).EndInit();
+            panelMiddle_DDE.ResumeLayout(false);
+            groupBoxBase_DDE.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBase_DDE).EndInit();
             ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.OpenFileDialog openFileDialogMain_GAM;
-        private System.Windows.Forms.Panel panelUpper_GAM;
+        private System.Windows.Forms.OpenFileDialog openFileDialogMain_DDE;
+        private System.Windows.Forms.Panel panelUpper_DDE;
         private System.Windows.Forms.PictureBox pictureBoxLoad_DDE;
         private System.Windows.Forms.Button buttonSave_DDE;
         private System.Windows.Forms.Button buttonLoad_DDE;
-        private System.Windows.Forms.Panel panelDown_GAM;
-        private System.Windows.Forms.Panel panelMiddle_GAM;
+        private System.Windows.Forms.Panel panelDown_DDE;
+        private System.Windows.Forms.Panel panelMiddle_DDE;
         private System.Windows.Forms.PictureBox pictureBoxSave_DDE;
         private System.Windows.Forms.PictureBox pictureBoxAbout_DDE;
         private System.Windows.Forms.PictureBox pictureBoxManagement_DDE;
         private System.Windows.Forms.Button buttonAbout_DDE;
         private System.Windows.Forms.Button buttonManagement_DDE;
-        private System.Windows.Forms.Button buttonLeft_GAM;
-        private System.Windows.Forms.Button buttonRight_GAM;
         private System.Windows.Forms.PictureBox pictureBoxFilter_DDE;
-        private System.Windows.Forms.GroupBox groupBoxBase_GAM;
-        private System.Windows.Forms.DataGridView dataGridViewBase_GAM;
-        private System.Windows.Forms.SaveFileDialog saveFileDialogMain_GAM;
+        private System.Windows.Forms.GroupBox groupBoxBase_DDE;
+        private System.Windows.Forms.DataGridView dataGridViewBase_DDE;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogMain_DDE;
         private System.Windows.Forms.Button buttonSearch_DDE;
         private System.Windows.Forms.PictureBox pictureBoxSearch_DDE;
         private System.Windows.Forms.MenuStrip menuStripSort_DDE;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMain_DDE;
-        private System.Windows.Forms.ToolStripMenuItem сортировкаToolStripMenuItemMain_GAM;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_SortDuration;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnWeight;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnID;
         private System.Windows.Forms.ToolStripMenuItem поУбываниюToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem столбецДлительностьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem столбецВесToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem столбецДатаToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem столбецIDToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem столбецВесToolStripMenuItem;
-        private System.Windows.Forms.Button buttonReset_GAM;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnDuration_Dec;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnWeight_Dec;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnID_Dec;
+        private System.Windows.Forms.Button buttonReset_DDE;
         private System.Windows.Forms.PictureBox pictureBoxSort_DDE;
         private System.Windows.Forms.TextBox textBoxSearch_DDE;
         private System.Windows.Forms.TextBox textBoxFilter_DDE;
-        private System.Windows.Forms.ToolTip toolTipButtons_GAM;
+        private System.Windows.Forms.ToolTip toolTipButtons_DDE;
         private System.Windows.Forms.Button buttonGraph_DDE;
         private System.Windows.Forms.MenuStrip menuStripMain_DDE;
         private System.Windows.Forms.ToolStripMenuItem фильтрToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem названиеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem весToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem длительностьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem форматToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem категорияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem iDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterName;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterWeight;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterDuration;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterFormat;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterCategory;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterID;
         private System.Windows.Forms.Button buttonMenu_DDE;
     }
 }

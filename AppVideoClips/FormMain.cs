@@ -7,30 +7,29 @@ namespace AppVideoClips
         public FormMain()
         {
             InitializeComponent();
-            FormMenu formmenu = new FormMenu();
-            formmenu.TopMost = true;
-            formmenu.Show();
+            // FormMenu was previously shown here causing it to remain visible over the main form.
+            // The welcome menu is now shown modally from Program.Main, so do not create/show it here.
 
             // Improve DataGridView contrast for readability
             try
             {
-                dataGridViewBase_GAM.EnableHeadersVisualStyles = false;
-                dataGridViewBase_GAM.BackgroundColor = Color.White;
-                dataGridViewBase_GAM.GridColor = Color.LightGray;
+                dataGridViewBase_DDE.EnableHeadersVisualStyles = false;
+                dataGridViewBase_DDE.BackgroundColor = Color.White;
+                dataGridViewBase_DDE.GridColor = Color.LightGray;
 
-                dataGridViewBase_GAM.DefaultCellStyle.BackColor = Color.White;
-                dataGridViewBase_GAM.DefaultCellStyle.ForeColor = Color.Black;
-                dataGridViewBase_GAM.DefaultCellStyle.SelectionBackColor = Color.DodgerBlue;
-                dataGridViewBase_GAM.DefaultCellStyle.SelectionForeColor = Color.White;
+                dataGridViewBase_DDE.DefaultCellStyle.BackColor = Color.White;
+                dataGridViewBase_DDE.DefaultCellStyle.ForeColor = Color.Black;
+                dataGridViewBase_DDE.DefaultCellStyle.SelectionBackColor = Color.DodgerBlue;
+                dataGridViewBase_DDE.DefaultCellStyle.SelectionForeColor = Color.White;
 
-                dataGridViewBase_GAM.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
-                dataGridViewBase_GAM.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
+                dataGridViewBase_DDE.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
+                dataGridViewBase_DDE.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
 
-                dataGridViewBase_GAM.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(200, 200, 200);
-                dataGridViewBase_GAM.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+                dataGridViewBase_DDE.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(200, 200, 200);
+                dataGridViewBase_DDE.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
 
-                dataGridViewBase_GAM.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(200, 200, 200);
-                dataGridViewBase_GAM.RowHeadersDefaultCellStyle.ForeColor = Color.Black;
+                dataGridViewBase_DDE.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(200, 200, 200);
+                dataGridViewBase_DDE.RowHeadersDefaultCellStyle.ForeColor = Color.Black;
             }
             catch
             {
@@ -47,35 +46,35 @@ namespace AppVideoClips
         static int rows = 0;
         static int columns = 0;
         static string[,] matrix = new string[0, 0];
-        private void buttonLoad_GAM_Click(object sender, EventArgs e)
+        private void buttonLoad_DDE_Click(object sender, EventArgs e)
         {
             try
             {
 
-                openFileDialogMain_GAM.ShowDialog();
-                openFile = openFileDialogMain_GAM.FileName;
+                openFileDialogMain_DDE.ShowDialog();
+                openFile = openFileDialogMain_DDE.FileName;
 
                 matrix = ds.LoadDataSet(openFile);
                 rows = matrix.GetLength(0);
                 columns = matrix.GetLength(1);
-                dataGridViewBase_GAM.RowCount = rows + 1;
-                dataGridViewBase_GAM.ColumnCount = columns;
+                dataGridViewBase_DDE.RowCount = rows + 1;
+                dataGridViewBase_DDE.ColumnCount = columns;
 
 
                 for (int i = 0; i < rows; i++)
                 {
                     for (int j = 0; j < columns; j++)
                     {
-                        dataGridViewBase_GAM.Rows[i].Cells[j].Value = matrix[i, j];
-                        dataGridViewBase_GAM.Rows[i].Cells[j].Selected = false;
+                        dataGridViewBase_DDE.Rows[i].Cells[j].Value = matrix[i, j];
+                        dataGridViewBase_DDE.Rows[i].Cells[j].Selected = false;
                     }
                 }
 
-                dataGridViewBase_GAM.Columns[0].Width = 100;
-                dataGridViewBase_GAM.Columns[1].Width = 150;
-                dataGridViewBase_GAM.Columns[3].Width = 150;
-                dataGridViewBase_GAM.Columns[6].Width = 900;
-                buttonReset_GAM.Enabled = true;
+                dataGridViewBase_DDE.Columns[0].Width = 100;
+                dataGridViewBase_DDE.Columns[1].Width = 150;
+                dataGridViewBase_DDE.Columns[3].Width = 150;
+                if (dataGridViewBase_DDE.Columns.Count > 6) dataGridViewBase_DDE.Columns[6].Width = 900;
+                buttonReset_DDE.Enabled = true;
 
             }
             catch
@@ -84,24 +83,24 @@ namespace AppVideoClips
             }
         }
 
-        private void buttonSave_GAM_Click(object sender, EventArgs e)
+        private void buttonSave_DDE_Click(object sender, EventArgs e)
         {
             try
             {
-                saveFileDialogMain_GAM.FileName = "OutPutFileTask7.csv";
-                saveFileDialogMain_GAM.InitialDirectory = Directory.GetCurrentDirectory();
+                saveFileDialogMain_DDE.FileName = "OutPutFileTask7.csv";
+                saveFileDialogMain_DDE.InitialDirectory = Directory.GetCurrentDirectory();
 
-                if (saveFileDialogMain_GAM.ShowDialog() == DialogResult.OK)
+                if (saveFileDialogMain_DDE.ShowDialog() == DialogResult.OK)
                 {
-                    string path = saveFileDialogMain_GAM.FileName;
+                    string path = saveFileDialogMain_DDE.FileName;
 
                     if (File.Exists(path))
                     {
                         File.Delete(path);
                     }
 
-                    int rows = dataGridViewBase_GAM.RowCount;
-                    int columns = dataGridViewBase_GAM.ColumnCount;
+                    int rows = dataGridViewBase_DDE.RowCount;
+                    int columns = dataGridViewBase_DDE.ColumnCount;
 
                     StringBuilder strBuilder = new StringBuilder();
 
@@ -109,7 +108,7 @@ namespace AppVideoClips
                     {
                         for (int j = 0; j < columns; j++)
                         {
-                            strBuilder.Append(dataGridViewBase_GAM.Rows[i].Cells[j].Value);
+                            strBuilder.Append(dataGridViewBase_DDE.Rows[i].Cells[j].Value);
 
                             if (j != columns - 1)
                             {
@@ -132,15 +131,15 @@ namespace AppVideoClips
         }
 
 
-        private void buttonAbout_GAM_Click(object sender, EventArgs e)
+        private void buttonAbout_DDE_Click(object sender, EventArgs e)
         {
             FormAbout formAbout = new FormAbout();
             formAbout.ShowDialog();
         }
 
-        private void buttonSearch_GAM_Click(object sender, EventArgs e)
+        private void buttonSearch_DDE_Click(object sender, EventArgs e)
         {
-            dataGridViewBase_GAM.ClearSelection();
+            dataGridViewBase_DDE.ClearSelection();
             if (textBoxSearch_DDE.Text == "")
             {
                 MessageBox.Show("Ââåäèòå êðèòåðèé äëÿ ïîèñêà", "Ïðåäóïðåæäåíèå", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -154,7 +153,7 @@ namespace AppVideoClips
                     {
                         if (matrix[i, j].ToLower().Contains(textBoxSearch_DDE.Text.ToLower()))
                         {
-                            dataGridViewBase_GAM.Rows[i].Selected = true;
+                            dataGridViewBase_DDE.Rows[i].Selected = true;
                         }
                     }
                 }
@@ -162,8 +161,6 @@ namespace AppVideoClips
 
 
         }
-
-
 
         private void ñîðòèðîâêàToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
@@ -173,7 +170,7 @@ namespace AppVideoClips
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    dataGridViewBase_GAM.Rows[i].Cells[j].Value = mxsort[i, j];
+                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
                 }
             }
         }
@@ -186,7 +183,7 @@ namespace AppVideoClips
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    dataGridViewBase_GAM.Rows[i].Cells[j].Value = mxsort[i, j];
+                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
                 }
             }
         }
@@ -200,38 +197,38 @@ namespace AppVideoClips
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    dataGridViewBase_GAM.Rows[i].Cells[j].Value = mxsort[i, j];
+                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
                 }
             }
         }
 
 
-        private void buttonReset_GAM_Click(object sender, EventArgs e)
+        private void buttonReset_DDE_Click(object sender, EventArgs e)
         {
             for (int v = 0; v < rows; v++)
             {
-                dataGridViewBase_GAM.Rows[v].Visible = true;
+                dataGridViewBase_DDE.Rows[v].Visible = true;
             }
 
-            dataGridViewBase_GAM.Rows.Clear();
+            dataGridViewBase_DDE.Rows.Clear();
             matrix = ds.LoadDataSet(path);
             rows = matrix.GetLength(0);
             columns = matrix.GetLength(1);
-            dataGridViewBase_GAM.RowCount = rows + 1;
-            dataGridViewBase_GAM.ColumnCount = columns;
+            dataGridViewBase_DDE.RowCount = rows + 1;
+            dataGridViewBase_DDE.ColumnCount = columns;
 
 
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    dataGridViewBase_GAM.Rows[i].Cells[j].Value = matrix[i, j];
-                    dataGridViewBase_GAM.Rows[i].Cells[j].Selected = false;
+                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = matrix[i, j];
+                    dataGridViewBase_DDE.Rows[i].Cells[j].Selected = false;
                 }
             }
-            dataGridViewBase_GAM.Columns[0].Width = 100;
-            dataGridViewBase_GAM.Columns[1].Width = 150;
-            dataGridViewBase_GAM.Columns[3].Width = 150;
+            dataGridViewBase_DDE.Columns[0].Width = 100;
+            dataGridViewBase_DDE.Columns[1].Width = 150;
+            dataGridViewBase_DDE.Columns[3].Width = 150;
         }
 
         private void ñòîëáåöÄëèòåëüíîñòüToolStripMenuItem_Click(object sender, EventArgs e)
@@ -242,7 +239,7 @@ namespace AppVideoClips
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    dataGridViewBase_GAM.Rows[i].Cells[j].Value = mxsort[i, j];
+                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
                 }
             }
         }
@@ -255,7 +252,7 @@ namespace AppVideoClips
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    dataGridViewBase_GAM.Rows[i].Cells[j].Value = mxsort[i, j];
+                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
                 }
             }
         }
@@ -268,32 +265,31 @@ namespace AppVideoClips
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    dataGridViewBase_GAM.Rows[i].Cells[j].Value = mxsort[i, j];
+                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
                 }
             }
         }
 
 
-
-        private void buttonRight_GAM_Click(object sender, EventArgs e)
+        private void buttonRight_DDE_Click(object sender, EventArgs e)
         {
-            dataGridViewBase_GAM.HorizontalScrollingOffset = dataGridViewBase_GAM.HorizontalScrollingOffset + 10;
+            dataGridViewBase_DDE.HorizontalScrollingOffset = dataGridViewBase_DDE.HorizontalScrollingOffset + 10;
         }
 
-        private void buttonLeft_GAM_Click(object sender, EventArgs e)
+        private void buttonLeft_DDE_Click(object sender, EventArgs e)
         {
-            if (dataGridViewBase_GAM.HorizontalScrollingOffset >= 10)
+            if (dataGridViewBase_DDE.HorizontalScrollingOffset >= 10)
             {
-                dataGridViewBase_GAM.HorizontalScrollingOffset = dataGridViewBase_GAM.HorizontalScrollingOffset - 10;
+                dataGridViewBase_DDE.HorizontalScrollingOffset = dataGridViewBase_DDE.HorizontalScrollingOffset - 10;
             }
             else
             {
-                dataGridViewBase_GAM.HorizontalScrollingOffset = 0;
+                dataGridViewBase_DDE.HorizontalScrollingOffset = 0;
             }
 
         }
 
-        private void buttonFilter_GAM_Click(object sender, EventArgs e)
+        private void buttonFilter_DDE_Click(object sender, EventArgs e)
         {
             if (textBoxFilter_DDE.Text == "")
             {
@@ -302,15 +298,15 @@ namespace AppVideoClips
             else
             {
                 string filterValue = textBoxFilter_DDE.Text.ToLower();
-                for (int i = 1; i < dataGridViewBase_GAM.Rows.Count; i++)
+                for (int i = 1; i < dataGridViewBase_DDE.Rows.Count; i++)
                 {
-                    if (!dataGridViewBase_GAM.Rows[i].IsNewRow)
+                    if (!dataGridViewBase_DDE.Rows[i].IsNewRow)
                     {
                         bool rowShouldBeVisible = false;
 
-                        for (int j = 0; j < dataGridViewBase_GAM.Columns.Count; j++)
+                        for (int j = 0; j < dataGridViewBase_DDE.Columns.Count; j++)
                         {
-                            var cellValue = dataGridViewBase_GAM.Rows[i].Cells[j].Value?.ToString()?.ToLower();
+                            var cellValue = dataGridViewBase_DDE.Rows[i].Cells[j].Value?.ToString()?.ToLower();
 
                             if (cellValue != null && cellValue.IndexOf(filterValue, StringComparison.OrdinalIgnoreCase) >= 0)
                             {
@@ -320,35 +316,24 @@ namespace AppVideoClips
                         }
                         for (int q = 0; q < columns; q++)
                         {
-                            dataGridViewBase_GAM.Rows[matrix.GetLength(0) - 1].Cells[q].Value = "";
+                            dataGridViewBase_DDE.Rows[matrix.GetLength(0) - 1].Cells[q].Value = "";
 
                         }
 
-                        dataGridViewBase_GAM.Rows[i].Visible = rowShouldBeVisible;
+                        dataGridViewBase_DDE.Rows[i].Visible = rowShouldBeVisible;
 
                     }
                 }
             }
-            //string filtervalue = textBoxFilter_GAM.Text.ToLower();
-            //for (int i = 1; i < rows; i++)
-            //{
-            //    if (!(matrix[i, 1].ToLower().Contains(filtervalue)))
-            //    {
-            //        dataGridViewBase_GAM.Rows[i].Visible = false;
-            //    }
-
-            //}
-
-
         }
 
-        private void buttonManagement_GAM_Click(object sender, EventArgs e)
+        private void buttonManagement_DDE_Click(object sender, EventArgs e)
         {
             FormManual formmanual = new FormManual();
             formmanual.ShowDialog();
         }
 
-        private void buttonLoad_GAM_MouseEnter(object sender, EventArgs e)
+        private void buttonLoad_DDE_MouseEnter(object sender, EventArgs e)
         {
             buttonLoad_DDE.BackColor = Color.DarkTurquoise;
             buttonLoad_DDE.ForeColor = Color.Black;
@@ -356,92 +341,74 @@ namespace AppVideoClips
 
 
 
-        private void buttonSave_GAM_MouseEnter(object sender, EventArgs e)
+        private void buttonSave_DDE_MouseEnter(object sender, EventArgs e)
         {
             buttonSave_DDE.BackColor = Color.DarkTurquoise;
             buttonSave_DDE.ForeColor = Color.Black;
         }
 
-        private void buttonSave_GAM_MouseLeave(object sender, EventArgs e)
+        private void buttonSave_DDE_MouseLeave(object sender, EventArgs e)
         {
             buttonSave_DDE.BackColor = Color.FromArgb(40, 40, 40);
             buttonSave_DDE.ForeColor = Color.WhiteSmoke;
         }
 
-        private void buttonLoad_GAM_MouseLeave(object sender, EventArgs e)
+        private void buttonLoad_DDE_MouseLeave(object sender, EventArgs e)
         {
             buttonLoad_DDE.BackColor = Color.FromArgb(40, 40, 40);
             buttonLoad_DDE.ForeColor = Color.WhiteSmoke;
         }
 
-        private void buttonManagement_GAM_MouseEnter(object sender, EventArgs e)
+        private void buttonManagement_DDE_MouseEnter(object sender, EventArgs e)
         {
             buttonManagement_DDE.BackColor = Color.DarkTurquoise;
             buttonManagement_DDE.ForeColor = Color.Black;
         }
 
-        private void buttonManagement_GAM_MouseLeave(object sender, EventArgs e)
+        private void buttonManagement_DDE_MouseLeave(object sender, EventArgs e)
         {
             buttonManagement_DDE.BackColor = Color.FromArgb(40, 40, 40);
             buttonManagement_DDE.ForeColor = Color.WhiteSmoke;
         }
 
-        private void buttonAbout_GAM_MouseEnter(object sender, EventArgs e)
+        private void buttonAbout_DDE_MouseEnter(object sender, EventArgs e)
         {
             buttonAbout_DDE.BackColor = Color.DarkTurquoise;
             buttonAbout_DDE.ForeColor = Color.Black;
         }
 
-        private void buttonAbout_GAM_MouseLeave(object sender, EventArgs e)
+        private void buttonAbout_DDE_MouseLeave(object sender, EventArgs e)
         {
             buttonAbout_DDE.BackColor = Color.FromArgb(40, 40, 40);
             buttonAbout_DDE.ForeColor = Color.WhiteSmoke;
         }
 
-        private void buttonSearch_GAM_MouseEnter(object sender, EventArgs e)
+        private void buttonSearch_DDE_MouseEnter(object sender, EventArgs e)
         {
             buttonSearch_DDE.BackColor = Color.DarkTurquoise;
             buttonSearch_DDE.ForeColor = Color.Black;
         }
 
-        private void buttonSearch_GAM_MouseLeave(object sender, EventArgs e)
+        private void buttonSearch_DDE_MouseLeave(object sender, EventArgs e)
         {
             buttonSearch_DDE.BackColor = Color.FromArgb(40, 40, 40);
             buttonSearch_DDE.ForeColor = Color.WhiteSmoke;
         }
 
-        private void buttonReset_GAM_MouseEnter(object sender, EventArgs e)
+        private void buttonReset_DDE_MouseEnter(object sender, EventArgs e)
         {
-            buttonReset_GAM.BackColor = Color.DarkTurquoise;
+            buttonReset_DDE.BackColor = Color.DarkTurquoise;
 
         }
 
-        private void buttonReset_GAM_MouseLeave(object sender, EventArgs e)
+        private void buttonReset_DDE_MouseLeave(object sender, EventArgs e)
         {
-            buttonReset_GAM.BackColor = Color.FromArgb(60, 60, 60);
+            buttonReset_DDE.BackColor = Color.FromArgb(60, 60, 60);
         }
 
-        private void buttonLeft_GAM_MouseEnter(object sender, EventArgs e)
-        {
-            buttonLeft_GAM.BackColor = Color.LightGray;
-        }
+        
 
-        private void buttonLeft_GAM_MouseLeave(object sender, EventArgs e)
-        {
-            buttonLeft_GAM.BackColor = Color.FromArgb(60, 60, 60);
-        }
-
-        private void buttonRight_GAM_MouseEnter(object sender, EventArgs e)
-        {
-            buttonRight_GAM.BackColor = Color.LightGray;
-        }
-
-        private void buttonRight_GAM_MouseLeave(object sender, EventArgs e)
-        {
-            buttonRight_GAM.BackColor = Color.FromArgb(60, 60, 60);
-        }
-
-        private void buttonGraph_GAM_Click(object sender, EventArgs e)
+        private void buttonGraph_DDE_Click(object sender, EventArgs e)
         {
             FormGraph fg = new FormGraph();
 
@@ -459,15 +426,15 @@ namespace AppVideoClips
                 {
                     if (!(matrix[i, 1].ToLower().Contains(filtervalue)))
                     {
-                        dataGridViewBase_GAM.Rows[i].Visible = false;
-                        //dataGridViewBase_GAM.Rows.RemoveAt(i);
+                        dataGridViewBase_DDE.Rows[i].Visible = false;
+                        //dataGridViewBase_DDE.Rows.RemoveAt(i);
 
                     }
 
 
                 }
-                //dataGridViewBase_GAM.Rows.RemoveAt(rows);
-                dataGridViewBase_GAM.Rows[rows].Visible = false;
+                //dataGridViewBase_DDE.Rows.RemoveAt(rows);
+                dataGridViewBase_DDE.Rows[rows].Visible = false;
 
             }
             catch
@@ -485,11 +452,11 @@ namespace AppVideoClips
                 {
                     if (!(matrix[i, 5].ToLower().Contains(filtervalue)))
                     {
-                        dataGridViewBase_GAM.Rows[i].Visible = false;
+                        dataGridViewBase_DDE.Rows[i].Visible = false;
                     }
 
                 }
-                dataGridViewBase_GAM.Rows[rows].Visible = false;
+                dataGridViewBase_DDE.Rows[rows].Visible = false;
             }
             catch
             {
@@ -506,11 +473,11 @@ namespace AppVideoClips
                 {
                     if (!(matrix[i, 2].ToLower().Contains(filtervalue)))
                     {
-                        dataGridViewBase_GAM.Rows[i].Visible = false;
+                        dataGridViewBase_DDE.Rows[i].Visible = false;
                     }
 
                 }
-                dataGridViewBase_GAM.Rows[rows].Visible = false;
+                dataGridViewBase_DDE.Rows[rows].Visible = false;
             }
             catch
             {
@@ -527,11 +494,11 @@ namespace AppVideoClips
                 {
                     if (!(matrix[i, 3].ToLower().Contains(filtervalue)))
                     {
-                        dataGridViewBase_GAM.Rows[i].Visible = false;
+                        dataGridViewBase_DDE.Rows[i].Visible = false;
                     }
 
                 }
-                dataGridViewBase_GAM.Rows[rows].Visible = false;
+                dataGridViewBase_DDE.Rows[rows].Visible = false;
             }
             catch
             {
@@ -548,11 +515,11 @@ namespace AppVideoClips
                 {
                     if (!(matrix[i, 6].ToLower().Contains(filtervalue)))
                     {
-                        dataGridViewBase_GAM.Rows[i].Visible = false;
+                        dataGridViewBase_DDE.Rows[i].Visible = false;
                     }
 
                 }
-                dataGridViewBase_GAM.Rows[rows].Visible = false;
+                dataGridViewBase_DDE.Rows[rows].Visible = false;
             }
             catch
             {
@@ -569,11 +536,11 @@ namespace AppVideoClips
                 {
                     if (!(matrix[i, 0].ToLower().Contains(filtervalue)))
                     {
-                        dataGridViewBase_GAM.Rows[i].Visible = false;
+                        dataGridViewBase_DDE.Rows[i].Visible = false;
                     }
 
                 }
-                dataGridViewBase_GAM.Rows[rows].Visible = false;
+                dataGridViewBase_DDE.Rows[rows].Visible = false;
 
             }
             catch
@@ -582,19 +549,19 @@ namespace AppVideoClips
             }
         }
 
-        private void buttonGraph_GAM_MouseEnter(object sender, EventArgs e)
+        private void buttonGraph_DDE_MouseEnter(object sender, EventArgs e)
         {
             buttonGraph_DDE.BackColor = Color.DarkTurquoise;
             buttonGraph_DDE.ForeColor = Color.Black;
         }
 
-        private void buttonGraph_GAM_MouseLeave(object sender, EventArgs e)
+        private void buttonGraph_DDE_MouseLeave(object sender, EventArgs e)
         {
             buttonGraph_DDE.BackColor = Color.FromArgb(40, 40, 40);
             buttonGraph_DDE.ForeColor = Color.WhiteSmoke;
         }
 
-        private void buttonMenu_GAM_Click(object sender, EventArgs e)
+        private void buttonMenu_DDE_Click(object sender, EventArgs e)
         {
             FormMenu fmen = new FormMenu();
 
@@ -602,19 +569,24 @@ namespace AppVideoClips
             fmen.ShowDialog();
         }
 
-        private void buttonMenu_GAM_MouseEnter(object sender, EventArgs e)
+        private void buttonMenu_DDE_MouseEnter(object sender, EventArgs e)
         {
             buttonMenu_DDE.BackColor = Color.DarkTurquoise;
             buttonMenu_DDE.ForeColor = Color.Black;
         }
 
-        private void buttonMenu_GAM_MouseLeave(object sender, EventArgs e)
+        private void buttonMenu_DDE_MouseLeave(object sender, EventArgs e)
         {
             buttonMenu_DDE.BackColor = Color.FromArgb(40, 40, 40);
             buttonMenu_DDE.ForeColor = Color.WhiteSmoke;
         }
 
-        private void dataGridViewBase_GAM_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewBase_DDE_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void pictureBoxSort_DDE_Click(object sender, EventArgs e)
         {
 
         }

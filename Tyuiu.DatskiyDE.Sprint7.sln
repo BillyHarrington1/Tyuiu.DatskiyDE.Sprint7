@@ -11,6 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppVideoClips.Lib", "AppVid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppVideoClips.Test", "AppVideoClips.Test\AppVideoClips.Test.csproj", "{6C51A8A9-9254-41FB-BFF5-07EFD575C5AD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource", "Resource", "{BDB3510A-F07A-409D-86E3-D8D1C3CB75CF}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\DataSet.csv = ..\..\..\Desktop\DataSet.csv
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Videos", "Videos", "{74E24527-4496-4C01-867C-F5580A6B7E86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +44,8 @@ Global
 		{5D73D461-B350-4140-8031-7C6A5C1DB2F4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{D29DC8CF-846A-41A1-8F45-BB0AC553ED87} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{6C51A8A9-9254-41FB-BFF5-07EFD575C5AD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{BDB3510A-F07A-409D-86E3-D8D1C3CB75CF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{74E24527-4496-4C01-867C-F5580A6B7E86} = {BDB3510A-F07A-409D-86E3-D8D1C3CB75CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B57931CA-2860-4107-8A0E-813C71844935}

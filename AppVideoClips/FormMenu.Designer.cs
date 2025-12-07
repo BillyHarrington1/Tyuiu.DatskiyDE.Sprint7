@@ -28,122 +28,146 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenu));
-            this.labelName_GAM = new System.Windows.Forms.Label();
-            this.buttonGo_GAM = new System.Windows.Forms.Button();
-            this.buttonManagement_GAM = new System.Windows.Forms.Button();
-            this.buttonAbout_GAM = new System.Windows.Forms.Button();
-            this.buttonExit_GAM = new System.Windows.Forms.Button();
-            this.pictureBoxIco_GAM = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIco_GAM)).BeginInit();
-            this.SuspendLayout();
+            labelName_DDE = new Label();
+            buttonGo_DDE = new Button();
+            buttonManagement_DDE = new Button();
+            buttonAbout_DDE = new Button();
+            buttonExit_DDE = new Button();
+            pictureBoxIco_DDE = new PictureBox();
+            buttonWatch_DDE = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxIco_DDE).BeginInit();
+            SuspendLayout();
             // 
-            // labelName_GAM
+            // labelName_DDE
             // 
-            this.labelName_GAM.AutoSize = true;
-            this.labelName_GAM.Font = new System.Drawing.Font("Segoe UI", 24.25F);
-            this.labelName_GAM.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.labelName_GAM.Location = new System.Drawing.Point(307, 30);
-            this.labelName_GAM.Name = "labelName_GAM";
-            this.labelName_GAM.Size = new System.Drawing.Size(485, 90);
-            this.labelName_GAM.TabIndex = 0;
-            this.labelName_GAM.Text = "CSV MAESTRO:\r\nРедактирование и фильтрация\r\n";
+            labelName_DDE.AutoSize = true;
+            labelName_DDE.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelName_DDE.ForeColor = Color.WhiteSmoke;
+            labelName_DDE.Location = new Point(358, 35);
+            labelName_DDE.Margin = new Padding(4, 0, 4, 0);
+            labelName_DDE.Name = "labelName_DDE";
+            labelName_DDE.Size = new Size(511, 65);
+            labelName_DDE.TabIndex = 0;
+            labelName_DDE.Text = "Каталог видео клипов";
+            labelName_DDE.Click += labelName_GAM_Click;
             // 
-            // buttonGo_GAM
+            // buttonGo_DDE
             // 
-            this.buttonGo_GAM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.buttonGo_GAM.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonGo_GAM.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.buttonGo_GAM.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonGo_GAM.Location = new System.Drawing.Point(315, 150);
-            this.buttonGo_GAM.Name = "buttonGo_GAM";
-            this.buttonGo_GAM.Size = new System.Drawing.Size(252, 68);
-            this.buttonGo_GAM.TabIndex = 1;
-            this.buttonGo_GAM.Text = "Перейти в рабочую среду\r\n";
-            this.buttonGo_GAM.UseVisualStyleBackColor = false;
-            this.buttonGo_GAM.Click += new System.EventHandler(this.buttonGo_GAM_Click);
+            buttonGo_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonGo_DDE.FlatStyle = FlatStyle.Popup;
+            buttonGo_DDE.Font = new Font("Segoe UI", 12F);
+            buttonGo_DDE.ForeColor = Color.WhiteSmoke;
+            buttonGo_DDE.Location = new Point(368, 173);
+            buttonGo_DDE.Margin = new Padding(4, 3, 4, 3);
+            buttonGo_DDE.Name = "buttonGo_DDE";
+            buttonGo_DDE.Size = new Size(294, 78);
+            buttonGo_DDE.TabIndex = 1;
+            buttonGo_DDE.Text = "Перейти в рабочую среду\r\n";
+            buttonGo_DDE.UseVisualStyleBackColor = false;
+            buttonGo_DDE.Click += buttonGo_GAM_Click;
             // 
-            // buttonManagement_GAM
+            // buttonManagement_DDE
             // 
-            this.buttonManagement_GAM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.buttonManagement_GAM.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonManagement_GAM.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.buttonManagement_GAM.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonManagement_GAM.Location = new System.Drawing.Point(12, 389);
-            this.buttonManagement_GAM.Name = "buttonManagement_GAM";
-            this.buttonManagement_GAM.Size = new System.Drawing.Size(111, 60);
-            this.buttonManagement_GAM.TabIndex = 1;
-            this.buttonManagement_GAM.Text = "Руководство";
-            this.buttonManagement_GAM.UseVisualStyleBackColor = false;
-            this.buttonManagement_GAM.Click += new System.EventHandler(this.buttonManagement_GAM_Click);
+            buttonManagement_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonManagement_DDE.FlatStyle = FlatStyle.Popup;
+            buttonManagement_DDE.Font = new Font("Segoe UI", 12F);
+            buttonManagement_DDE.ForeColor = Color.WhiteSmoke;
+            buttonManagement_DDE.Location = new Point(14, 449);
+            buttonManagement_DDE.Margin = new Padding(4, 3, 4, 3);
+            buttonManagement_DDE.Name = "buttonManagement_DDE";
+            buttonManagement_DDE.Size = new Size(130, 69);
+            buttonManagement_DDE.TabIndex = 1;
+            buttonManagement_DDE.Text = "Руководство";
+            buttonManagement_DDE.UseVisualStyleBackColor = false;
+            buttonManagement_DDE.Click += buttonManagement_GAM_Click;
             // 
-            // buttonAbout_GAM
+            // buttonAbout_DDE
             // 
-            this.buttonAbout_GAM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.buttonAbout_GAM.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonAbout_GAM.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.buttonAbout_GAM.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonAbout_GAM.Location = new System.Drawing.Point(129, 389);
-            this.buttonAbout_GAM.Name = "buttonAbout_GAM";
-            this.buttonAbout_GAM.Size = new System.Drawing.Size(111, 60);
-            this.buttonAbout_GAM.TabIndex = 1;
-            this.buttonAbout_GAM.Text = "О программе";
-            this.buttonAbout_GAM.UseVisualStyleBackColor = false;
-            this.buttonAbout_GAM.Click += new System.EventHandler(this.buttonAbout_GAM_Click);
+            buttonAbout_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonAbout_DDE.FlatStyle = FlatStyle.Popup;
+            buttonAbout_DDE.Font = new Font("Segoe UI", 12F);
+            buttonAbout_DDE.ForeColor = Color.WhiteSmoke;
+            buttonAbout_DDE.Location = new Point(150, 449);
+            buttonAbout_DDE.Margin = new Padding(4, 3, 4, 3);
+            buttonAbout_DDE.Name = "buttonAbout_DDE";
+            buttonAbout_DDE.Size = new Size(130, 69);
+            buttonAbout_DDE.TabIndex = 1;
+            buttonAbout_DDE.Text = "О программе";
+            buttonAbout_DDE.UseVisualStyleBackColor = false;
+            buttonAbout_DDE.Click += buttonAbout_GAM_Click;
             // 
-            // buttonExit_GAM
+            // buttonWatch_DDE
             // 
-            this.buttonExit_GAM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.buttonExit_GAM.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonExit_GAM.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.buttonExit_GAM.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonExit_GAM.Location = new System.Drawing.Point(708, 415);
-            this.buttonExit_GAM.Name = "buttonExit_GAM";
-            this.buttonExit_GAM.Size = new System.Drawing.Size(84, 34);
-            this.buttonExit_GAM.TabIndex = 1;
-            this.buttonExit_GAM.Text = "Выход";
-            this.buttonExit_GAM.UseVisualStyleBackColor = false;
-            this.buttonExit_GAM.Click += new System.EventHandler(this.buttonExit_GAM_Click);
+            buttonWatch_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonWatch_DDE.FlatStyle = FlatStyle.Popup;
+            buttonWatch_DDE.Font = new Font("Segoe UI", 12F);
+            buttonWatch_DDE.ForeColor = Color.WhiteSmoke;
+            buttonWatch_DDE.Location = new Point(368, 260);
+            buttonWatch_DDE.Margin = new Padding(4, 3, 4, 3);
+            buttonWatch_DDE.Name = "buttonWatch_DDE";
+            buttonWatch_DDE.Size = new Size(294, 60);
+            buttonWatch_DDE.TabIndex = 2;
+            buttonWatch_DDE.Text = "Перейти в просмотр видео";
+            buttonWatch_DDE.UseVisualStyleBackColor = false;
+            buttonWatch_DDE.Click += buttonWatch_GAM_Click;
             // 
-            // pictureBoxIco_GAM
+            // buttonExit_DDE
             // 
-            this.pictureBoxIco_GAM.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxIco_GAM.Image")));
-            this.pictureBoxIco_GAM.Location = new System.Drawing.Point(1, 9);
-            this.pictureBoxIco_GAM.Name = "pictureBoxIco_GAM";
-            this.pictureBoxIco_GAM.Size = new System.Drawing.Size(308, 356);
-            this.pictureBoxIco_GAM.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxIco_GAM.TabIndex = 2;
-            this.pictureBoxIco_GAM.TabStop = false;
+            buttonExit_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonExit_DDE.FlatStyle = FlatStyle.Popup;
+            buttonExit_DDE.Font = new Font("Segoe UI", 12F);
+            buttonExit_DDE.ForeColor = Color.WhiteSmoke;
+            buttonExit_DDE.Location = new Point(826, 479);
+            buttonExit_DDE.Margin = new Padding(4, 3, 4, 3);
+            buttonExit_DDE.Name = "buttonExit_DDE";
+            buttonExit_DDE.Size = new Size(98, 39);
+            buttonExit_DDE.TabIndex = 1;
+            buttonExit_DDE.Text = "Выход";
+            buttonExit_DDE.UseVisualStyleBackColor = false;
+            buttonExit_DDE.Click += buttonExit_GAM_Click;
+            // 
+            // pictureBoxIco_DDE
+            // 
+            pictureBoxIco_DDE.Location = new Point(1, 10);
+            pictureBoxIco_DDE.Margin = new Padding(4, 3, 4, 3);
+            pictureBoxIco_DDE.Name = "pictureBoxIco_DDE";
+            pictureBoxIco_DDE.Size = new Size(359, 411);
+            pictureBoxIco_DDE.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxIco_DDE.TabIndex = 2;
+            pictureBoxIco_DDE.TabStop = false;
             // 
             // FormMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.ClientSize = new System.Drawing.Size(804, 461);
-            this.Controls.Add(this.pictureBoxIco_GAM);
-            this.Controls.Add(this.buttonExit_GAM);
-            this.Controls.Add(this.buttonAbout_GAM);
-            this.Controls.Add(this.buttonManagement_GAM);
-            this.Controls.Add(this.buttonGo_GAM);
-            this.Controls.Add(this.labelName_GAM);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormMenu";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CSV Maestro";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIco_GAM)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(60, 60, 60);
+            ClientSize = new Size(938, 532);
+            Controls.Add(pictureBoxIco_DDE);
+            Controls.Add(buttonExit_DDE);
+            Controls.Add(buttonAbout_DDE);
+            Controls.Add(buttonManagement_DDE);
+            Controls.Add(buttonWatch_DDE);
+            Controls.Add(buttonGo_DDE);
+            Controls.Add(labelName_DDE);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "FormMenu";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "CSV Maestro";
+            ((System.ComponentModel.ISupportInitialize)pictureBoxIco_DDE).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label labelName_GAM;
-        private System.Windows.Forms.Button buttonGo_GAM;
-        private System.Windows.Forms.Button buttonManagement_GAM;
-        private System.Windows.Forms.Button buttonAbout_GAM;
-        private System.Windows.Forms.Button buttonExit_GAM;
-        private System.Windows.Forms.PictureBox pictureBoxIco_GAM;
+        private System.Windows.Forms.Label labelName_DDE;
+        private System.Windows.Forms.Button buttonGo_DDE;
+        private System.Windows.Forms.Button buttonManagement_DDE;
+        private System.Windows.Forms.Button buttonAbout_DDE;
+        private System.Windows.Forms.Button buttonExit_DDE;
+        private System.Windows.Forms.PictureBox pictureBoxIco_DDE;
+        private System.Windows.Forms.Button buttonWatch_DDE;
     }
 }

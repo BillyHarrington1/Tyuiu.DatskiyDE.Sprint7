@@ -1,7 +1,5 @@
 ﻿using System.Globalization;
 using System.Text;
-using System.Linq;
-using System.IO;
 namespace AppVideoClips.Lib
 {
     public class DataService
@@ -19,7 +17,6 @@ namespace AppVideoClips.Lib
             }
             catch
             {
-                // fallback to UTF8 if 1251 unsupported or fails
                 lines = File.ReadAllLines(path, Encoding.UTF8);
             }
 
@@ -27,7 +24,6 @@ namespace AppVideoClips.Lib
             if (nonEmpty.Length == 0)
                 return new string[0, 0];
 
-            // Detect separator - prefer semicolon if present, otherwise comma
             char sep = nonEmpty[0].Contains(';') ? ';' : ',';
 
             int columns = nonEmpty.Max(l => SplitCsvLine(l, sep).Length);
@@ -40,8 +36,7 @@ namespace AppVideoClips.Lib
                 for (int j = 0; j < columns; j++)
                 {
                     if (j < parts.Length)
-                    {
-                        // Trim surrounding quotes and whitespace
+                    {          
                         var v = parts[j].Trim();
                         if (v.Length >= 2 && v.StartsWith("\"") && v.EndsWith("\""))
                             v = v.Substring(1, v.Length - 2);
@@ -59,7 +54,7 @@ namespace AppVideoClips.Lib
 
         private static string[] SplitCsvLine(string line, char separator)
         {
-            // Simple split that respects quoted values
+        
             var result = new List<string>();
             var sb = new StringBuilder();
             bool inQuotes = false;
