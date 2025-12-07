@@ -53,6 +53,7 @@
             buttonSave_DDE = new Button();
             buttonManagement_DDE = new Button();
             buttonLoad_DDE = new Button();
+            buttonCloseCustom = new Button();
             panelDown_DDE = new Panel();
             buttonGraph_DDE = new Button();
             textBoxFilter_DDE = new TextBox();
@@ -108,6 +109,7 @@
             panelUpper_DDE.Controls.Add(buttonSave_DDE);
             panelUpper_DDE.Controls.Add(buttonManagement_DDE);
             panelUpper_DDE.Controls.Add(buttonLoad_DDE);
+            panelUpper_DDE.Controls.Add(buttonCloseCustom);
             panelUpper_DDE.Dock = DockStyle.Top;
             panelUpper_DDE.Location = new Point(0, 0);
             panelUpper_DDE.Margin = new Padding(4, 3, 4, 3);
@@ -168,7 +170,7 @@
             menuStripSort_DDE.BackColor = Color.FromArgb(120, 120, 120);
             menuStripSort_DDE.Dock = DockStyle.None;
             menuStripSort_DDE.Items.AddRange(new ToolStripItem[] { toolStripMenuItemMain_DDE, поУбываниюToolStripMenuItem });
-            menuStripSort_DDE.Location = new Point(722, 72);
+            menuStripSort_DDE.Location = new Point(699, 68);
             menuStripSort_DDE.Name = "menuStripSort_DDE";
             menuStripSort_DDE.Padding = new Padding(7, 2, 0, 2);
             menuStripSort_DDE.Size = new Size(215, 24);
@@ -241,7 +243,7 @@
             pictureBoxAbout_DDE.BackgroundImageLayout = ImageLayout.Center;
             pictureBoxAbout_DDE.ErrorImage = null;
             pictureBoxAbout_DDE.InitialImage = null;
-            pictureBoxAbout_DDE.Location = new Point(770, 7);
+            pictureBoxAbout_DDE.Location = new Point(644, 7);
             pictureBoxAbout_DDE.Margin = new Padding(4, 3, 4, 3);
             pictureBoxAbout_DDE.Name = "pictureBoxAbout_DDE";
             pictureBoxAbout_DDE.Size = new Size(40, 39);
@@ -270,7 +272,7 @@
             pictureBoxManagement_DDE.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBoxManagement_DDE.ErrorImage = null;
             pictureBoxManagement_DDE.InitialImage = null;
-            pictureBoxManagement_DDE.Location = new Point(616, 7);
+            pictureBoxManagement_DDE.Location = new Point(475, 5);
             pictureBoxManagement_DDE.Margin = new Padding(4, 3, 4, 3);
             pictureBoxManagement_DDE.Name = "pictureBoxManagement_DDE";
             pictureBoxManagement_DDE.Size = new Size(40, 39);
@@ -299,7 +301,7 @@
             buttonAbout_DDE.FlatStyle = FlatStyle.Popup;
             buttonAbout_DDE.Font = new Font("Segoe UI", 9F);
             buttonAbout_DDE.ForeColor = Color.WhiteSmoke;
-            buttonAbout_DDE.Location = new Point(817, 7);
+            buttonAbout_DDE.Location = new Point(692, 7);
             buttonAbout_DDE.Margin = new Padding(4, 3, 4, 3);
             buttonAbout_DDE.Name = "buttonAbout_DDE";
             buttonAbout_DDE.Size = new Size(108, 39);
@@ -336,7 +338,7 @@
             buttonManagement_DDE.FlatStyle = FlatStyle.Popup;
             buttonManagement_DDE.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonManagement_DDE.ForeColor = Color.WhiteSmoke;
-            buttonManagement_DDE.Location = new Point(663, 7);
+            buttonManagement_DDE.Location = new Point(523, 5);
             buttonManagement_DDE.Margin = new Padding(4, 3, 4, 3);
             buttonManagement_DDE.Name = "buttonManagement_DDE";
             buttonManagement_DDE.Size = new Size(100, 39);
@@ -365,6 +367,20 @@
             buttonLoad_DDE.Click += buttonLoad_DDE_Click;
             buttonLoad_DDE.MouseEnter += buttonLoad_DDE_MouseEnter;
             buttonLoad_DDE.MouseLeave += buttonLoad_DDE_MouseLeave;
+            // 
+            // buttonCloseCustom
+            // 
+            buttonCloseCustom.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonCloseCustom.BackColor = Color.FromArgb(40, 40, 40);
+            buttonCloseCustom.FlatStyle = FlatStyle.Popup;
+            buttonCloseCustom.ForeColor = Color.WhiteSmoke;
+            buttonCloseCustom.Location = new Point(818, 7);
+            buttonCloseCustom.Name = "buttonCloseCustom";
+            buttonCloseCustom.Size = new Size(108, 39);
+            buttonCloseCustom.TabIndex = 7;
+            buttonCloseCustom.Text = "Закрыть";
+            buttonCloseCustom.UseVisualStyleBackColor = false;
+            buttonCloseCustom.Click += ButtonCloseCustom_Click;
             // 
             // panelDown_DDE
             // 

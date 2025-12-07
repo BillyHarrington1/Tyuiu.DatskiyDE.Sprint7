@@ -4,11 +4,79 @@ namespace AppVideoClips
 {
     public partial class FormMain : Form
     {
+        // single close button field
+        private Button buttonCloseCustom;
+        private bool draggingMain = false;
+        private Point dragStartMain;
+
         public FormMain()
         {
             InitializeComponent();
-            // FormMenu was previously shown here causing it to remain visible over the main form.
-            // The welcome menu is now shown modally from Program.Main, so do not create/show it here.
+
+            // Make window borderless
+            this.FormBorderStyle = FormBorderStyle.None;
+
+            // Attach drag handlers to the designer top panel if available
+            try
+            {
+                panelUpper_DDE.MouseDown += PanelTopCustom_MouseDown;
+                panelUpper_DDE.MouseMove += PanelTopCustom_MouseMove;
+            }
+            catch { }
+
+            // Create one close button and add it into the designer's top panel so it's visible in designer hierarchy at runtime
+            try
+            {
+                buttonCloseCustom = new Button
+                {
+                    Text = "Закрыть",
+                    AutoSize = true,
+                    BackColor = Color.FromArgb(40, 40, 40),
+                    FlatStyle = FlatStyle.Popup,
+                    ForeColor = Color.WhiteSmoke,
+                    Anchor = AnchorStyles.Top | AnchorStyles.Right
+                };
+                buttonCloseCustom.Click += (s, e) => this.Close();
+
+                if (panelUpper_DDE != null)
+                {
+                    panelUpper_DDE.Controls.Add(buttonCloseCustom);
+                }
+                else
+                {
+                    // fallback: add to form
+                    this.Controls.Add(buttonCloseCustom);
+                }
+
+                // position after layout
+                this.Shown += (s, e) =>
+                {
+                    try
+                    {
+                        if (buttonCloseCustom.Parent != null)
+                        {
+                            var parentWidth = buttonCloseCustom.Parent.ClientSize.Width;
+                            buttonCloseCustom.Location = new Point(parentWidth - buttonCloseCustom.Width - 12, 6);
+                            buttonCloseCustom.BringToFront();
+                        }
+                    }
+                    catch { }
+                };
+
+                this.Resize += (s, e) =>
+                {
+                    try
+                    {
+                        if (buttonCloseCustom.Parent != null)
+                        {
+                            var parentWidth = buttonCloseCustom.Parent.ClientSize.Width;
+                            buttonCloseCustom.Location = new Point(parentWidth - buttonCloseCustom.Width - 12, 6);
+                        }
+                    }
+                    catch { }
+                };
+            }
+            catch { }
 
             // Improve DataGridView contrast for readability
             try
@@ -35,8 +103,36 @@ namespace AppVideoClips
             {
                 // ignore if designer control not yet created in some contexts
             }
+        }
 
+        // add method expected by designer
+        private void ButtonCloseCustom_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        private void PanelTopCustom_MouseDown(object? sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                draggingMain = true;
+                dragStartMain = new Point(e.X, e.Y);
+            }
+        }
+
+        private void PanelTopCustom_MouseMove(object? sender, MouseEventArgs e)
+        {
+            if (draggingMain)
+            {
+                var p = PointToScreen(e.Location);
+                this.Location = new Point(p.X - dragStartMain.X, p.Y - dragStartMain.Y);
+            }
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            draggingMain = false;
         }
 
         DataService ds = new DataService();
@@ -339,8 +435,6 @@ namespace AppVideoClips
             buttonLoad_DDE.ForeColor = Color.Black;
         }
 
-
-
         private void buttonSave_DDE_MouseEnter(object sender, EventArgs e)
         {
             buttonSave_DDE.BackColor = Color.DarkTurquoise;
@@ -406,7 +500,7 @@ namespace AppVideoClips
             buttonReset_DDE.BackColor = Color.FromArgb(60, 60, 60);
         }
 
-        
+
 
         private void buttonGraph_DDE_Click(object sender, EventArgs e)
         {

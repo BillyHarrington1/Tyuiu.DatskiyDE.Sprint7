@@ -17,6 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource", "Resource", "{BD
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Videos", "Videos", "{74E24527-4496-4C01-867C-F5580A6B7E86}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Pictures\1080p_Лучшее_рукопожатие_всех_времён_Gachimuchi.mp4 = ..\..\..\Pictures\1080p_Лучшее_рукопожатие_всех_времён_Gachimuchi.mp4
+		..\..\..\Downloads\videoplayback.mp4 = ..\..\..\Downloads\videoplayback.mp4
+		..\..\..\Downloads\video_2025-12-07_13-52-50.mp4 = ..\..\..\Downloads\video_2025-12-07_13-52-50.mp4
+		..\..\..\Downloads\video_2025-12-07_13-53-00.mp4 = ..\..\..\Downloads\video_2025-12-07_13-53-00.mp4
+		..\..\..\Downloads\video_2025-12-07_13-53-36.mp4 = ..\..\..\Downloads\video_2025-12-07_13-53-36.mp4
+		..\..\..\Downloads\video_2025-12-07_13-54-04.mp4 = ..\..\..\Downloads\video_2025-12-07_13-54-04.mp4
+		..\..\..\Downloads\video_2025-12-07_13-54-09.mp4 = ..\..\..\Downloads\video_2025-12-07_13-54-09.mp4
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
