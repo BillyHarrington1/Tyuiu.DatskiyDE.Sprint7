@@ -53,7 +53,6 @@
             buttonSave_DDE = new Button();
             buttonManagement_DDE = new Button();
             buttonLoad_DDE = new Button();
-            buttonCloseCustom = new Button();
             panelDown_DDE = new Panel();
             buttonGraph_DDE = new Button();
             textBoxFilter_DDE = new TextBox();
@@ -109,7 +108,6 @@
             panelUpper_DDE.Controls.Add(buttonSave_DDE);
             panelUpper_DDE.Controls.Add(buttonManagement_DDE);
             panelUpper_DDE.Controls.Add(buttonLoad_DDE);
-            panelUpper_DDE.Controls.Add(buttonCloseCustom);
             panelUpper_DDE.Dock = DockStyle.Top;
             panelUpper_DDE.Location = new Point(0, 0);
             panelUpper_DDE.Margin = new Padding(4, 3, 4, 3);
@@ -367,20 +365,6 @@
             buttonLoad_DDE.Click += buttonLoad_DDE_Click;
             buttonLoad_DDE.MouseEnter += buttonLoad_DDE_MouseEnter;
             buttonLoad_DDE.MouseLeave += buttonLoad_DDE_MouseLeave;
-            // 
-            // buttonCloseCustom
-            // 
-            buttonCloseCustom.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonCloseCustom.BackColor = Color.FromArgb(40, 40, 40);
-            buttonCloseCustom.FlatStyle = FlatStyle.Popup;
-            buttonCloseCustom.ForeColor = Color.WhiteSmoke;
-            buttonCloseCustom.Location = new Point(818, 7);
-            buttonCloseCustom.Name = "buttonCloseCustom";
-            buttonCloseCustom.Size = new Size(108, 39);
-            buttonCloseCustom.TabIndex = 7;
-            buttonCloseCustom.Text = "Закрыть";
-            buttonCloseCustom.UseVisualStyleBackColor = false;
-            buttonCloseCustom.Click += ButtonCloseCustom_Click;
             // 
             // panelDown_DDE
             // 

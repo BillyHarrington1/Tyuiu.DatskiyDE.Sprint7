@@ -4,8 +4,6 @@ namespace AppVideoClips
 {
     public partial class FormMain : Form
     {
-        // single close button field
-        private Button buttonCloseCustom;
         private bool draggingMain = false;
         private Point dragStartMain;
 
@@ -21,60 +19,6 @@ namespace AppVideoClips
             {
                 panelUpper_DDE.MouseDown += PanelTopCustom_MouseDown;
                 panelUpper_DDE.MouseMove += PanelTopCustom_MouseMove;
-            }
-            catch { }
-
-            // Create one close button and add it into the designer's top panel so it's visible in designer hierarchy at runtime
-            try
-            {
-                buttonCloseCustom = new Button
-                {
-                    Text = "Закрыть",
-                    AutoSize = true,
-                    BackColor = Color.FromArgb(40, 40, 40),
-                    FlatStyle = FlatStyle.Popup,
-                    ForeColor = Color.WhiteSmoke,
-                    Anchor = AnchorStyles.Top | AnchorStyles.Right
-                };
-                buttonCloseCustom.Click += (s, e) => this.Close();
-
-                if (panelUpper_DDE != null)
-                {
-                    panelUpper_DDE.Controls.Add(buttonCloseCustom);
-                }
-                else
-                {
-                    // fallback: add to form
-                    this.Controls.Add(buttonCloseCustom);
-                }
-
-                // position after layout
-                this.Shown += (s, e) =>
-                {
-                    try
-                    {
-                        if (buttonCloseCustom.Parent != null)
-                        {
-                            var parentWidth = buttonCloseCustom.Parent.ClientSize.Width;
-                            buttonCloseCustom.Location = new Point(parentWidth - buttonCloseCustom.Width - 12, 6);
-                            buttonCloseCustom.BringToFront();
-                        }
-                    }
-                    catch { }
-                };
-
-                this.Resize += (s, e) =>
-                {
-                    try
-                    {
-                        if (buttonCloseCustom.Parent != null)
-                        {
-                            var parentWidth = buttonCloseCustom.Parent.ClientSize.Width;
-                            buttonCloseCustom.Location = new Point(parentWidth - buttonCloseCustom.Width - 12, 6);
-                        }
-                    }
-                    catch { }
-                };
             }
             catch { }
 
@@ -142,11 +86,11 @@ namespace AppVideoClips
         static int rows = 0;
         static int columns = 0;
         static string[,] matrix = new string[0, 0];
+
         private void buttonLoad_DDE_Click(object sender, EventArgs e)
         {
             try
             {
-
                 openFileDialogMain_DDE.ShowDialog();
                 openFile = openFileDialogMain_DDE.FileName;
 
@@ -155,7 +99,6 @@ namespace AppVideoClips
                 columns = matrix.GetLength(1);
                 dataGridViewBase_DDE.RowCount = rows + 1;
                 dataGridViewBase_DDE.ColumnCount = columns;
-
 
                 for (int i = 0; i < rows; i++)
                 {
@@ -166,9 +109,9 @@ namespace AppVideoClips
                     }
                 }
 
-                dataGridViewBase_DDE.Columns[0].Width = 100;
-                dataGridViewBase_DDE.Columns[1].Width = 150;
-                dataGridViewBase_DDE.Columns[3].Width = 150;
+                if (dataGridViewBase_DDE.Columns.Count > 0) dataGridViewBase_DDE.Columns[0].Width = 100;
+                if (dataGridViewBase_DDE.Columns.Count > 1) dataGridViewBase_DDE.Columns[1].Width = 150;
+                if (dataGridViewBase_DDE.Columns.Count > 3) dataGridViewBase_DDE.Columns[3].Width = 150;
                 if (dataGridViewBase_DDE.Columns.Count > 6) dataGridViewBase_DDE.Columns[6].Width = 900;
                 buttonReset_DDE.Enabled = true;
 
@@ -190,10 +133,7 @@ namespace AppVideoClips
                 {
                     string path = saveFileDialogMain_DDE.FileName;
 
-                    if (File.Exists(path))
-                    {
-                        File.Delete(path);
-                    }
+                    if (File.Exists(path)) File.Delete(path);
 
                     int rows = dataGridViewBase_DDE.RowCount;
                     int columns = dataGridViewBase_DDE.ColumnCount;
@@ -205,13 +145,8 @@ namespace AppVideoClips
                         for (int j = 0; j < columns; j++)
                         {
                             strBuilder.Append(dataGridViewBase_DDE.Rows[i].Cells[j].Value);
-
-                            if (j != columns - 1)
-                            {
-                                strBuilder.Append(";");
-                            }
+                            if (j != columns - 1) strBuilder.Append(";");
                         }
-
                         strBuilder.AppendLine();
                     }
 
@@ -226,7 +161,6 @@ namespace AppVideoClips
             }
         }
 
-
         private void buttonAbout_DDE_Click(object sender, EventArgs e)
         {
             FormAbout formAbout = new FormAbout();
@@ -236,136 +170,152 @@ namespace AppVideoClips
         private void buttonSearch_DDE_Click(object sender, EventArgs e)
         {
             dataGridViewBase_DDE.ClearSelection();
-            if (textBoxSearch_DDE.Text == "")
+            if (string.IsNullOrWhiteSpace(textBoxSearch_DDE.Text))
             {
                 MessageBox.Show("Введите критерий для поиска", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
-            else
-            {
-                for (int i = 0; i < rows; i++)
-                {
-                    for (int j = 0; j < columns; j++)
-                    {
-                        if (matrix[i, j].ToLower().Contains(textBoxSearch_DDE.Text.ToLower()))
-                        {
-                            dataGridViewBase_DDE.Rows[i].Selected = true;
-                        }
-                    }
-                }
-            }
-
-
-        }
-
-        private void сортировкаToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            string[,] mx = ds.LoadDataSet(path);
-            string[,] mxsort = ds.SortVozr(mx, 2);
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
+                    if (!string.IsNullOrEmpty(matrix[i, j]) && matrix[i, j].IndexOf(textBoxSearch_DDE.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        dataGridViewBase_DDE.Rows[i].Selected = true;
+                        break;
+                    }
                 }
+            }
+        }
+
+        // Sorting handlers will use DataService's robust methods
+        private void сортировкаToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                var src = (matrix != null && matrix.Length > 0) ? matrix : ds.LoadDataSet(path);
+                var mxsort = ds.SortVozr(src, 2);
+                ApplySortedMatrixToGrid(mxsort);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сортировки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void столбецВесToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string[,] mx = ds.LoadDataSet(path);
-            string[,] mxsort = ds.SortVozr(mx, 5);
-            for (int i = 0; i < rows; i++)
+            try
             {
-                for (int j = 0; j < columns; j++)
-                {
-                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
-                }
+                var src = (matrix != null && matrix.Length > 0) ? matrix : ds.LoadDataSet(path);
+                var mxsort = ds.SortVozr(src, 5);
+                ApplySortedMatrixToGrid(mxsort);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сортировки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void столбецIDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string[,] mx = ds.LoadDataSet(path);
-            string[,] mxsort = ds.SortVozr(mx, 0);
-            for (int i = 0; i < rows; i++)
+            try
             {
-                for (int j = 0; j < columns; j++)
+                var src = (matrix != null && matrix.Length > 0) ? matrix : ds.LoadDataSet(path);
+                var mxsort = ds.SortVozr(src, 0);
+                ApplySortedMatrixToGrid(mxsort);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сортировки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ApplySortedMatrixToGrid(string[,] mxsort)
+        {
+            if (mxsort == null) return;
+            int rcount = mxsort.GetLength(0);
+            int ccount = mxsort.GetLength(1);
+            dataGridViewBase_DDE.RowCount = rcount + 1;
+            dataGridViewBase_DDE.ColumnCount = ccount;
+            for (int i = 0; i < rcount; i++)
+            {
+                for (int j = 0; j < ccount; j++)
                 {
                     dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
                 }
             }
         }
 
-
         private void buttonReset_DDE_Click(object sender, EventArgs e)
         {
-            for (int v = 0; v < rows; v++)
+            try
             {
-                dataGridViewBase_DDE.Rows[v].Visible = true;
-            }
+                matrix = ds.LoadDataSet(path);
+                rows = matrix.GetLength(0);
+                columns = matrix.GetLength(1);
+                dataGridViewBase_DDE.RowCount = rows + 1;
+                dataGridViewBase_DDE.ColumnCount = columns;
 
-            dataGridViewBase_DDE.Rows.Clear();
-            matrix = ds.LoadDataSet(path);
-            rows = matrix.GetLength(0);
-            columns = matrix.GetLength(1);
-            dataGridViewBase_DDE.RowCount = rows + 1;
-            dataGridViewBase_DDE.ColumnCount = columns;
-
-
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < columns; j++)
+                for (int i = 0; i < rows; i++)
                 {
-                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = matrix[i, j];
-                    dataGridViewBase_DDE.Rows[i].Cells[j].Selected = false;
+                    for (int j = 0; j < columns; j++)
+                    {
+                        dataGridViewBase_DDE.Rows[i].Cells[j].Value = matrix[i, j];
+                        dataGridViewBase_DDE.Rows[i].Cells[j].Selected = false;
+                        dataGridViewBase_DDE.Rows[i].Visible = true;
+                    }
                 }
+
+                if (dataGridViewBase_DDE.Columns.Count > 0) dataGridViewBase_DDE.Columns[0].Width = 100;
+                if (dataGridViewBase_DDE.Columns.Count > 1) dataGridViewBase_DDE.Columns[1].Width = 150;
+                if (dataGridViewBase_DDE.Columns.Count > 3) dataGridViewBase_DDE.Columns[3].Width = 150;
             }
-            dataGridViewBase_DDE.Columns[0].Width = 100;
-            dataGridViewBase_DDE.Columns[1].Width = 150;
-            dataGridViewBase_DDE.Columns[3].Width = 150;
+            catch { }
         }
 
         private void столбецДлительностьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string[,] mx = ds.LoadDataSet(path);
-            string[,] mxsort = ds.SortUbyv(mx, 2);
-            for (int i = 0; i < rows; i++)
+            try
             {
-                for (int j = 0; j < columns; j++)
-                {
-                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
-                }
+                var src = (matrix != null && matrix.Length > 0) ? matrix : ds.LoadDataSet(path);
+                var mxsort = ds.SortUbyv(src, 2);
+                ApplySortedMatrixToGrid(mxsort);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сортировки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void столбецВесToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string[,] mx = ds.LoadDataSet(path);
-            string[,] mxsort = ds.SortUbyv(mx, 5);
-            for (int i = 0; i < rows; i++)
+            try
             {
-                for (int j = 0; j < columns; j++)
-                {
-                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
-                }
+                var src = (matrix != null && matrix.Length > 0) ? matrix : ds.LoadDataSet(path);
+                var mxsort = ds.SortUbyv(src, 5);
+                ApplySortedMatrixToGrid(mxsort);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сортировки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void столбецДатаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            string[,] mx = ds.LoadDataSet(path);
-            string[,] mxsort = ds.SortUbyv(mx, 0);
-            for (int i = 0; i < rows; i++)
+            try
             {
-                for (int j = 0; j < columns; j++)
-                {
-                    dataGridViewBase_DDE.Rows[i].Cells[j].Value = mxsort[i, j];
-                }
+                var src = (matrix != null && matrix.Length > 0) ? matrix : ds.LoadDataSet(path);
+                var mxsort = ds.SortUbyv(src, 0);
+                ApplySortedMatrixToGrid(mxsort);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сортировки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void buttonRight_DDE_Click(object sender, EventArgs e)
         {
@@ -387,39 +337,27 @@ namespace AppVideoClips
 
         private void buttonFilter_DDE_Click(object sender, EventArgs e)
         {
-            if (textBoxFilter_DDE.Text == "")
+            if (string.IsNullOrWhiteSpace(textBoxFilter_DDE.Text))
             {
                 MessageBox.Show("Введите критерий для фильтрации", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-            else
+
+            string filterValue = textBoxFilter_DDE.Text;
+            for (int i = 1; i < dataGridViewBase_DDE.Rows.Count; i++)
             {
-                string filterValue = textBoxFilter_DDE.Text.ToLower();
-                for (int i = 1; i < dataGridViewBase_DDE.Rows.Count; i++)
+                var row = dataGridViewBase_DDE.Rows[i];
+                if (row.IsNewRow) continue;
+                bool visible = false;
+                for (int j = 0; j < dataGridViewBase_DDE.Columns.Count; j++)
                 {
-                    if (!dataGridViewBase_DDE.Rows[i].IsNewRow)
+                    var cell = row.Cells[j].Value?.ToString();
+                    if (!string.IsNullOrEmpty(cell) && cell.IndexOf(filterValue, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
-                        bool rowShouldBeVisible = false;
-
-                        for (int j = 0; j < dataGridViewBase_DDE.Columns.Count; j++)
-                        {
-                            var cellValue = dataGridViewBase_DDE.Rows[i].Cells[j].Value?.ToString()?.ToLower();
-
-                            if (cellValue != null && cellValue.IndexOf(filterValue, StringComparison.OrdinalIgnoreCase) >= 0)
-                            {
-                                rowShouldBeVisible = true;
-                                break;
-                            }
-                        }
-                        for (int q = 0; q < columns; q++)
-                        {
-                            dataGridViewBase_DDE.Rows[matrix.GetLength(0) - 1].Cells[q].Value = "";
-
-                        }
-
-                        dataGridViewBase_DDE.Rows[i].Visible = rowShouldBeVisible;
-
+                        visible = true; break;
                     }
                 }
+                row.Visible = visible;
             }
         }
 
@@ -429,260 +367,179 @@ namespace AppVideoClips
             formmanual.ShowDialog();
         }
 
-        private void buttonLoad_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            buttonLoad_DDE.BackColor = Color.DarkTurquoise;
-            buttonLoad_DDE.ForeColor = Color.Black;
-        }
-
-        private void buttonSave_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            buttonSave_DDE.BackColor = Color.DarkTurquoise;
-            buttonSave_DDE.ForeColor = Color.Black;
-        }
-
-        private void buttonSave_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            buttonSave_DDE.BackColor = Color.FromArgb(40, 40, 40);
-            buttonSave_DDE.ForeColor = Color.WhiteSmoke;
-        }
-
-        private void buttonLoad_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            buttonLoad_DDE.BackColor = Color.FromArgb(40, 40, 40);
-            buttonLoad_DDE.ForeColor = Color.WhiteSmoke;
-        }
-
-        private void buttonManagement_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            buttonManagement_DDE.BackColor = Color.DarkTurquoise;
-            buttonManagement_DDE.ForeColor = Color.Black;
-        }
-
-        private void buttonManagement_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            buttonManagement_DDE.BackColor = Color.FromArgb(40, 40, 40);
-            buttonManagement_DDE.ForeColor = Color.WhiteSmoke;
-        }
-
-        private void buttonAbout_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            buttonAbout_DDE.BackColor = Color.DarkTurquoise;
-            buttonAbout_DDE.ForeColor = Color.Black;
-        }
-
-        private void buttonAbout_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            buttonAbout_DDE.BackColor = Color.FromArgb(40, 40, 40);
-            buttonAbout_DDE.ForeColor = Color.WhiteSmoke;
-        }
-
-        private void buttonSearch_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            buttonSearch_DDE.BackColor = Color.DarkTurquoise;
-            buttonSearch_DDE.ForeColor = Color.Black;
-        }
-
-        private void buttonSearch_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            buttonSearch_DDE.BackColor = Color.FromArgb(40, 40, 40);
-            buttonSearch_DDE.ForeColor = Color.WhiteSmoke;
-        }
-
-        private void buttonReset_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            buttonReset_DDE.BackColor = Color.DarkTurquoise;
-
-        }
-
-        private void buttonReset_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            buttonReset_DDE.BackColor = Color.FromArgb(60, 60, 60);
-        }
-
-
-
-        private void buttonGraph_DDE_Click(object sender, EventArgs e)
-        {
-            FormGraph fg = new FormGraph();
-
-            fg.Show();
-
-
-        }
-
+        // filter menu handlers: use matrix and bounds-check
         private void названиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string filtervalue = textBoxFilter_DDE.Text.ToLower();
-                for (int i = 1; i < rows; i++)
-                {
-                    if (!(matrix[i, 1].ToLower().Contains(filtervalue)))
-                    {
-                        dataGridViewBase_DDE.Rows[i].Visible = false;
-                        //dataGridViewBase_DDE.Rows.RemoveAt(i);
-
-                    }
-
-
-                }
-                //dataGridViewBase_DDE.Rows.RemoveAt(rows);
-                dataGridViewBase_DDE.Rows[rows].Visible = false;
-
+                if (columns <= 1) return;
+                string fv = textBoxFilter_DDE.Text;
+                for (int i = 1; i < rows; i++) if (!(matrix[i, 1] ?? string.Empty).Contains(fv, StringComparison.OrdinalIgnoreCase)) dataGridViewBase_DDE.Rows[i].Visible = false;
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private void весToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string filtervalue = textBoxFilter_DDE.Text.ToLower();
-                for (int i = 1; i < rows; i++)
-                {
-                    if (!(matrix[i, 5].ToLower().Contains(filtervalue)))
-                    {
-                        dataGridViewBase_DDE.Rows[i].Visible = false;
-                    }
-
-                }
-                dataGridViewBase_DDE.Rows[rows].Visible = false;
+                if (columns <= 5) return;
+                string fv = textBoxFilter_DDE.Text;
+                for (int i = 1; i < rows; i++) if (!(matrix[i, 5] ?? string.Empty).Contains(fv, StringComparison.OrdinalIgnoreCase)) dataGridViewBase_DDE.Rows[i].Visible = false;
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private void длительностьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string filtervalue = textBoxFilter_DDE.Text.ToLower();
-                for (int i = 1; i < rows; i++)
-                {
-                    if (!(matrix[i, 2].ToLower().Contains(filtervalue)))
-                    {
-                        dataGridViewBase_DDE.Rows[i].Visible = false;
-                    }
-
-                }
-                dataGridViewBase_DDE.Rows[rows].Visible = false;
+                if (columns <= 2) return;
+                string fv = textBoxFilter_DDE.Text;
+                for (int i = 1; i < rows; i++) if (!(matrix[i, 2] ?? string.Empty).Contains(fv, StringComparison.OrdinalIgnoreCase)) dataGridViewBase_DDE.Rows[i].Visible = false;
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private void форматToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string filtervalue = textBoxFilter_DDE.Text.ToLower();
-                for (int i = 1; i < rows; i++)
-                {
-                    if (!(matrix[i, 3].ToLower().Contains(filtervalue)))
-                    {
-                        dataGridViewBase_DDE.Rows[i].Visible = false;
-                    }
-
-                }
-                dataGridViewBase_DDE.Rows[rows].Visible = false;
+                if (columns <= 3) return;
+                string fv = textBoxFilter_DDE.Text;
+                for (int i = 1; i < rows; i++) if (!(matrix[i, 3] ?? string.Empty).Contains(fv, StringComparison.OrdinalIgnoreCase)) dataGridViewBase_DDE.Rows[i].Visible = false;
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private void категорияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string filtervalue = textBoxFilter_DDE.Text.ToLower();
-                for (int i = 1; i < rows; i++)
-                {
-                    if (!(matrix[i, 6].ToLower().Contains(filtervalue)))
-                    {
-                        dataGridViewBase_DDE.Rows[i].Visible = false;
-                    }
-
-                }
-                dataGridViewBase_DDE.Rows[rows].Visible = false;
+                if (columns <= 6) return;
+                string fv = textBoxFilter_DDE.Text;
+                for (int i = 1; i < rows; i++) if (!(matrix[i, 6] ?? string.Empty).Contains(fv, StringComparison.OrdinalIgnoreCase)) dataGridViewBase_DDE.Rows[i].Visible = false;
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private void iDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string filtervalue = textBoxFilter_DDE.Text.ToLower();
-                for (int i = 1; i < rows; i++)
-                {
-                    if (!(matrix[i, 0].ToLower().Contains(filtervalue)))
-                    {
-                        dataGridViewBase_DDE.Rows[i].Visible = false;
-                    }
-
-                }
-                dataGridViewBase_DDE.Rows[rows].Visible = false;
-
+                if (columns <= 0) return;
+                string fv = textBoxFilter_DDE.Text;
+                for (int i = 1; i < rows; i++) if (!(matrix[i, 0] ?? string.Empty).Contains(fv, StringComparison.OrdinalIgnoreCase)) dataGridViewBase_DDE.Rows[i].Visible = false;
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
-        private void buttonGraph_DDE_MouseEnter(object sender, EventArgs e)
+        private void buttonAbout_DDE_MouseEnter(object sender, EventArgs e)
         {
-            buttonGraph_DDE.BackColor = Color.DarkTurquoise;
-            buttonGraph_DDE.ForeColor = Color.Black;
+            try { buttonAbout_DDE.BackColor = Color.DarkTurquoise; buttonAbout_DDE.ForeColor = Color.Black; } catch { }
         }
 
-        private void buttonGraph_DDE_MouseLeave(object sender, EventArgs e)
+        private void buttonAbout_DDE_MouseLeave(object sender, EventArgs e)
         {
-            buttonGraph_DDE.BackColor = Color.FromArgb(40, 40, 40);
-            buttonGraph_DDE.ForeColor = Color.WhiteSmoke;
+            try { buttonAbout_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonAbout_DDE.ForeColor = Color.WhiteSmoke; } catch { }
+        }
+
+        private void buttonSave_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonSave_DDE.BackColor = Color.DarkTurquoise; buttonSave_DDE.ForeColor = Color.Black; } catch { }
+        }
+
+        private void buttonSave_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonSave_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonSave_DDE.ForeColor = Color.WhiteSmoke; } catch { }
+        }
+
+        private void buttonManagement_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonManagement_DDE.BackColor = Color.DarkTurquoise; buttonManagement_DDE.ForeColor = Color.Black; } catch { }
+        }
+
+        private void buttonManagement_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonManagement_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonManagement_DDE.ForeColor = Color.WhiteSmoke; } catch { }
+        }
+
+        private void buttonLoad_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonLoad_DDE.BackColor = Color.DarkTurquoise; buttonLoad_DDE.ForeColor = Color.Black; } catch { }
+        }
+
+        private void buttonLoad_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonLoad_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonLoad_DDE.ForeColor = Color.WhiteSmoke; } catch { }
         }
 
         private void buttonMenu_DDE_Click(object sender, EventArgs e)
         {
-            FormMenu fmen = new FormMenu();
-
-            fmen.TopMost = true;
-            fmen.ShowDialog();
+            try
+            {
+                FormMenu fmen = new FormMenu();
+                fmen.TopMost = true;
+                fmen.ShowDialog();
+            }
+            catch { }
         }
 
         private void buttonMenu_DDE_MouseEnter(object sender, EventArgs e)
         {
-            buttonMenu_DDE.BackColor = Color.DarkTurquoise;
-            buttonMenu_DDE.ForeColor = Color.Black;
+            try { buttonMenu_DDE.BackColor = Color.DarkTurquoise; buttonMenu_DDE.ForeColor = Color.Black; } catch { }
         }
 
         private void buttonMenu_DDE_MouseLeave(object sender, EventArgs e)
         {
-            buttonMenu_DDE.BackColor = Color.FromArgb(40, 40, 40);
-            buttonMenu_DDE.ForeColor = Color.WhiteSmoke;
-        }
-
-        private void dataGridViewBase_DDE_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            try { buttonMenu_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonMenu_DDE.ForeColor = Color.WhiteSmoke; } catch { }
         }
 
         private void pictureBoxSort_DDE_Click(object sender, EventArgs e)
         {
-
+            // optional: toggle visibility of menuStripSort_DDE
+            try { menuStripSort_DDE.Visible = !menuStripSort_DDE.Visible; } catch { }
         }
+
+        private void buttonReset_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonReset_DDE.BackColor = Color.DarkTurquoise; } catch { }
+        }
+
+        private void buttonReset_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonReset_DDE.BackColor = Color.FromArgb(60, 60, 60); } catch { }
+        }
+
+        private void dataGridViewBase_DDE_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // placeholder
+        }
+
+        private void buttonGraph_DDE_Click(object sender, EventArgs e)
+        {
+            try { FormGraph fg = new FormGraph(); fg.Show(); } catch { }
+        }
+
+        private void buttonGraph_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonGraph_DDE.BackColor = Color.DarkTurquoise; buttonGraph_DDE.ForeColor = Color.Black; } catch { }
+        }
+
+        private void buttonGraph_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonGraph_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonGraph_DDE.ForeColor = Color.WhiteSmoke; } catch { }
+        }
+
+        private void buttonSearch_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonSearch_DDE.BackColor = Color.DarkTurquoise; buttonSearch_DDE.ForeColor = Color.Black; } catch { }
+        }
+
+        private void buttonSearch_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonSearch_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonSearch_DDE.ForeColor = Color.WhiteSmoke; } catch { }
+        }
+
     }
 }

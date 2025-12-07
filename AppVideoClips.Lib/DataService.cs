@@ -54,7 +54,6 @@ namespace AppVideoClips.Lib
 
         private static string[] SplitCsvLine(string line, char separator)
         {
-        
             var result = new List<string>();
             var sb = new StringBuilder();
             bool inQuotes = false;
@@ -84,75 +83,86 @@ namespace AppVideoClips.Lib
             return result.ToArray();
         }
 
-        public string[,] SortUbyv(string[,] basa, int column)
+        // try parse numeric or timespan-like values to double for sorting
+        private static double ParseSortableValue(string s)
         {
-            int[] door = new int[basa.GetLength(0) - 1];
-            door[door.Length - 1] = Convert.ToInt32(basa[basa.GetLength(0) - 1, column]);
-            for (int i = 0; i < door.Length - 1; i++)
-            {
-                door[i] = Convert.ToInt32(basa[i + 1, column]);
-            }
+            if (string.IsNullOrWhiteSpace(s)) return double.NaN;
+            s = s.Trim();
 
-            Array.Sort(door, (x, y) => y.CompareTo(x));
+            // Try TimeSpan parse (e.g., 0:02:30 or 00:02:30)
+            if (TimeSpan.TryParse(s, out var ts)) return ts.TotalSeconds;
 
-            string[,] SortedBasa = new string[basa.GetLength(0), basa.GetLength(1)];
+            // Normalize decimal separators then try double
+            var normalized = s.Replace(',', '.');
+            if (double.TryParse(normalized, NumberStyles.Any, CultureInfo.InvariantCulture, out var d)) return d;
 
-            for (int i = 0; i < SortedBasa.GetLength(1); i++)
-            {
-                SortedBasa[0, i] = basa[0, i];
-            }
+            // Extract digits and dots if mixed with text (e.g., "750 KB")
+            var digits = new string(s.Where(ch => char.IsDigit(ch) || ch == '.' || ch == ',').ToArray()).Replace(',', '.');
+            if (!string.IsNullOrEmpty(digits) && double.TryParse(digits, NumberStyles.Any, CultureInfo.InvariantCulture, out d)) return d;
 
-            for (int i = 0; i < SortedBasa.GetLength(0) - 1; i++)
-            {
-                for (int j = 1; j < basa.GetLength(0); j++)
-                {
-                    if (door[i] == Convert.ToInt32(basa[j, column]))
-                    {
-                        for (int c = 0; c < SortedBasa.GetLength(1); c++)
-                        {
-                            SortedBasa[i + 1, c] = basa[j, c];
-                        }
-                        basa[j, column] = "-1";
-                        break;
-                    }
-                }
-            }
-            return SortedBasa;
+            return double.NaN;
         }
 
+        public string[,] SortUbyv(string[,] basa, int column)
+        {
+            // descending
+            int rows = basa.GetLength(0);
+            int cols = basa.GetLength(1);
+            if (rows <= 1) return basa;
+
+            var header = new string[cols];
+            for (int c = 0; c < cols; c++) header[c] = basa[0, c];
+
+            var list = new List<(int rowIndex, double value)>();
+            for (int r = 1; r < rows; r++)
+            {
+                var raw = basa[r, column] ?? string.Empty;
+                var val = ParseSortableValue(raw);
+                list.Add((r, val));
+            }
+
+            var sorted = list.OrderByDescending(x => double.IsNaN(x.value) ? double.NegativeInfinity : x.value).ToList();
+
+            var result = new string[rows, cols];
+            for (int c = 0; c < cols; c++) result[0, c] = header[c];
+            for (int i = 0; i < sorted.Count; i++)
+            {
+                int src = sorted[i].rowIndex;
+                for (int c = 0; c < cols; c++) result[i + 1, c] = basa[src, c];
+            }
+
+            return result;
+        }
 
         public string[,] SortVozr(string[,] basa, int column)
         {
-            int[] input = new int[basa.GetLength(0) - 1];
-            input[input.Length - 1] = Convert.ToInt32(basa[basa.GetLength(0) - 1, column]);
-            for (int i = 0; i < input.Length - 1; i++)
-            {
-                input[i] = Convert.ToInt32(basa[i + 1, column]);
-            }
-            Array.Sort(input, (x, y) => x.CompareTo(y));
-            string[,] sortedmx = new string[basa.GetLength(0), basa.GetLength(1)];
+            // ascending
+            int rows = basa.GetLength(0);
+            int cols = basa.GetLength(1);
+            if (rows <= 1) return basa;
 
-            for (int i = 0; i < sortedmx.GetLength(1); i++)
+            var header = new string[cols];
+            for (int c = 0; c < cols; c++) header[c] = basa[0, c];
+
+            var list = new List<(int rowIndex, double value)>();
+            for (int r = 1; r < rows; r++)
             {
-                sortedmx[0, i] = basa[0, i];
+                var raw = basa[r, column] ?? string.Empty;
+                var val = ParseSortableValue(raw);
+                list.Add((r, val));
             }
 
-            for (int i = 0; i < sortedmx.GetLength(0) - 1; i++)
+            var sorted = list.OrderBy(x => double.IsNaN(x.value) ? double.PositiveInfinity : x.value).ToList();
+
+            var result = new string[rows, cols];
+            for (int c = 0; c < cols; c++) result[0, c] = header[c];
+            for (int i = 0; i < sorted.Count; i++)
             {
-                for (int j = 1; j < basa.GetLength(0); j++)
-                {
-                    if (input[i] == Convert.ToInt32(basa[j, column]))
-                    {
-                        for (int c = 0; c < sortedmx.GetLength(1); c++)
-                        {
-                            sortedmx[i + 1, c] = basa[j, c];
-                        }
-                        basa[j, column] = "-1";
-                        break;
-                    }
-                }
+                int src = sorted[i].rowIndex;
+                for (int c = 0; c < cols; c++) result[i + 1, c] = basa[src, c];
             }
-            return sortedmx;
+
+            return result;
         }
     }
 }
