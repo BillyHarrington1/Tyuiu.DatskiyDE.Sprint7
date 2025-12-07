@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             openFileDialogMain_DDE = new OpenFileDialog();
             panelUpper_DDE = new Panel();
+            buttonClose_DDE = new Button();
             buttonMenu_DDE = new Button();
             pictureBoxSort_DDE = new PictureBox();
             buttonReset_DDE = new Button();
@@ -41,7 +42,7 @@
             ToolStripMenuItem_DDE_SortDuration = new ToolStripMenuItem();
             ToolStripMenuItem_DDE_ColumnWeight = new ToolStripMenuItem();
             ToolStripMenuItem_DDE_ColumnID = new ToolStripMenuItem();
-            поУбываниюToolStripMenuItem = new ToolStripMenuItem();
+            ToolStripMenuItem_DDE = new ToolStripMenuItem();
             ToolStripMenuItem_DDE_ColumnDuration_Dec = new ToolStripMenuItem();
             ToolStripMenuItem_DDE_ColumnWeight_Dec = new ToolStripMenuItem();
             ToolStripMenuItem_DDE_ColumnID_Dec = new ToolStripMenuItem();
@@ -96,6 +97,7 @@
             // panelUpper_DDE
             // 
             panelUpper_DDE.BackColor = Color.FromArgb(60, 60, 60);
+            panelUpper_DDE.Controls.Add(buttonClose_DDE);
             panelUpper_DDE.Controls.Add(buttonMenu_DDE);
             panelUpper_DDE.Controls.Add(pictureBoxSort_DDE);
             panelUpper_DDE.Controls.Add(buttonReset_DDE);
@@ -114,6 +116,22 @@
             panelUpper_DDE.Name = "panelUpper_DDE";
             panelUpper_DDE.Size = new Size(938, 97);
             panelUpper_DDE.TabIndex = 0;
+            // 
+            // buttonClose_DDE
+            // 
+            buttonClose_DDE.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonClose_DDE.AutoSize = true;
+            buttonClose_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonClose_DDE.FlatStyle = FlatStyle.Popup;
+            buttonClose_DDE.ForeColor = Color.WhiteSmoke;
+            buttonClose_DDE.Location = new Point(818, 8);
+            buttonClose_DDE.Name = "buttonClose_DDE";
+            buttonClose_DDE.Size = new Size(96, 37);
+            buttonClose_DDE.TabIndex = 7;
+            buttonClose_DDE.Text = "Закрыть";
+            toolTipButtons_DDE.SetToolTip(buttonClose_DDE, "Закрыть окно");
+            buttonClose_DDE.UseVisualStyleBackColor = false;
+            buttonClose_DDE.Click += ButtonCloseCustom_Click;
             // 
             // buttonMenu_DDE
             // 
@@ -167,13 +185,13 @@
             menuStripSort_DDE.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             menuStripSort_DDE.BackColor = Color.FromArgb(120, 120, 120);
             menuStripSort_DDE.Dock = DockStyle.None;
-            menuStripSort_DDE.Items.AddRange(new ToolStripItem[] { toolStripMenuItemMain_DDE, поУбываниюToolStripMenuItem });
+            menuStripSort_DDE.Items.AddRange(new ToolStripItem[] { toolStripMenuItemMain_DDE, ToolStripMenuItem_DDE });
             menuStripSort_DDE.Location = new Point(699, 68);
             menuStripSort_DDE.Name = "menuStripSort_DDE";
             menuStripSort_DDE.Padding = new Padding(7, 2, 0, 2);
             menuStripSort_DDE.Size = new Size(215, 24);
             menuStripSort_DDE.TabIndex = 3;
-            menuStripSort_DDE.Text = "menuStrip1";
+            menuStripSort_DDE.Text = "menuStrip";
             // 
             // toolStripMenuItemMain_DDE
             // 
@@ -205,13 +223,13 @@
             ToolStripMenuItem_DDE_ColumnID.Text = "Столбец \"ID\"";
             ToolStripMenuItem_DDE_ColumnID.Click += столбецIDToolStripMenuItem_Click;
             // 
-            // поУбываниюToolStripMenuItem
+            // ToolStripMenuItem_DDE
             // 
-            поУбываниюToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItem_DDE_ColumnDuration_Dec, ToolStripMenuItem_DDE_ColumnWeight_Dec, ToolStripMenuItem_DDE_ColumnID_Dec });
-            поУбываниюToolStripMenuItem.ForeColor = SystemColors.ControlText;
-            поУбываниюToolStripMenuItem.Name = "поУбываниюToolStripMenuItem";
-            поУбываниюToolStripMenuItem.Size = new Size(96, 20);
-            поУбываниюToolStripMenuItem.Text = "По убыванию";
+            ToolStripMenuItem_DDE.DropDownItems.AddRange(new ToolStripItem[] { ToolStripMenuItem_DDE_ColumnDuration_Dec, ToolStripMenuItem_DDE_ColumnWeight_Dec, ToolStripMenuItem_DDE_ColumnID_Dec });
+            ToolStripMenuItem_DDE.ForeColor = SystemColors.ControlText;
+            ToolStripMenuItem_DDE.Name = "ToolStripMenuItem_DDE";
+            ToolStripMenuItem_DDE.Size = new Size(96, 20);
+            ToolStripMenuItem_DDE.Text = "По убыванию";
             // 
             // ToolStripMenuItem_DDE_ColumnDuration_Dec
             // 
@@ -568,24 +586,24 @@
             dataGridViewBase_DDE.BackgroundColor = Color.DimGray;
             dataGridViewBase_DDE.BorderStyle = BorderStyle.Fixed3D;
             dataGridViewBase_DDE.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(224, 224, 224);
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dataGridViewCellStyle1.ForeColor = SystemColors.Desktop;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewBase_DDE.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(224, 224, 224);
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle3.ForeColor = SystemColors.Desktop;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridViewBase_DDE.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewBase_DDE.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewBase_DDE.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(224, 224, 224);
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ButtonHighlight;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridViewBase_DDE.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(224, 224, 224);
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ButtonHighlight;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridViewBase_DDE.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridViewBase_DDE.Dock = DockStyle.Fill;
             dataGridViewBase_DDE.GridColor = Color.Gray;
             dataGridViewBase_DDE.Location = new Point(4, 19);
@@ -662,7 +680,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_SortDuration;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnWeight;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnID;
-        private System.Windows.Forms.ToolStripMenuItem поУбываниюToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnDuration_Dec;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnWeight_Dec;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_ColumnID_Dec;
@@ -681,6 +699,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterCategory;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterID;
         private System.Windows.Forms.Button buttonMenu_DDE;
+        private Button buttonClose_DDE;
     }
 }
 
