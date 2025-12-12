@@ -32,10 +32,16 @@
             buttonImport = new Button();
             buttonRefresh = new Button();
             buttonYouTube = new Button();
+            buttonRutube = new Button();
+            buttonVK = new Button();
+            buttonTwitch = new Button();
             labelTitle = new Label();
+            buttonMinimize = new Button();
             buttonClose = new Button();
+            buttonToggleSidebar = new Button();
             webView2 = new Microsoft.Web.WebView2.WinForms.WebView2();
             flowPanelVideos = new FlowLayoutPanel();
+            panelSidebar = new Panel();
             panelControls = new Panel();
             buttonPlay = new Button();
             buttonPause = new Button();
@@ -43,6 +49,7 @@
             labelVolume = new Label();
             panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)webView2).BeginInit();
+            panelSidebar.SuspendLayout();
             panelControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackVolume).BeginInit();
             SuspendLayout();
@@ -53,8 +60,13 @@
             panelTop.Controls.Add(buttonImport);
             panelTop.Controls.Add(buttonRefresh);
             panelTop.Controls.Add(buttonYouTube);
+            panelTop.Controls.Add(buttonRutube);
+            panelTop.Controls.Add(buttonVK);
+            panelTop.Controls.Add(buttonTwitch);
             panelTop.Controls.Add(labelTitle);
+            panelTop.Controls.Add(buttonMinimize);
             panelTop.Controls.Add(buttonClose);
+            panelTop.Controls.Add(buttonToggleSidebar);
             panelTop.Dock = DockStyle.Top;
             panelTop.Location = new Point(0, 0);
             panelTop.Name = "panelTop";
@@ -70,7 +82,7 @@
             buttonImport.BackColor = Color.FromArgb(40, 40, 40);
             buttonImport.FlatStyle = FlatStyle.Popup;
             buttonImport.ForeColor = Color.WhiteSmoke;
-            buttonImport.Location = new Point(820, 12);
+            buttonImport.Location = new Point(675, 12);
             buttonImport.Name = "buttonImport";
             buttonImport.Size = new Size(80, 25);
             buttonImport.TabIndex = 4;
@@ -85,7 +97,7 @@
             buttonRefresh.BackColor = Color.FromArgb(40, 40, 40);
             buttonRefresh.FlatStyle = FlatStyle.Popup;
             buttonRefresh.ForeColor = Color.WhiteSmoke;
-            buttonRefresh.Location = new Point(900, 12);
+            buttonRefresh.Location = new Point(761, 10);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(80, 25);
             buttonRefresh.TabIndex = 5;
@@ -100,13 +112,58 @@
             buttonYouTube.BackColor = Color.FromArgb(40, 40, 40);
             buttonYouTube.FlatStyle = FlatStyle.Popup;
             buttonYouTube.ForeColor = Color.WhiteSmoke;
-            buttonYouTube.Location = new Point(1020, 12);
+            buttonYouTube.Location = new Point(847, 12);
             buttonYouTube.Name = "buttonYouTube";
             buttonYouTube.Size = new Size(80, 25);
             buttonYouTube.TabIndex = 2;
             buttonYouTube.Text = "YouTube";
             buttonYouTube.UseVisualStyleBackColor = false;
             buttonYouTube.Click += buttonYouTube_Click;
+            // 
+            // buttonRutube
+            // 
+            buttonRutube.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonRutube.AutoSize = true;
+            buttonRutube.BackColor = Color.FromArgb(40, 40, 40);
+            buttonRutube.FlatStyle = FlatStyle.Popup;
+            buttonRutube.ForeColor = Color.WhiteSmoke;
+            buttonRutube.Location = new Point(949, 10);
+            buttonRutube.Name = "buttonRutube";
+            buttonRutube.Size = new Size(80, 25);
+            buttonRutube.TabIndex = 6;
+            buttonRutube.Text = "Рутуб";
+            buttonRutube.UseVisualStyleBackColor = false;
+            buttonRutube.Click += buttonRutube_Click;
+            // 
+            // buttonVK
+            // 
+            buttonVK.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonVK.AutoSize = true;
+            buttonVK.BackColor = Color.FromArgb(40, 40, 40);
+            buttonVK.FlatStyle = FlatStyle.Popup;
+            buttonVK.ForeColor = Color.WhiteSmoke;
+            buttonVK.Location = new Point(589, 12);
+            buttonVK.Name = "buttonVK";
+            buttonVK.Size = new Size(80, 25);
+            buttonVK.TabIndex = 7;
+            buttonVK.Text = "ВКонтакте";
+            buttonVK.UseVisualStyleBackColor = false;
+            buttonVK.Click += buttonVK_Click;
+            // 
+            // buttonTwitch
+            // 
+            buttonTwitch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonTwitch.AutoSize = true;
+            buttonTwitch.BackColor = Color.FromArgb(40, 40, 40);
+            buttonTwitch.FlatStyle = FlatStyle.Popup;
+            buttonTwitch.ForeColor = Color.WhiteSmoke;
+            buttonTwitch.Location = new Point(1198, 12);
+            buttonTwitch.Name = "buttonTwitch";
+            buttonTwitch.Size = new Size(80, 25);
+            buttonTwitch.TabIndex = 8;
+            buttonTwitch.Text = "Twitch";
+            buttonTwitch.UseVisualStyleBackColor = false;
+            buttonTwitch.Click += buttonTwitch_Click;
             // 
             // labelTitle
             // 
@@ -118,6 +175,21 @@
             labelTitle.TabIndex = 1;
             labelTitle.Text = "Просмотр видео";
             // 
+            // buttonMinimize
+            // 
+            buttonMinimize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonMinimize.AutoSize = true;
+            buttonMinimize.BackColor = Color.FromArgb(40, 40, 40);
+            buttonMinimize.FlatStyle = FlatStyle.Popup;
+            buttonMinimize.ForeColor = Color.WhiteSmoke;
+            buttonMinimize.Location = new Point(1035, 11);
+            buttonMinimize.Name = "buttonMinimize";
+            buttonMinimize.Size = new Size(80, 27);
+            buttonMinimize.TabIndex = 9;
+            buttonMinimize.Text = "Свернуть";
+            buttonMinimize.UseVisualStyleBackColor = false;
+            buttonMinimize.Click += buttonMinimize_Click;
+            // 
             // buttonClose
             // 
             buttonClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -125,13 +197,27 @@
             buttonClose.BackColor = Color.FromArgb(40, 40, 40);
             buttonClose.FlatStyle = FlatStyle.Popup;
             buttonClose.ForeColor = Color.WhiteSmoke;
-            buttonClose.Location = new Point(1106, 10);
+            buttonClose.Location = new Point(1120, 11);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(80, 27);
             buttonClose.TabIndex = 0;
             buttonClose.Text = "Закрыть";
             buttonClose.UseVisualStyleBackColor = false;
             buttonClose.Click += buttonClose_Click;
+            // 
+            // buttonToggleSidebar
+            // 
+            buttonToggleSidebar.AutoSize = true;
+            buttonToggleSidebar.BackColor = Color.FromArgb(40, 40, 40);
+            buttonToggleSidebar.FlatStyle = FlatStyle.Popup;
+            buttonToggleSidebar.ForeColor = Color.WhiteSmoke;
+            buttonToggleSidebar.Location = new Point(114, 7);
+            buttonToggleSidebar.Name = "buttonToggleSidebar";
+            buttonToggleSidebar.Size = new Size(50, 32);
+            buttonToggleSidebar.TabIndex = 10;
+            buttonToggleSidebar.Text = "≡";
+            buttonToggleSidebar.UseVisualStyleBackColor = false;
+            buttonToggleSidebar.Click += buttonToggleSidebar_Click;
             // 
             // webView2
             // 
@@ -141,19 +227,29 @@
             webView2.Dock = DockStyle.Fill;
             webView2.Location = new Point(0, 48);
             webView2.Name = "webView2";
-            webView2.Size = new Size(840, 624);
+            webView2.Size = new Size(1000, 624);
             webView2.TabIndex = 2;
-            webView2.ZoomFactor = 2D;
+            webView2.ZoomFactor = 1D;
+            // 
+            // panelSidebar
+            // 
+            panelSidebar.BackColor = Color.FromArgb(30, 30, 30);
+            panelSidebar.Dock = DockStyle.Right;
+            panelSidebar.Width = 360;
+            panelSidebar.Visible = true;
+            panelSidebar.Name = "panelSidebar";
             // 
             // flowPanelVideos
             // 
             flowPanelVideos.AutoScroll = true;
             flowPanelVideos.BackColor = Color.FromArgb(30, 30, 30);
-            flowPanelVideos.Dock = DockStyle.Right;
-            flowPanelVideos.Location = new Point(840, 48);
+            flowPanelVideos.Dock = DockStyle.Fill;
+            flowPanelVideos.Location = new Point(0, 0);
             flowPanelVideos.Name = "flowPanelVideos";
             flowPanelVideos.Size = new Size(360, 624);
+            panelSidebar.Controls.Add(flowPanelVideos);
             flowPanelVideos.TabIndex = 3;
+            flowPanelVideos.Paint += flowPanelVideos_Paint;
             // 
             // panelControls
             // 
@@ -214,8 +310,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(20, 20, 20);
             ClientSize = new Size(1200, 720);
+            // add webView2 first so dock layout calculates correctly, then sidebar docks to right
             Controls.Add(webView2);
-            Controls.Add(flowPanelVideos);
+            Controls.Add(panelSidebar);
             Controls.Add(panelControls);
             Controls.Add(panelTop);
             Font = new Font("Segoe UI", 8.25F);
@@ -228,6 +325,7 @@
             panelTop.ResumeLayout(false);
             panelTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)webView2).EndInit();
+            panelSidebar.ResumeLayout(false);
             panelControls.ResumeLayout(false);
             panelControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackVolume).EndInit();
@@ -241,10 +339,16 @@
         private System.Windows.Forms.Button buttonImport;
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.Button buttonYouTube;
+        private System.Windows.Forms.Button buttonRutube;
+        private System.Windows.Forms.Button buttonVK;
+        private System.Windows.Forms.Button buttonTwitch;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Button buttonMinimize;
+        private System.Windows.Forms.Button buttonToggleSidebar;
         private Microsoft.Web.WebView2.WinForms.WebView2 webView2;
         private System.Windows.Forms.FlowLayoutPanel flowPanelVideos;
+        private System.Windows.Forms.Panel panelSidebar;
         private System.Windows.Forms.Panel panelControls;
         private System.Windows.Forms.Button buttonPlay;
         private System.Windows.Forms.Button buttonPause;

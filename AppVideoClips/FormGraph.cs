@@ -14,6 +14,22 @@ namespace AppVideoClips
         public FormGraph()
         {
             InitializeComponent();
+
+            Theme.ApplyTheme(this);
+
+            // add theme toggle button
+            try
+            {
+                var btn = new Button { Text = "Тема", Size = new Size(70, 28), BackColor = Color.Transparent, FlatStyle = FlatStyle.Flat, ForeColor = Theme.Foreground };
+                btn.Click += (s, e) => Theme.ToggleTheme(this);
+                // place top-right
+                btn.Location = new Point(this.ClientSize.Width - 90, 8);
+                btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                Controls.Add(btn);
+                btn.BringToFront();
+            }
+            catch { }
+
             InitializeFromCsv();
         }
 

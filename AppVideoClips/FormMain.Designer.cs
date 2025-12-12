@@ -33,7 +33,9 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             openFileDialogMain_DDE = new OpenFileDialog();
             panelUpper_DDE = new Panel();
-            buttonClose_DDE = new Button();
+            buttonCloseCustom = new Button();
+            buttonMinimize_DDE = new Button();
+            buttonTheme_DDE = new Button();
             buttonMenu_DDE = new Button();
             pictureBoxSort_DDE = new PictureBox();
             buttonReset_DDE = new Button();
@@ -97,7 +99,9 @@
             // panelUpper_DDE
             // 
             panelUpper_DDE.BackColor = Color.FromArgb(60, 60, 60);
-            panelUpper_DDE.Controls.Add(buttonClose_DDE);
+            panelUpper_DDE.Controls.Add(buttonCloseCustom);
+            panelUpper_DDE.Controls.Add(buttonMinimize_DDE);
+            panelUpper_DDE.Controls.Add(buttonTheme_DDE);
             panelUpper_DDE.Controls.Add(buttonMenu_DDE);
             panelUpper_DDE.Controls.Add(pictureBoxSort_DDE);
             panelUpper_DDE.Controls.Add(buttonReset_DDE);
@@ -117,21 +121,47 @@
             panelUpper_DDE.Size = new Size(938, 97);
             panelUpper_DDE.TabIndex = 0;
             // 
-            // buttonClose_DDE
+            // buttonCloseCustom
             // 
-            buttonClose_DDE.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonClose_DDE.AutoSize = true;
-            buttonClose_DDE.BackColor = Color.FromArgb(40, 40, 40);
-            buttonClose_DDE.FlatStyle = FlatStyle.Popup;
-            buttonClose_DDE.ForeColor = Color.WhiteSmoke;
-            buttonClose_DDE.Location = new Point(818, 8);
-            buttonClose_DDE.Name = "buttonClose_DDE";
-            buttonClose_DDE.Size = new Size(96, 37);
-            buttonClose_DDE.TabIndex = 7;
-            buttonClose_DDE.Text = "Закрыть";
-            toolTipButtons_DDE.SetToolTip(buttonClose_DDE, "Закрыть окно");
-            buttonClose_DDE.UseVisualStyleBackColor = false;
-            buttonClose_DDE.Click += ButtonCloseCustom_Click;
+            buttonCloseCustom.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonCloseCustom.BackColor = Color.FromArgb(40, 40, 40);
+            buttonCloseCustom.FlatStyle = FlatStyle.Popup;
+            buttonCloseCustom.ForeColor = Color.WhiteSmoke;
+            buttonCloseCustom.Location = new Point(818, 7);
+            buttonCloseCustom.Name = "buttonCloseCustom";
+            buttonCloseCustom.Size = new Size(108, 39);
+            buttonCloseCustom.TabIndex = 7;
+            buttonCloseCustom.Text = "Закрыть";
+            buttonCloseCustom.UseVisualStyleBackColor = false;
+            buttonCloseCustom.Click += ButtonCloseCustom_Click;
+            // 
+            // buttonMinimize_DDE
+            // 
+            buttonMinimize_DDE.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonMinimize_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonMinimize_DDE.FlatStyle = FlatStyle.Popup;
+            buttonMinimize_DDE.ForeColor = Color.WhiteSmoke;
+            buttonMinimize_DDE.Location = new Point(702, 7);
+            buttonMinimize_DDE.Name = "buttonMinimize_DDE";
+            buttonMinimize_DDE.Size = new Size(108, 39);
+            buttonMinimize_DDE.TabIndex = 8;
+            buttonMinimize_DDE.Text = "Свернуть";
+            buttonMinimize_DDE.UseVisualStyleBackColor = false;
+            buttonMinimize_DDE.Click += ButtonMinimize_DDE_Click;
+            // 
+            // buttonTheme_DDE
+            // 
+            buttonTheme_DDE.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonTheme_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonTheme_DDE.FlatStyle = FlatStyle.Popup;
+            buttonTheme_DDE.ForeColor = Color.WhiteSmoke;
+            buttonTheme_DDE.Location = new Point(590, 7);
+            buttonTheme_DDE.Name = "buttonTheme_DDE";
+            buttonTheme_DDE.Size = new Size(108, 39);
+            buttonTheme_DDE.TabIndex = 9;
+            buttonTheme_DDE.Text = "Тема";
+            buttonTheme_DDE.UseVisualStyleBackColor = false;
+            buttonTheme_DDE.Click += ButtonTheme_DDE_Click;
             // 
             // buttonMenu_DDE
             // 
@@ -699,7 +729,9 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterCategory;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DDE_FilterID;
         private System.Windows.Forms.Button buttonMenu_DDE;
-        private Button buttonClose_DDE;
+        private System.Windows.Forms.Button buttonCloseCustom;
+        private System.Windows.Forms.Button buttonMinimize_DDE;
+        private System.Windows.Forms.Button buttonTheme_DDE;
     }
 }
 

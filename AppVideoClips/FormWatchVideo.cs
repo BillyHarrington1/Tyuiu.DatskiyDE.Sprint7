@@ -23,10 +23,92 @@ namespace AppVideoClips
         private List<string> videoFiles = new List<string>();
         private int page = 0;
         private int pageSize = 6;
+        private bool sidebarVisible = true;
+
+        private HashSet<string> favorites = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        private Dictionary<string, int> progressMap = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
         public FormWatchVideo()
         {
             InitializeComponent();
+
+            // Only run runtime UI adjustments when not in designer
+            if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Runtime)
+            {
+                // Apply theme globally
+                Theme.ApplyTheme(this);
+
+                panelTop.BackColor = Theme.Panel;
+                panelControls.BackColor = Theme.PanelAlt;
+                panelSidebar.BackColor = Theme.Panel;
+                flowPanelVideos.BackColor = Theme.PanelAlt;
+
+                // style new buttons
+                foreach (var b in new[] { buttonYouTube, buttonRutube, buttonVK, buttonTwitch })
+                {
+                    b.FlatStyle = FlatStyle.Flat;
+                    b.FlatAppearance.BorderSize = 0;
+                    b.BackColor = Color.Transparent;
+                    b.ForeColor = Theme.IconColor;
+                }
+
+                // Only attach handlers here that are not wired by designer
+                // (designer already wires Click handlers in InitializeComponent)
+                buttonMinimize.Click += MinimizeButton_Click;
+
+                // ensure webview resizes when sidebar toggled
+                this.Resize += (s, e) => LayoutPanels();
+
+                // add theme toggle button into panelTop (programmatic so designer unaffected)
+                var btnTheme = new Button()
+                {
+                    Text = "Тема",
+                    AutoSize = false,
+                    Size = new Size(70, 28),
+                    Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                    Location = new Point(panelTop.ClientSize.Width - 90, 10),
+                    BackColor = Color.Transparent,
+                    FlatStyle = FlatStyle.Flat,
+                    ForeColor = Theme.Foreground
+                };
+                btnTheme.Click += (s, e) => { Theme.ToggleTheme(this); };
+                panelTop.Controls.Add(btnTheme);
+                btnTheme.BringToFront();
+            }
+        }
+
+        private void MinimizeButton_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void ToggleSidebar()
+        {
+            // toggle visibility once (designer click handler calls this)
+            sidebarVisible = !sidebarVisible;
+            panelSidebar.Visible = sidebarVisible;
+            panelSidebar.Width = sidebarVisible ? 360 : 0;
+            // update layout
+            LayoutPanels();
+        }
+
+        private void LayoutPanels()
+        {
+            // refresh controls so dock/size settle
+            panelSidebar.Refresh();
+            webView2.Refresh();
+            this.PerformLayout();
+            this.Refresh();
+        }
+
+        private void NavigateTo(string url)
+        {
+            try
+            {
+                if (webView2.CoreWebView2 == null) _ = webView2.EnsureCoreWebView2Async();
+                webView2.CoreWebView2.Navigate(url);
+            }
+            catch { }
         }
 
         private async void FormWatchVideo_Load(object sender, EventArgs e)
@@ -86,14 +168,14 @@ namespace AppVideoClips
         {
             var p = new Panel();
             p.Width = flowPanelVideos.ClientSize.Width - 20;
-            p.Height = 180;
+            p.Height = 220;
             p.Margin = new Padding(8);
-            p.BackColor = Color.FromArgb(40, 40, 40);
+            p.BackColor = Theme.PanelAlt;
 
             var thumb = new PictureBox();
             thumb.Width = 320;
             thumb.Height = 180;
-            thumb.Location = new Point(0, 0);
+            thumb.Location = new Point(8, 8);
             thumb.SizeMode = PictureBoxSizeMode.Zoom;
             thumb.BackColor = Color.Black;
 
@@ -112,18 +194,41 @@ namespace AppVideoClips
             }
 
             var label = new Label();
-            label.ForeColor = Color.WhiteSmoke;
-            label.Location = new Point(328, 8);
+            label.ForeColor = Theme.Foreground;
+            label.Location = new Point(336, 8);
             label.AutoSize = false;
-            label.Size = new Size(p.Width - 336, 100);
+            label.Size = new Size(p.Width - 344, 48);
             label.Text = filePath != null ? Path.GetFileName(filePath) : "(no video)";
 
             var info = new Label();
-            info.ForeColor = Color.LightGray;
-            info.Location = new Point(328, 112);
+            info.ForeColor = Theme.Foreground;
+            info.Location = new Point(336, 56);
             info.AutoSize = false;
-            info.Size = new Size(p.Width - 336, 48);
+            info.Size = new Size(p.Width - 344, 40);
             info.Text = filePath != null ? GetVideoInfo(filePath) : string.Empty;
+
+            var progress = new ProgressBar();
+            progress.Style = ProgressBarStyle.Continuous;
+            progress.Location = new Point(336, 96);
+            progress.Size = new Size(p.Width - 360, 20);
+            progress.Value = progressMap.TryGetValue(filePath ?? string.Empty, out var v) ? Math.Min(100, v) : 0;
+
+            var fav = new Button();
+            fav.Text = favorites.Contains(filePath ?? string.Empty) ? "♥" : "♡";
+            fav.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            fav.BackColor = Color.Transparent;
+            fav.FlatStyle = FlatStyle.Flat;
+            fav.FlatAppearance.BorderSize = 0;
+            fav.ForeColor = favorites.Contains(filePath ?? string.Empty) ? Color.Gold : Theme.Foreground;
+            fav.Location = new Point(p.Width - 48, 8);
+            fav.Size = new Size(36, 36);
+            fav.Cursor = Cursors.Hand;
+            fav.Click += (s, e) =>
+            {
+                if (filePath == null) return;
+                if (favorites.Contains(filePath)) { favorites.Remove(filePath); fav.Text = "♡"; fav.ForeColor = Theme.Foreground; }
+                else { favorites.Add(filePath); fav.Text = "♥"; fav.ForeColor = Color.Gold; }
+            };
 
             // Make the whole panel clickable: attach click handlers to panel and all child controls
             p.Cursor = Cursors.Hand;
@@ -133,21 +238,37 @@ namespace AppVideoClips
             label.Click += Tile_Click;
             info.Click += Tile_Click;
 
+            // Add controls
             p.Controls.Add(thumb);
             p.Controls.Add(label);
             p.Controls.Add(info);
+            p.Controls.Add(progress);
+            p.Controls.Add(fav);
+
+            // Apply theme for the tile
+            Theme.ApplyTheme(p);
 
             return p;
         }
 
-        private string GetVideoInfo(string path)
+        private void UpdateTileProgress(string file, int value)
         {
             try
             {
-                var fi = new FileInfo(path);
-                return $"Size: {fi.Length / 1024 / 1024} MB";
+                foreach (Control c in flowPanelVideos.Controls)
+                {
+                    if (c is Panel p && (p.Tag as string) == file)
+                    {
+                        var prog = p.Controls.OfType<ProgressBar>().FirstOrDefault();
+                        if (prog != null)
+                        {
+                            prog.Value = Math.Min(100, Math.Max(0, value));
+                        }
+                        break;
+                    }
+                }
             }
-            catch { return string.Empty; }
+            catch { }
         }
 
         private void Tile_Click(object? sender, EventArgs e)
@@ -242,6 +363,10 @@ window.chrome.webview.addEventListener('message', e => {{
                 // Navigate to the generated player
                 webView2.CoreWebView2.Navigate(hostUrl);
 
+                // Mark as watched (set progress to 100) for demo purposes
+                progressMap[file] = 100;
+                UpdateTileProgress(file, 100);
+
                 Task.Run(() =>
                 {
                     try
@@ -263,6 +388,16 @@ window.chrome.webview.addEventListener('message', e => {{
             {
                 MessageBox.Show($"Не удалось воспроизвести файл: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private string GetVideoInfo(string path)
+        {
+            try
+            {
+                var fi = new FileInfo(path);
+                return $"Size: {fi.Length / 1024 / 1024} MB";
+            }
+            catch { return string.Empty; }
         }
 
         private bool IsVideoFile(string path)
@@ -370,6 +505,36 @@ window.chrome.webview.addEventListener('message', e => {{
             File.Copy(sourcePath, dest, true);
             LoadVideoFiles();
             RenderPage();
+        }
+
+        private void buttonRutube_Click(object sender, EventArgs e)
+        {
+            NavigateTo("https://rutube.ru");
+        }
+
+        private void buttonVK_Click(object sender, EventArgs e)
+        {
+            NavigateTo("https://vk.com/video");
+        }
+
+        private void buttonTwitch_Click(object sender, EventArgs e)
+        {
+            NavigateTo("https://www.twitch.tv");
+        }
+
+        private void buttonMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void buttonToggleSidebar_Click(object sender, EventArgs e)
+        {
+            ToggleSidebar();
+        }
+
+        private void flowPanelVideos_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

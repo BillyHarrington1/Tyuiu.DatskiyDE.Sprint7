@@ -1,6 +1,6 @@
 using AppVideoClips.Lib;
 using System.Text;
-using FontAwesome.Sharp;
+
 namespace AppVideoClips
 {
     public partial class FormMain : Form
@@ -12,29 +12,34 @@ namespace AppVideoClips
         {
             InitializeComponent();
 
-            // Make window borderless
-            this.FormBorderStyle = FormBorderStyle.None;
+            // Apply theme globally
+            Theme.ApplyTheme(this);
 
-            // Attach drag handlers to the designer top panel if available
             try
             {
-                panelUpper_DDE.MouseDown += PanelTopCustom_MouseDown;
-                panelUpper_DDE.MouseMove += PanelTopCustom_MouseMove;
+                this.BackColor = Theme.Background;
+                panelUpper_DDE.BackColor = Theme.Panel;
+                panelDown_DDE.BackColor = Theme.Panel;
+                panelMiddle_DDE.BackColor = Theme.PanelAlt;
+
+                // recolor controls
+                foreach (Control c in panelUpper_DDE.Controls)
+                {
+                    if (c is Button b)
+                    {
+                        b.BackColor = Color.FromArgb(40, 40, 40);
+                        b.ForeColor = Theme.Foreground;
+                        b.FlatStyle = FlatStyle.Flat;
+                    }
+                }
             }
             catch { }
 
-            // assign FontAwesome icons to picture boxes
-            try
-            {
-                pictureBoxLoad_DDE.Image = CreateFaIconBitmap(IconChar.FolderOpen, 40, Color.White);
-                pictureBoxSave_DDE.Image = CreateFaIconBitmap(IconChar.FileExport, 40, Color.White);
-                pictureBoxManagement_DDE.Image = CreateFaIconBitmap(IconChar.Book, 40, Color.White);
-                pictureBoxAbout_DDE.Image = CreateFaIconBitmap(IconChar.InfoCircle, 40, Color.White);
-                pictureBoxSort_DDE.Image = CreateFaIconBitmap(IconChar.SortAmountDown, 34, Color.White);
-                pictureBoxFilter_DDE.Image = CreateFaIconBitmap(IconChar.Filter, 40, Color.White);
-                pictureBoxSearch_DDE.Image = CreateFaIconBitmap(IconChar.Search, 40, Color.White);
-            }
-            catch { }
+            // Ensure minimize button exists before wiring
+            try { buttonMinimize_DDE.Click += (s, e) => this.WindowState = FormWindowState.Minimized; } catch { }
+            try { buttonTheme_DDE.Click += (s, e) => ToggleTheme(); } catch { }
+
+            // Do not auto-generate bitmap icons here - use embedded assets if needed
 
             // add context menu to copy selected row
             try
@@ -72,19 +77,6 @@ namespace AppVideoClips
             {
                 // ignore if designer control not yet created in some contexts
             }
-        }
-
-        private Bitmap CreateFaIconBitmap(IconChar iconChar, int size, Color color)
-        {
-            using var ipb = new IconPictureBox();
-            ipb.IconChar = iconChar;
-            ipb.IconColor = color;
-            ipb.IconSize = size;
-            ipb.BackColor = Color.Transparent;
-            ipb.Size = new Size(size, size);
-            var bmp = new Bitmap(size, size);
-            ipb.DrawToBitmap(bmp, new Rectangle(0, 0, size, size));
-            return bmp;
         }
 
         private void CopySelectedRowToClipboard()
@@ -645,5 +637,19 @@ namespace AppVideoClips
             try { buttonSearch_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonSearch_DDE.ForeColor = Color.WhiteSmoke; } catch { }
         }
 
+        private void ButtonMinimize_DDE_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void ButtonTheme_DDE_Click(object sender, EventArgs e)
+        {
+            ToggleTheme();
+        }
+
+        private void ToggleTheme()
+        {
+            Theme.ToggleTheme(this);
+        }
     }
 }
