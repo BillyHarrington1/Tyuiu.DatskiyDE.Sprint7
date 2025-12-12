@@ -37,9 +37,7 @@ namespace AppVideoClips
 
             // Ensure minimize button exists before wiring
             try { buttonMinimize_DDE.Click += (s, e) => this.WindowState = FormWindowState.Minimized; } catch { }
-            try { buttonTheme_DDE.Click += (s, e) => ToggleTheme(); } catch { }
-
-            // Do not auto-generate bitmap icons here - use embedded assets if needed
+            try { buttonTheme_DDE.Click += (s, e) => Theme.ToggleThemeGlobal(); } catch { }
 
             // add context menu to copy selected row
             try

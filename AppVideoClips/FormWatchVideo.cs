@@ -13,6 +13,7 @@ using Microsoft.Web.WebView2.Core;
 using Microsoft.WindowsAPICodePack.Shell;
 using System.Text;
 using System.Reflection;
+using System.Text.Json;
 
 namespace AppVideoClips
 {
@@ -28,9 +29,14 @@ namespace AppVideoClips
         private HashSet<string> favorites = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         private Dictionary<string, int> progressMap = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
+        private string favStorePath;
+
         public FormWatchVideo()
         {
             InitializeComponent();
+
+            favStorePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "AppVideoClips", "favorites.json");
+            LoadFavorites();
 
             // Only run runtime UI adjustments when not in designer
             if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Runtime)
@@ -58,23 +64,36 @@ namespace AppVideoClips
 
                 // ensure webview resizes when sidebar toggled
                 this.Resize += (s, e) => LayoutPanels();
-
-                // add theme toggle button into panelTop (programmatic so designer unaffected)
-                var btnTheme = new Button()
-                {
-                    Text = "Тема",
-                    AutoSize = false,
-                    Size = new Size(70, 28),
-                    Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                    Location = new Point(panelTop.ClientSize.Width - 90, 10),
-                    BackColor = Color.Transparent,
-                    FlatStyle = FlatStyle.Flat,
-                    ForeColor = Theme.Foreground
-                };
-                btnTheme.Click += (s, e) => { Theme.ToggleTheme(this); };
-                panelTop.Controls.Add(btnTheme);
-                btnTheme.BringToFront();
             }
+        }
+
+        private void LoadFavorites()
+        {
+            try
+            {
+                var dir = Path.GetDirectoryName(favStorePath);
+                if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                if (File.Exists(favStorePath))
+                {
+                    var json = File.ReadAllText(favStorePath, Encoding.UTF8);
+                    var list = JsonSerializer.Deserialize<List<string>>(json) ?? new List<string>();
+                    favorites = new HashSet<string>(list, StringComparer.OrdinalIgnoreCase);
+                }
+            }
+            catch { }
+        }
+
+        private void SaveFavorites()
+        {
+            try
+            {
+                var dir = Path.GetDirectoryName(favStorePath);
+                if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                var list = favorites.ToList();
+                var json = JsonSerializer.Serialize(list);
+                File.WriteAllText(favStorePath, json, Encoding.UTF8);
+            }
+            catch { }
         }
 
         private void MinimizeButton_Click(object sender, EventArgs e)
@@ -122,7 +141,6 @@ namespace AppVideoClips
             LoadVideoFiles();
             RenderPage();
         }
-
 
         private void LoadVideoFiles()
         {
@@ -228,6 +246,7 @@ namespace AppVideoClips
                 if (filePath == null) return;
                 if (favorites.Contains(filePath)) { favorites.Remove(filePath); fav.Text = "♡"; fav.ForeColor = Theme.Foreground; }
                 else { favorites.Add(filePath); fav.Text = "♥"; fav.ForeColor = Color.Gold; }
+                SaveFavorites();
             };
 
             // Make the whole panel clickable: attach click handlers to panel and all child controls
@@ -503,6 +522,23 @@ window.chrome.webview.addEventListener('message', e => {{
             if (!Directory.Exists(videosDir)) Directory.CreateDirectory(videosDir);
             string dest = Path.Combine(videosDir, Path.GetFileName(sourcePath));
             File.Copy(sourcePath, dest, true);
+
+            // generate a simple placeholder subtitles file in SRT format (auto-subtitles stub)
+            try
+            {
+                var srtPath = Path.ChangeExtension(dest, ".srt");
+                if (!File.Exists(srtPath))
+                {
+                    var lines = new List<string>
+                    {
+                        "1\r\n00:00:00,000 --> 00:00:05,000\r\n[Автосубтитры не доступны]",
+                        ""
+                    };
+                    File.WriteAllText(srtPath, string.Join("\r\n", lines), Encoding.UTF8);
+                }
+            }
+            catch { }
+
             LoadVideoFiles();
             RenderPage();
         }
