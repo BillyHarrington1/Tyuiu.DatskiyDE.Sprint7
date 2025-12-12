@@ -41,6 +41,7 @@ namespace AppVideoClips
             RenderPage();
         }
 
+
         private void LoadVideoFiles()
         {
             string videosDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Videos");

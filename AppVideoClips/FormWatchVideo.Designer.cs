@@ -28,199 +28,210 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.panelTop = new System.Windows.Forms.Panel();
-            this.buttonImport = new System.Windows.Forms.Button();
-            this.buttonRefresh = new System.Windows.Forms.Button();
-            this.buttonYouTube = new System.Windows.Forms.Button();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.buttonClose = new System.Windows.Forms.Button();
-            this.webView2 = new Microsoft.Web.WebView2.WinForms.WebView2();
-            this.flowPanelVideos = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelControls = new System.Windows.Forms.Panel();
-            this.buttonPlay = new System.Windows.Forms.Button();
-            this.buttonPause = new System.Windows.Forms.Button();
-            this.trackVolume = new System.Windows.Forms.TrackBar();
-            this.labelVolume = new System.Windows.Forms.Label();
-            this.panelTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.webView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
-            this.SuspendLayout();
+            panelTop = new Panel();
+            buttonImport = new Button();
+            buttonRefresh = new Button();
+            buttonYouTube = new Button();
+            labelTitle = new Label();
+            buttonClose = new Button();
+            webView2 = new Microsoft.Web.WebView2.WinForms.WebView2();
+            flowPanelVideos = new FlowLayoutPanel();
+            panelControls = new Panel();
+            buttonPlay = new Button();
+            buttonPause = new Button();
+            trackVolume = new TrackBar();
+            labelVolume = new Label();
+            panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)webView2).BeginInit();
+            panelControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackVolume).BeginInit();
+            SuspendLayout();
             // 
             // panelTop
             // 
-            this.panelTop.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            this.panelTop.Controls.Add(this.buttonImport);
-            this.panelTop.Controls.Add(this.buttonRefresh);
-            this.panelTop.Controls.Add(this.buttonYouTube);
-            this.panelTop.Controls.Add(this.labelTitle);
-            this.panelTop.Controls.Add(this.buttonClose);
-            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1200, 48);
-            this.panelTop.TabIndex = 0;
-            this.panelTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseDown);
-            this.panelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTop_MouseMove);
+            panelTop.BackColor = Color.FromArgb(40, 40, 40);
+            panelTop.Controls.Add(buttonImport);
+            panelTop.Controls.Add(buttonRefresh);
+            panelTop.Controls.Add(buttonYouTube);
+            panelTop.Controls.Add(labelTitle);
+            panelTop.Controls.Add(buttonClose);
+            panelTop.Dock = DockStyle.Top;
+            panelTop.Location = new Point(0, 0);
+            panelTop.Name = "panelTop";
+            panelTop.Size = new Size(1200, 48);
+            panelTop.TabIndex = 0;
+            panelTop.MouseDown += panelTop_MouseDown;
+            panelTop.MouseMove += panelTop_MouseMove;
             // 
             // buttonImport
             // 
-            this.buttonImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonImport.AutoSize = true;
-            this.buttonImport.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            this.buttonImport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonImport.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonImport.Location = new System.Drawing.Point(820, 12);
-            this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Size = new System.Drawing.Size(80, 24);
-            this.buttonImport.TabIndex = 4;
-            this.buttonImport.Text = "Добавить";
-            this.buttonImport.UseVisualStyleBackColor = false;
-            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
+            buttonImport.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonImport.AutoSize = true;
+            buttonImport.BackColor = Color.FromArgb(40, 40, 40);
+            buttonImport.FlatStyle = FlatStyle.Popup;
+            buttonImport.ForeColor = Color.WhiteSmoke;
+            buttonImport.Location = new Point(820, 12);
+            buttonImport.Name = "buttonImport";
+            buttonImport.Size = new Size(80, 25);
+            buttonImport.TabIndex = 4;
+            buttonImport.Text = "Добавить";
+            buttonImport.UseVisualStyleBackColor = false;
+            buttonImport.Click += buttonImport_Click;
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonRefresh.AutoSize = true;
-            this.buttonRefresh.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            this.buttonRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonRefresh.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonRefresh.Location = new System.Drawing.Point(900, 12);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(80, 24);
-            this.buttonRefresh.TabIndex = 5;
-            this.buttonRefresh.Text = "Обновить";
-            this.buttonRefresh.UseVisualStyleBackColor = false;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            buttonRefresh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonRefresh.AutoSize = true;
+            buttonRefresh.BackColor = Color.FromArgb(40, 40, 40);
+            buttonRefresh.FlatStyle = FlatStyle.Popup;
+            buttonRefresh.ForeColor = Color.WhiteSmoke;
+            buttonRefresh.Location = new Point(900, 12);
+            buttonRefresh.Name = "buttonRefresh";
+            buttonRefresh.Size = new Size(80, 25);
+            buttonRefresh.TabIndex = 5;
+            buttonRefresh.Text = "Обновить";
+            buttonRefresh.UseVisualStyleBackColor = false;
+            buttonRefresh.Click += buttonRefresh_Click;
             // 
             // buttonYouTube
             // 
-            this.buttonYouTube.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonYouTube.AutoSize = true;
-            this.buttonYouTube.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            this.buttonYouTube.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonYouTube.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonYouTube.Location = new System.Drawing.Point(1020, 12);
-            this.buttonYouTube.Name = "buttonYouTube";
-            this.buttonYouTube.Size = new System.Drawing.Size(80, 24);
-            this.buttonYouTube.TabIndex = 2;
-            this.buttonYouTube.Text = "YouTube";
-            this.buttonYouTube.UseVisualStyleBackColor = false;
-            this.buttonYouTube.Click += new System.EventHandler(this.buttonYouTube_Click);
+            buttonYouTube.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonYouTube.AutoSize = true;
+            buttonYouTube.BackColor = Color.FromArgb(40, 40, 40);
+            buttonYouTube.FlatStyle = FlatStyle.Popup;
+            buttonYouTube.ForeColor = Color.WhiteSmoke;
+            buttonYouTube.Location = new Point(1020, 12);
+            buttonYouTube.Name = "buttonYouTube";
+            buttonYouTube.Size = new Size(80, 25);
+            buttonYouTube.TabIndex = 2;
+            buttonYouTube.Text = "YouTube";
+            buttonYouTube.UseVisualStyleBackColor = false;
+            buttonYouTube.Click += buttonYouTube_Click;
             // 
             // labelTitle
             // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.labelTitle.Location = new System.Drawing.Point(12, 15);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(91, 13);
-            this.labelTitle.TabIndex = 1;
-            this.labelTitle.Text = "Просмотр видео";
+            labelTitle.AutoSize = true;
+            labelTitle.ForeColor = Color.WhiteSmoke;
+            labelTitle.Location = new Point(12, 15);
+            labelTitle.Name = "labelTitle";
+            labelTitle.Size = new Size(96, 13);
+            labelTitle.TabIndex = 1;
+            labelTitle.Text = "Просмотр видео";
             // 
             // buttonClose
             // 
-            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClose.AutoSize = true;
-            this.buttonClose.BackColor = System.Drawing.Color.FromArgb(40, 40, 40);
-            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonClose.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonClose.Location = new System.Drawing.Point(1106, 10);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(80, 27);
-            this.buttonClose.TabIndex = 0;
-            this.buttonClose.Text = "Закрыть";
-            this.buttonClose.UseVisualStyleBackColor = false;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            buttonClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonClose.AutoSize = true;
+            buttonClose.BackColor = Color.FromArgb(40, 40, 40);
+            buttonClose.FlatStyle = FlatStyle.Popup;
+            buttonClose.ForeColor = Color.WhiteSmoke;
+            buttonClose.Location = new Point(1106, 10);
+            buttonClose.Name = "buttonClose";
+            buttonClose.Size = new Size(80, 27);
+            buttonClose.TabIndex = 0;
+            buttonClose.Text = "Закрыть";
+            buttonClose.UseVisualStyleBackColor = false;
+            buttonClose.Click += buttonClose_Click;
             // 
             // webView2
             // 
-            this.webView2.CreationProperties = null;
-            this.webView2.DefaultBackgroundColor = System.Drawing.Color.Black;
-            this.webView2.Location = new System.Drawing.Point(0, 48);
-            this.webView2.Name = "webView2";
-            this.webView2.Size = new System.Drawing.Size(840, 572);
-            this.webView2.TabIndex = 2;
-            this.webView2.ZoomFactor = 1D;
+            webView2.AllowExternalDrop = true;
+            webView2.CreationProperties = null;
+            webView2.DefaultBackgroundColor = Color.Black;
+            webView2.Dock = DockStyle.Fill;
+            webView2.Location = new Point(0, 48);
+            webView2.Name = "webView2";
+            webView2.Size = new Size(840, 624);
+            webView2.TabIndex = 2;
+            webView2.ZoomFactor = 2D;
             // 
             // flowPanelVideos
             // 
-            this.flowPanelVideos.AutoScroll = true;
-            this.flowPanelVideos.BackColor = System.Drawing.Color.FromArgb(30, 30, 30);
-            this.flowPanelVideos.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowPanelVideos.Location = new System.Drawing.Point(840, 48);
-            this.flowPanelVideos.Name = "flowPanelVideos";
-            this.flowPanelVideos.Size = new System.Drawing.Size(360, 612);
-            this.flowPanelVideos.TabIndex = 3;
+            flowPanelVideos.AutoScroll = true;
+            flowPanelVideos.BackColor = Color.FromArgb(30, 30, 30);
+            flowPanelVideos.Dock = DockStyle.Right;
+            flowPanelVideos.Location = new Point(840, 48);
+            flowPanelVideos.Name = "flowPanelVideos";
+            flowPanelVideos.Size = new Size(360, 624);
+            flowPanelVideos.TabIndex = 3;
             // 
             // panelControls
             // 
-            this.panelControls.BackColor = System.Drawing.Color.FromArgb(20, 20, 20);
-            this.panelControls.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControls.Height = 48;
-            this.panelControls.Name = "panelControls";
-            this.panelControls.TabIndex = 4;
+            panelControls.BackColor = Color.FromArgb(20, 20, 20);
+            panelControls.Controls.Add(buttonPlay);
+            panelControls.Controls.Add(buttonPause);
+            panelControls.Controls.Add(trackVolume);
+            panelControls.Controls.Add(labelVolume);
+            panelControls.Dock = DockStyle.Bottom;
+            panelControls.Location = new Point(0, 672);
+            panelControls.Name = "panelControls";
+            panelControls.Size = new Size(1200, 48);
+            panelControls.TabIndex = 4;
             // 
             // buttonPlay
             // 
-            this.buttonPlay.Text = "Play";
-            this.buttonPlay.AutoSize = true;
-            this.buttonPlay.Location = new System.Drawing.Point(8, 10);
-            this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
+            buttonPlay.AutoSize = true;
+            buttonPlay.Location = new Point(8, 10);
+            buttonPlay.Name = "buttonPlay";
+            buttonPlay.Size = new Size(75, 25);
+            buttonPlay.TabIndex = 0;
+            buttonPlay.Text = "Play";
+            buttonPlay.Click += buttonPlay_Click;
             // 
             // buttonPause
             // 
-            this.buttonPause.Text = "Pause";
-            this.buttonPause.AutoSize = true;
-            this.buttonPause.Location = new System.Drawing.Point(80, 10);
-            this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
+            buttonPause.AutoSize = true;
+            buttonPause.Location = new Point(80, 10);
+            buttonPause.Name = "buttonPause";
+            buttonPause.Size = new Size(75, 25);
+            buttonPause.TabIndex = 1;
+            buttonPause.Text = "Pause";
+            buttonPause.Click += buttonPause_Click;
             // 
             // trackVolume
             // 
-            this.trackVolume.Location = new System.Drawing.Point(160, 8);
-            this.trackVolume.Name = "trackVolume";
-            this.trackVolume.Size = new System.Drawing.Size(150, 45);
-            this.trackVolume.Minimum = 0;
-            this.trackVolume.Maximum = 100;
-            this.trackVolume.Value = 100;
-            this.trackVolume.Scroll += new System.EventHandler(this.trackVolume_Scroll);
+            trackVolume.Location = new Point(160, 8);
+            trackVolume.Maximum = 100;
+            trackVolume.Name = "trackVolume";
+            trackVolume.Size = new Size(150, 45);
+            trackVolume.TabIndex = 2;
+            trackVolume.Value = 100;
+            trackVolume.Scroll += trackVolume_Scroll;
             // 
             // labelVolume
             // 
-            this.labelVolume.AutoSize = true;
-            this.labelVolume.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.labelVolume.Location = new System.Drawing.Point(320, 12);
-            this.labelVolume.Text = "Volume";
-            // 
-            // add controls to panelControls
-            // 
-            this.panelControls.Controls.Add(this.buttonPlay);
-            this.panelControls.Controls.Add(this.buttonPause);
-            this.panelControls.Controls.Add(this.trackVolume);
-            this.panelControls.Controls.Add(this.labelVolume);
+            labelVolume.AutoSize = true;
+            labelVolume.ForeColor = Color.WhiteSmoke;
+            labelVolume.Location = new Point(320, 12);
+            labelVolume.Name = "labelVolume";
+            labelVolume.Size = new Size(45, 13);
+            labelVolume.TabIndex = 3;
+            labelVolume.Text = "Volume";
             // 
             // FormWatchVideo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(20, 20, 20);
-            this.ClientSize = new System.Drawing.Size(1200, 720);
-            this.Controls.Add(this.webView2);
-            this.Controls.Add(this.flowPanelVideos);
-            this.Controls.Add(this.panelControls);
-            this.Controls.Add(this.panelTop);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormWatchVideo";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Просмотр видео";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FormWatchVideo_Load);
-            this.panelTop.ResumeLayout(false);
-            this.panelTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.webView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(6F, 13F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(20, 20, 20);
+            ClientSize = new Size(1200, 720);
+            Controls.Add(webView2);
+            Controls.Add(flowPanelVideos);
+            Controls.Add(panelControls);
+            Controls.Add(panelTop);
+            Font = new Font("Segoe UI", 8.25F);
+            FormBorderStyle = FormBorderStyle.None;
+            Name = "FormWatchVideo";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Просмотр видео";
+            WindowState = FormWindowState.Maximized;
+            Load += FormWatchVideo_Load;
+            panelTop.ResumeLayout(false);
+            panelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)webView2).EndInit();
+            panelControls.ResumeLayout(false);
+            panelControls.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackVolume).EndInit();
+            ResumeLayout(false);
 
         }
 
