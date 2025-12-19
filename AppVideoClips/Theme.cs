@@ -7,15 +7,15 @@ namespace AppVideoClips
     {
         public static bool IsDark { get; private set; } = true;
 
-        // Dark blue theme
+        // темно-синяя тема
         public static readonly Color DarkBackground = Color.FromArgb(10, 15, 30);
         public static readonly Color DarkPanel = Color.FromArgb(18, 24, 40);
         public static readonly Color DarkPanelAlt = Color.FromArgb(16, 22, 36);
         public static readonly Color DarkForeground = Color.FromArgb(230, 230, 230);
-        public static readonly Color DarkAccent = Color.FromArgb(48, 84, 145); // blue
+        public static readonly Color DarkAccent = Color.FromArgb(48, 84, 145); 
         public static readonly Color DarkIcon = Color.FromArgb(240,240,240);
 
-        // Light
+        // белая тема
         public static readonly Color LightBackground = Color.FromArgb(250, 250, 250);
         public static readonly Color LightPanel = Color.FromArgb(240, 240, 240);
         public static readonly Color LightPanelAlt = Color.FromArgb(230, 230, 230);
@@ -32,7 +32,7 @@ namespace AppVideoClips
 
         public static void ToggleTheme(Control root)
         {
-            // legacy: toggle for a single root
+            // рут
             IsDark = !IsDark;
             ApplyTheme(root);
         }
@@ -40,7 +40,7 @@ namespace AppVideoClips
         public static void ToggleThemeGlobal()
         {
             IsDark = !IsDark;
-            // apply to all open forms
+            // Применение ко всем формам 
             foreach (Form f in Application.OpenForms)
             {
                 try { ApplyTheme(f); } catch { }
