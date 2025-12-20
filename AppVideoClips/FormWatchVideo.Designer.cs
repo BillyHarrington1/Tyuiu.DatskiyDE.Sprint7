@@ -68,6 +68,7 @@
             panelTop.Controls.Add(buttonClose);
             panelTop.Controls.Add(buttonToggleSidebar);
             panelTop.Dock = DockStyle.Top;
+            panelTop.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             panelTop.Location = new Point(0, 0);
             panelTop.Name = "panelTop";
             panelTop.Size = new Size(1200, 48);
@@ -82,9 +83,9 @@
             buttonImport.BackColor = Color.FromArgb(40, 40, 40);
             buttonImport.FlatStyle = FlatStyle.Popup;
             buttonImport.ForeColor = Color.WhiteSmoke;
-            buttonImport.Location = new Point(675, 12);
+            buttonImport.Location = new Point(830, 3);
             buttonImport.Name = "buttonImport";
-            buttonImport.Size = new Size(80, 25);
+            buttonImport.Size = new Size(89, 45);
             buttonImport.TabIndex = 4;
             buttonImport.Text = "Добавить";
             buttonImport.UseVisualStyleBackColor = false;
@@ -97,11 +98,11 @@
             buttonRefresh.BackColor = Color.FromArgb(40, 40, 40);
             buttonRefresh.FlatStyle = FlatStyle.Popup;
             buttonRefresh.ForeColor = Color.WhiteSmoke;
-            buttonRefresh.Location = new Point(761, 10);
+            buttonRefresh.Location = new Point(925, 3);
             buttonRefresh.Name = "buttonRefresh";
-            buttonRefresh.Size = new Size(80, 25);
+            buttonRefresh.Size = new Size(94, 45);
             buttonRefresh.TabIndex = 5;
-            buttonRefresh.Text = "Обновить";
+            buttonRefresh.Text = "Обновить ";
             buttonRefresh.UseVisualStyleBackColor = false;
             buttonRefresh.Click += buttonRefresh_Click;
             // 
@@ -112,9 +113,9 @@
             buttonYouTube.BackColor = Color.FromArgb(40, 40, 40);
             buttonYouTube.FlatStyle = FlatStyle.Popup;
             buttonYouTube.ForeColor = Color.WhiteSmoke;
-            buttonYouTube.Location = new Point(847, 12);
+            buttonYouTube.Location = new Point(624, 3);
             buttonYouTube.Name = "buttonYouTube";
-            buttonYouTube.Size = new Size(80, 25);
+            buttonYouTube.Size = new Size(80, 44);
             buttonYouTube.TabIndex = 2;
             buttonYouTube.Text = "YouTube";
             buttonYouTube.UseVisualStyleBackColor = false;
@@ -127,9 +128,9 @@
             buttonRutube.BackColor = Color.FromArgb(40, 40, 40);
             buttonRutube.FlatStyle = FlatStyle.Popup;
             buttonRutube.ForeColor = Color.WhiteSmoke;
-            buttonRutube.Location = new Point(949, 10);
+            buttonRutube.Location = new Point(710, 3);
             buttonRutube.Name = "buttonRutube";
-            buttonRutube.Size = new Size(80, 25);
+            buttonRutube.Size = new Size(75, 44);
             buttonRutube.TabIndex = 6;
             buttonRutube.Text = "Рутуб";
             buttonRutube.UseVisualStyleBackColor = false;
@@ -142,11 +143,11 @@
             buttonVK.BackColor = Color.FromArgb(40, 40, 40);
             buttonVK.FlatStyle = FlatStyle.Popup;
             buttonVK.ForeColor = Color.WhiteSmoke;
-            buttonVK.Location = new Point(589, 12);
+            buttonVK.Location = new Point(537, 2);
             buttonVK.Name = "buttonVK";
-            buttonVK.Size = new Size(80, 25);
+            buttonVK.Size = new Size(81, 44);
             buttonVK.TabIndex = 7;
-            buttonVK.Text = "ВКонтакте";
+            buttonVK.Text = "ВКВидео";
             buttonVK.UseVisualStyleBackColor = false;
             buttonVK.Click += buttonVK_Click;
             // 
@@ -157,9 +158,9 @@
             buttonTwitch.BackColor = Color.FromArgb(40, 40, 40);
             buttonTwitch.FlatStyle = FlatStyle.Popup;
             buttonTwitch.ForeColor = Color.WhiteSmoke;
-            buttonTwitch.Location = new Point(1198, 12);
+            buttonTwitch.Location = new Point(456, 3);
             buttonTwitch.Name = "buttonTwitch";
-            buttonTwitch.Size = new Size(80, 25);
+            buttonTwitch.Size = new Size(78, 44);
             buttonTwitch.TabIndex = 8;
             buttonTwitch.Text = "Twitch";
             buttonTwitch.UseVisualStyleBackColor = false;
@@ -171,7 +172,7 @@
             labelTitle.ForeColor = Color.WhiteSmoke;
             labelTitle.Location = new Point(12, 15);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(96, 13);
+            labelTitle.Size = new Size(122, 23);
             labelTitle.TabIndex = 1;
             labelTitle.Text = "Просмотр видео";
             // 
@@ -181,12 +182,13 @@
             buttonMinimize.AutoSize = true;
             buttonMinimize.BackColor = Color.FromArgb(40, 40, 40);
             buttonMinimize.FlatStyle = FlatStyle.Popup;
+            buttonMinimize.Font = new Font("Segoe UI", 18F);
             buttonMinimize.ForeColor = Color.WhiteSmoke;
-            buttonMinimize.Location = new Point(1035, 11);
+            buttonMinimize.Location = new Point(1086, 2);
             buttonMinimize.Name = "buttonMinimize";
-            buttonMinimize.Size = new Size(80, 27);
+            buttonMinimize.Size = new Size(53, 45);
             buttonMinimize.TabIndex = 9;
-            buttonMinimize.Text = "Свернуть";
+            buttonMinimize.Text = "_";
             buttonMinimize.UseVisualStyleBackColor = false;
             buttonMinimize.Click += buttonMinimize_Click;
             // 
@@ -196,24 +198,26 @@
             buttonClose.AutoSize = true;
             buttonClose.BackColor = Color.FromArgb(40, 40, 40);
             buttonClose.FlatStyle = FlatStyle.Popup;
-            buttonClose.ForeColor = Color.WhiteSmoke;
-            buttonClose.Location = new Point(1120, 11);
+            buttonClose.Font = new Font("Segoe UI", 18F);
+            buttonClose.ForeColor = Color.White;
+            buttonClose.Location = new Point(1145, 3);
             buttonClose.Name = "buttonClose";
-            buttonClose.Size = new Size(80, 27);
+            buttonClose.Size = new Size(52, 45);
             buttonClose.TabIndex = 0;
-            buttonClose.Text = "Закрыть";
+            buttonClose.Text = "X";
             buttonClose.UseVisualStyleBackColor = false;
             buttonClose.Click += buttonClose_Click;
             // 
             // buttonToggleSidebar
             // 
+            buttonToggleSidebar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonToggleSidebar.AutoSize = true;
             buttonToggleSidebar.BackColor = Color.FromArgb(40, 40, 40);
             buttonToggleSidebar.FlatStyle = FlatStyle.Popup;
             buttonToggleSidebar.ForeColor = Color.WhiteSmoke;
-            buttonToggleSidebar.Location = new Point(114, 7);
+            buttonToggleSidebar.Location = new Point(1025, 2);
             buttonToggleSidebar.Name = "buttonToggleSidebar";
-            buttonToggleSidebar.Size = new Size(50, 32);
+            buttonToggleSidebar.Size = new Size(55, 46);
             buttonToggleSidebar.TabIndex = 10;
             buttonToggleSidebar.Text = "≡";
             buttonToggleSidebar.UseVisualStyleBackColor = false;
@@ -227,29 +231,31 @@
             webView2.Dock = DockStyle.Fill;
             webView2.Location = new Point(0, 48);
             webView2.Name = "webView2";
-            webView2.Size = new Size(1000, 624);
+            webView2.Size = new Size(840, 624);
             webView2.TabIndex = 2;
             webView2.ZoomFactor = 1D;
-            // 
-            // panelSidebar
-            // 
-            panelSidebar.BackColor = Color.FromArgb(30, 30, 30);
-            panelSidebar.Dock = DockStyle.Right;
-            panelSidebar.Width = 360;
-            panelSidebar.Visible = true;
-            panelSidebar.Name = "panelSidebar";
             // 
             // flowPanelVideos
             // 
             flowPanelVideos.AutoScroll = true;
             flowPanelVideos.BackColor = Color.FromArgb(30, 30, 30);
             flowPanelVideos.Dock = DockStyle.Fill;
+            flowPanelVideos.Font = new Font("Segoe Print", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             flowPanelVideos.Location = new Point(0, 0);
             flowPanelVideos.Name = "flowPanelVideos";
             flowPanelVideos.Size = new Size(360, 624);
-            panelSidebar.Controls.Add(flowPanelVideos);
             flowPanelVideos.TabIndex = 3;
             flowPanelVideos.Paint += flowPanelVideos_Paint;
+            // 
+            // panelSidebar
+            // 
+            panelSidebar.BackColor = Color.FromArgb(30, 30, 30);
+            panelSidebar.Controls.Add(flowPanelVideos);
+            panelSidebar.Dock = DockStyle.Right;
+            panelSidebar.Location = new Point(840, 48);
+            panelSidebar.Name = "panelSidebar";
+            panelSidebar.Size = new Size(360, 624);
+            panelSidebar.TabIndex = 3;
             // 
             // panelControls
             // 
@@ -267,29 +273,33 @@
             // buttonPlay
             // 
             buttonPlay.AutoSize = true;
+            buttonPlay.Font = new Font("Segoe Print", 9F, FontStyle.Bold | FontStyle.Italic);
+            buttonPlay.ForeColor = SystemColors.Control;
             buttonPlay.Location = new Point(8, 10);
             buttonPlay.Name = "buttonPlay";
-            buttonPlay.Size = new Size(75, 25);
+            buttonPlay.Size = new Size(75, 31);
             buttonPlay.TabIndex = 0;
-            buttonPlay.Text = "Play";
+            buttonPlay.Text = "Пуск";
             buttonPlay.Click += buttonPlay_Click;
             // 
             // buttonPause
             // 
             buttonPause.AutoSize = true;
+            buttonPause.Font = new Font("Segoe Print", 9F, FontStyle.Bold | FontStyle.Italic);
+            buttonPause.ForeColor = SystemColors.Control;
             buttonPause.Location = new Point(80, 10);
             buttonPause.Name = "buttonPause";
-            buttonPause.Size = new Size(75, 25);
+            buttonPause.Size = new Size(75, 31);
             buttonPause.TabIndex = 1;
-            buttonPause.Text = "Pause";
+            buttonPause.Text = "Пауза";
             buttonPause.Click += buttonPause_Click;
             // 
             // trackVolume
             // 
-            trackVolume.Location = new Point(160, 8);
+            trackVolume.Location = new Point(161, 6);
             trackVolume.Maximum = 100;
             trackVolume.Name = "trackVolume";
-            trackVolume.Size = new Size(150, 45);
+            trackVolume.Size = new Size(153, 45);
             trackVolume.TabIndex = 2;
             trackVolume.Value = 100;
             trackVolume.Scroll += trackVolume_Scroll;
@@ -297,12 +307,13 @@
             // labelVolume
             // 
             labelVolume.AutoSize = true;
+            labelVolume.Font = new Font("Segoe Print", 9F, FontStyle.Bold | FontStyle.Italic);
             labelVolume.ForeColor = Color.WhiteSmoke;
             labelVolume.Location = new Point(320, 12);
             labelVolume.Name = "labelVolume";
-            labelVolume.Size = new Size(45, 13);
+            labelVolume.Size = new Size(38, 21);
             labelVolume.TabIndex = 3;
-            labelVolume.Text = "Volume";
+            labelVolume.Text = "Звук";
             // 
             // FormWatchVideo
             // 
@@ -310,7 +321,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(20, 20, 20);
             ClientSize = new Size(1200, 720);
-            // add webView2 first so dock layout calculates correctly, then sidebar docks to right
             Controls.Add(webView2);
             Controls.Add(panelSidebar);
             Controls.Add(panelControls);

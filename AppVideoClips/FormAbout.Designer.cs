@@ -3,27 +3,33 @@
     partial class FormAbout
     {
         PictureBox pictureBox_DDE;
-        Label labelText_DDE;
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
             pictureBox_DDE = new PictureBox();
-            labelText_DDE = new Label();
-
-            pictureBox_DDE.Dock = System.Windows.Forms.DockStyle.Top;
-            pictureBox_DDE.Height = 200;
+            ((System.ComponentModel.ISupportInitialize)pictureBox_DDE).BeginInit();
+            SuspendLayout();
+            // 
+            // pictureBox_DDE
+            // 
+            pictureBox_DDE.Dock = DockStyle.Top;
+            pictureBox_DDE.Image = (Image)resources.GetObject("pictureBox_DDE.Image");
+            pictureBox_DDE.Location = new Point(0, 0);
+            pictureBox_DDE.Name = "pictureBox_DDE";
+            pictureBox_DDE.Size = new Size(384, 259);
             pictureBox_DDE.SizeMode = PictureBoxSizeMode.Zoom;
-
-            labelText_DDE.Dock = System.Windows.Forms.DockStyle.Fill;
-            labelText_DDE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            labelText_DDE.Text = "Каталог видеоклипов\nРазработчик: DDE\n2025";
-
-            Controls.Add(labelText_DDE);
+            pictureBox_DDE.TabIndex = 1;
+            pictureBox_DDE.TabStop = false;
+            // 
+            // FormAbout
+            // 
+            ClientSize = new Size(384, 258);
             Controls.Add(pictureBox_DDE);
-
+            Name = "FormAbout";
             Text = "О программе";
-            Width = 400;
-            Height = 400;
+            ((System.ComponentModel.ISupportInitialize)pictureBox_DDE).EndInit();
+            ResumeLayout(false);
         }
     }
 }

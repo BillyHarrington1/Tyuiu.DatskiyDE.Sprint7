@@ -174,8 +174,8 @@ namespace AppVideoClips
 
             // add pagination controls at bottom
             var navPanel = new Panel { Width = flowPanelVideos.ClientSize.Width - 20, Height = 40, BackColor = Color.Transparent };
-            var btnPrev = new Button { Text = "<< Prev", Enabled = page > 0, Width = 80, Location = new Point(8, 6) };
-            var btnNext = new Button { Text = "Next >>", Enabled = (page + 1) * pageSize < videoFiles.Count, Width = 80, Location = new Point(96, 6) };
+            var btnPrev = new Button { Text = "<< Назад", Enabled = page > 0, Width = 80, Location = new Point(8, 6) };
+            var btnNext = new Button { Text = "Вперед >>", Enabled = (page + 1) * pageSize < videoFiles.Count, Width = 80, Location = new Point(96, 6) };
             btnPrev.Click += (s, e) => { page = Math.Max(0, page - 1); RenderPage(); };
             btnNext.Click += (s, e) => { if ((page + 1) * pageSize < videoFiles.Count) { page++; RenderPage(); } };
             navPanel.Controls.Add(btnPrev); navPanel.Controls.Add(btnNext);
@@ -350,30 +350,30 @@ namespace AppVideoClips
                 };
 
                 var html = $@"<!doctype html>
-<html>
-<head>
-<meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=Edge' />
-<style>body{{margin:0;background:black;display:flex;align-items:center;justify-content:center;height:100vh}}video{{max-width:100%;max-height:100%}}</style>
-</head>
-<body>
-<video id='v' controls autoplay>
-<source src='{Uri.EscapeDataString(fileName)}' type='{mime}'>
-Your browser does not support the video tag.
-</video>
-<script>
-const v = document.getElementById('v');
-window.chrome.webview.addEventListener('message', e => {{
-  const data = e.data;
-  const cmd = data.cmd;
-  const value = data.value;
-  if (cmd === 'play') v.play();
-  if (cmd === 'pause') v.pause();
-  if (cmd === 'volume') v.volume = value;
-}});
-</script>
-</body>
-</html>";
+                <html>
+                <head>
+                <meta charset='utf-8'>
+                <meta http-equiv='X-UA-Compatible' content='IE=Edge' />
+                <style>body{{margin:0;background:black;display:flex;align-items:center;justify-content:center;height:100vh}}video{{max-width:100%;max-height:100%}}</style>
+                </head>
+                <body>
+                <video id='v' controls autoplay>
+                <source src='{Uri.EscapeDataString(fileName)}' type='{mime}'>
+                Your browser does not support the video tag.
+                </video>
+                <script>
+                const v = document.getElementById('v');
+                window.chrome.webview.addEventListener('message', e => {{
+                 const data = e.data;
+                 const cmd = data.cmd;
+                 const value = data.value;
+                 if (cmd === 'play') v.play();
+                 if (cmd === 'pause') v.pause();
+                 if (cmd === 'volume') v.volume = value;
+                }});
+                </script>
+                </body>
+                </html>";
 
                 File.WriteAllText(playerPath, html, Encoding.UTF8);
 
@@ -386,7 +386,7 @@ window.chrome.webview.addEventListener('message', e => {{
                 progressMap[file] = 100;
                 UpdateTileProgress(file, 100);
 
-                Task.Run(() =>
+                _ = Task.Run(() =>
                 {
                     try
                     {

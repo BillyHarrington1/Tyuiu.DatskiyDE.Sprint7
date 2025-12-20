@@ -44,7 +44,7 @@
             labelName_DDE.AutoSize = true;
             labelName_DDE.Font = new Font("Segoe Print", 36F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             labelName_DDE.ForeColor = Color.White;
-            labelName_DDE.Location = new Point(335, 39);
+            labelName_DDE.Location = new Point(344, 39);
             labelName_DDE.Margin = new Padding(4, 0, 4, 0);
             labelName_DDE.Name = "labelName_DDE";
             labelName_DDE.Size = new Size(603, 85);
@@ -55,13 +55,14 @@
             // buttonGo_DDE
             // 
             buttonGo_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonGo_DDE.Cursor = Cursors.Hand;
             buttonGo_DDE.FlatStyle = FlatStyle.Popup;
             buttonGo_DDE.Font = new Font("Segoe Print", 24F, FontStyle.Bold | FontStyle.Italic);
             buttonGo_DDE.ForeColor = Color.WhiteSmoke;
             buttonGo_DDE.Location = new Point(368, 127);
             buttonGo_DDE.Margin = new Padding(4, 3, 4, 3);
             buttonGo_DDE.Name = "buttonGo_DDE";
-            buttonGo_DDE.Size = new Size(341, 138);
+            buttonGo_DDE.Size = new Size(342, 138);
             buttonGo_DDE.TabIndex = 1;
             buttonGo_DDE.Text = "Перейти в рабочую среду\r\n";
             buttonGo_DDE.UseVisualStyleBackColor = false;
@@ -70,6 +71,7 @@
             // buttonManagement_DDE
             // 
             buttonManagement_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonManagement_DDE.Cursor = Cursors.Hand;
             buttonManagement_DDE.FlatStyle = FlatStyle.Popup;
             buttonManagement_DDE.Font = new Font("Segoe Print", 14.25F, FontStyle.Bold | FontStyle.Italic);
             buttonManagement_DDE.ForeColor = Color.WhiteSmoke;
@@ -85,6 +87,7 @@
             // buttonAbout_DDE
             // 
             buttonAbout_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonAbout_DDE.Cursor = Cursors.Hand;
             buttonAbout_DDE.FlatStyle = FlatStyle.Popup;
             buttonAbout_DDE.Font = new Font("Segoe Print", 14.25F, FontStyle.Bold | FontStyle.Italic);
             buttonAbout_DDE.ForeColor = Color.WhiteSmoke;
@@ -100,6 +103,7 @@
             // buttonExit_DDE
             // 
             buttonExit_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonExit_DDE.Cursor = Cursors.Hand;
             buttonExit_DDE.FlatStyle = FlatStyle.Popup;
             buttonExit_DDE.Font = new Font("Segoe Print", 20.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             buttonExit_DDE.ForeColor = Color.WhiteSmoke;
@@ -127,13 +131,14 @@
             // buttonWatch_DDE
             // 
             buttonWatch_DDE.BackColor = Color.FromArgb(40, 40, 40);
+            buttonWatch_DDE.Cursor = Cursors.Hand;
             buttonWatch_DDE.FlatStyle = FlatStyle.Popup;
             buttonWatch_DDE.Font = new Font("Segoe Print", 24F, FontStyle.Bold | FontStyle.Italic);
             buttonWatch_DDE.ForeColor = Color.WhiteSmoke;
             buttonWatch_DDE.Location = new Point(368, 279);
             buttonWatch_DDE.Margin = new Padding(4, 3, 4, 3);
             buttonWatch_DDE.Name = "buttonWatch_DDE";
-            buttonWatch_DDE.Size = new Size(341, 142);
+            buttonWatch_DDE.Size = new Size(342, 142);
             buttonWatch_DDE.TabIndex = 2;
             buttonWatch_DDE.Text = "Перейти в просмотр видео";
             buttonWatch_DDE.UseVisualStyleBackColor = false;
