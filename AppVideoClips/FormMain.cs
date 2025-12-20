@@ -10,9 +10,7 @@ namespace AppVideoClips
 
         public FormMain()
         {
-            InitializeComponent();
-
-            // Apply theme globally
+            InitializeComponent();         
             Theme.ApplyTheme(this);
 
             try
@@ -22,59 +20,62 @@ namespace AppVideoClips
                 panelDown_DDE.BackColor = Theme.Panel;
                 panelMiddle_DDE.BackColor = Theme.PanelAlt;
 
-                // recolor controls
+             
                 foreach (Control c in panelUpper_DDE.Controls)
                 {
                     if (c is Button b)
                     {
-                        b.BackColor = Color.FromArgb(40, 40, 40);
+                        b.BackColor = Theme.PanelAlt;
                         b.ForeColor = Theme.Foreground;
                         b.FlatStyle = FlatStyle.Flat;
+                        b.FlatAppearance.BorderSize = 0;
+                        b.MouseEnter += (s, e) => { b.BackColor = Theme.Accent; b.ForeColor = Theme.Foreground; };
+                        b.MouseLeave += (s, e) => { b.BackColor = Theme.PanelAlt; b.ForeColor = Theme.Foreground; };
                     }
                 }
             }
             catch { }
 
-            // Ensure minimize button exists before wiring
             try { buttonMinimize_DDE.Click += (s, e) => this.WindowState = FormWindowState.Minimized; } catch { }
-            try { buttonTheme_DDE.Click += (s, e) => Theme.ToggleThemeGlobal(); } catch { }
-
-            // add context menu to copy selected row
+       
             try
             {
                 var cms = new ContextMenuStrip();
                 var miCopyRow = new ToolStripMenuItem("Êîïèðîâàòü ñòðîêó");
                 miCopyRow.Click += (s, e) => CopySelectedRowToClipboard();
                 cms.Items.Add(miCopyRow);
-                dataGridViewBase_DDE.ContextMenuStrip = cms;
+                dataGridViewBase_DDE.ContextMenuStrip = cms;             
+                ApplyDataGridTheme();
             }
             catch { }
+        }
 
-            // Improve DataGridView contrast for readability
+        private void ApplyDataGridTheme()
+        {
             try
             {
-                dataGridViewBase_DDE.EnableHeadersVisualStyles = false;
-                dataGridViewBase_DDE.BackgroundColor = Color.White;
-                dataGridViewBase_DDE.GridColor = Color.LightGray;
+                var dgv = dataGridViewBase_DDE;
+                dgv.EnableHeadersVisualStyles = false;
+                dgv.BackgroundColor = Theme.PanelAlt;
+                dgv.GridColor = Color.FromArgb(60, 60, 90);
+                dgv.DefaultCellStyle.BackColor = Theme.PanelAlt;
+                dgv.DefaultCellStyle.ForeColor = Theme.Foreground;
+                dgv.DefaultCellStyle.Font = new Font("Segoe Print", 12F);
+                dgv.RowTemplate.DefaultCellStyle.Font = new Font("Segoe Print", 12F);
+                dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(15, 20, 35);
+                dgv.AlternatingRowsDefaultCellStyle.ForeColor = Theme.Foreground;
+                dgv.ColumnHeadersDefaultCellStyle.BackColor = Theme.Panel;
+                dgv.ColumnHeadersDefaultCellStyle.ForeColor = Theme.Foreground;
+                dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe Print", 12F, FontStyle.Bold);
+                dgv.RowHeadersDefaultCellStyle.BackColor = Theme.Panel;
+                dgv.RowHeadersDefaultCellStyle.ForeColor = Theme.Foreground;
 
-                dataGridViewBase_DDE.DefaultCellStyle.BackColor = Color.White;
-                dataGridViewBase_DDE.DefaultCellStyle.ForeColor = Color.Black;
-                dataGridViewBase_DDE.DefaultCellStyle.SelectionBackColor = Color.DodgerBlue;
-                dataGridViewBase_DDE.DefaultCellStyle.SelectionForeColor = Color.White;
-
-                dataGridViewBase_DDE.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
-                dataGridViewBase_DDE.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
-
-                dataGridViewBase_DDE.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(200, 200, 200);
-                dataGridViewBase_DDE.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-
-                dataGridViewBase_DDE.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(200, 200, 200);
-                dataGridViewBase_DDE.RowHeadersDefaultCellStyle.ForeColor = Color.Black;
+                dgv.AllowUserToResizeColumns = true;
+                dgv.AllowUserToResizeRows = true;
+                dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             }
-            catch
-            {
-                // ignore if designer control not yet created in some contexts
-            }
+            catch { }
         }
 
         private void CopySelectedRowToClipboard()
@@ -91,8 +92,7 @@ namespace AppVideoClips
             }
             catch { }
         }
-
-        // add method expected by designer
+   
         private void ButtonCloseCustom_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -123,8 +123,7 @@ namespace AppVideoClips
         }
 
         DataService ds = new DataService();
-        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "DataSet.csv");
-        //string path = @"C:\Users\djura\Desktop\DataSet.csv";
+        string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "DataSet.csv");  
         static string openFile = string.Empty;
         static int rows = 0;
         static int columns = 0;
@@ -140,7 +139,7 @@ namespace AppVideoClips
                 matrix = ds.LoadDataSet(openFile);
                 rows = matrix.GetLength(0);
                 columns = matrix.GetLength(1);
-                dataGridViewBase_DDE.RowCount = rows + 1;
+                dataGridViewBase_DDE.RowCount = rows; 
                 dataGridViewBase_DDE.ColumnCount = columns;
 
                 for (int i = 0; i < rows; i++)
@@ -158,11 +157,11 @@ namespace AppVideoClips
                 if (dataGridViewBase_DDE.Columns.Count > 6) dataGridViewBase_DDE.Columns[6].Width = 900;
                 buttonReset_DDE.Enabled = true;
 
-                // populate filter menu dynamically with headers from CSV
+              
                 try
                 {
                     ôèëüòðToolStripMenuItem.DropDownItems.Clear();
-                    // Add reset filter item
+                
                     var reset = new ToolStripMenuItem("Ñáðîñèòü ôèëüòð");
                     reset.Click += ResetFilter_Click;
                     ôèëüòðToolStripMenuItem.DropDownItems.Add(reset);
@@ -282,8 +281,7 @@ namespace AppVideoClips
                 }
             }
         }
-
-        // Sorting handlers will use DataService's robust methods
+     
         private void ñîðòèðîâêàToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             try
@@ -331,7 +329,7 @@ namespace AppVideoClips
             if (mxsort == null) return;
             int rcount = mxsort.GetLength(0);
             int ccount = mxsort.GetLength(1);
-            dataGridViewBase_DDE.RowCount = rcount + 1;
+            dataGridViewBase_DDE.RowCount = rcount; 
             dataGridViewBase_DDE.ColumnCount = ccount;
             for (int i = 0; i < rcount; i++)
             {
@@ -349,7 +347,7 @@ namespace AppVideoClips
                 matrix = ds.LoadDataSet(path);
                 rows = matrix.GetLength(0);
                 columns = matrix.GetLength(1);
-                dataGridViewBase_DDE.RowCount = rows + 1;
+                dataGridViewBase_DDE.RowCount = rows; 
                 dataGridViewBase_DDE.ColumnCount = columns;
 
                 for (int i = 0; i < rows; i++)
@@ -369,6 +367,130 @@ namespace AppVideoClips
             catch { }
         }
 
+      
+        private void buttonAbout_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonAbout_DDE.BackColor = Theme.Accent; buttonAbout_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonAbout_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonAbout_DDE.BackColor = Theme.PanelAlt; buttonAbout_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonSave_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonSave_DDE.BackColor = Theme.Accent; buttonSave_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonSave_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonSave_DDE.BackColor = Theme.PanelAlt; buttonSave_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonManagement_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonManagement_DDE.BackColor = Theme.Accent; buttonManagement_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonManagement_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonManagement_DDE.BackColor = Theme.PanelAlt; buttonManagement_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonLoad_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonLoad_DDE.BackColor = Theme.Accent; buttonLoad_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonLoad_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonLoad_DDE.BackColor = Theme.PanelAlt; buttonLoad_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonMenu_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonMenu_DDE.BackColor = Theme.Accent; buttonMenu_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonMenu_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonMenu_DDE.BackColor = Theme.PanelAlt; buttonMenu_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonReset_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonReset_DDE.BackColor = Theme.Accent; } catch { }
+        }
+
+        private void buttonReset_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonReset_DDE.BackColor = Theme.Panel; } catch { }
+        }
+
+        private void buttonGraph_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonGraph_DDE.BackColor = Theme.Accent; buttonGraph_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonGraph_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonGraph_DDE.BackColor = Theme.PanelAlt; buttonGraph_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonSearch_DDE_MouseEnter(object sender, EventArgs e)
+        {
+            try { buttonSearch_DDE.BackColor = Theme.Accent; buttonSearch_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void buttonSearch_DDE_MouseLeave(object sender, EventArgs e)
+        {
+            try { buttonSearch_DDE.BackColor = Theme.PanelAlt; buttonSearch_DDE.ForeColor = Theme.Foreground; } catch { }
+        }
+
+        private void ButtonMinimize_DDE_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void ButtonTheme_DDE_Click(object sender, EventArgs e)
+        {
+           
+            Theme.ToggleThemeGlobal();
+        }
+
+        private void ToggleTheme()
+        {
+            Theme.ToggleTheme(this);
+        }
+
+        private void buttonMenu_DDE_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var fmen = new FormMenu();
+                fmen.StartPosition = FormStartPosition.CenterParent;
+                fmen.ShowDialog(this);
+            }
+            catch { }
+        }
+
+        private void buttonManagement_DDE_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var formmanual = new FormManual();
+                formmanual.StartPosition = FormStartPosition.CenterParent;
+                formmanual.ShowDialog(this);
+            }
+            catch { }
+        }
+
+        private void pictureBoxSort_DDE_Click(object sender, EventArgs e)
+        {
+            try { menuStripSort_DDE.Visible = !menuStripSort_DDE.Visible; } catch { }
+        }
+
         private void ñòîëáåöÄëèòåëüíîñòüToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -377,10 +499,7 @@ namespace AppVideoClips
                 var mxsort = ds.SortUbyv(src, 2);
                 ApplySortedMatrixToGrid(mxsort);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Îøèáêà ñîðòèðîâêè: {ex.Message}", "Îøèáêà", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch { }
         }
 
         private void ñòîëáåöÂåñToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -391,10 +510,7 @@ namespace AppVideoClips
                 var mxsort = ds.SortUbyv(src, 5);
                 ApplySortedMatrixToGrid(mxsort);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Îøèáêà ñîðòèðîâêè: {ex.Message}", "Îøèáêà", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch { }
         }
 
         private void ñòîëáåöÄàòàToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -405,63 +521,14 @@ namespace AppVideoClips
                 var mxsort = ds.SortUbyv(src, 0);
                 ApplySortedMatrixToGrid(mxsort);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Îøèáêà ñîðòèðîâêè: {ex.Message}", "Îøèáêà", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch { }
         }
 
-        private void buttonRight_DDE_Click(object sender, EventArgs e)
+        private void buttonGraph_DDE_Click(object sender, EventArgs e)
         {
-            dataGridViewBase_DDE.HorizontalScrollingOffset = dataGridViewBase_DDE.HorizontalScrollingOffset + 10;
+            try { var fg = new FormGraph(); fg.StartPosition = FormStartPosition.CenterParent; fg.Show(); } catch { }
         }
 
-        private void buttonLeft_DDE_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewBase_DDE.HorizontalScrollingOffset >= 10)
-            {
-                dataGridViewBase_DDE.HorizontalScrollingOffset = dataGridViewBase_DDE.HorizontalScrollingOffset - 10;
-            }
-            else
-            {
-                dataGridViewBase_DDE.HorizontalScrollingOffset = 0;
-            }
-
-        }
-
-        private void buttonFilter_DDE_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBoxFilter_DDE.Text))
-            {
-                MessageBox.Show("Ââåäèòå êðèòåðèé äëÿ ôèëüòðàöèè", "Ïðåäóïðåæäåíèå", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            string filterValue = textBoxFilter_DDE.Text;
-            for (int i = 1; i < dataGridViewBase_DDE.Rows.Count; i++)
-            {
-                var row = dataGridViewBase_DDE.Rows[i];
-                if (row.IsNewRow) continue;
-                bool visible = false;
-                for (int j = 0; j < dataGridViewBase_DDE.Columns.Count; j++)
-                {
-                    var cell = row.Cells[j].Value?.ToString();
-                    if (!string.IsNullOrEmpty(cell) && cell.IndexOf(filterValue, StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        visible = true; break;
-                    }
-                }
-                row.Visible = visible;
-            }
-        }
-
-        private void buttonManagement_DDE_Click(object sender, EventArgs e)
-        {
-            FormManual formmanual = new FormManual();
-            formmanual.ShowDialog();
-        }
-
-        // filter menu handlers: use matrix and bounds-check
         private void íàçâàíèåToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -528,126 +595,9 @@ namespace AppVideoClips
             catch { }
         }
 
-        private void buttonAbout_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            try { buttonAbout_DDE.BackColor = Color.DarkTurquoise; buttonAbout_DDE.ForeColor = Color.Black; } catch { }
-        }
-
-        private void buttonAbout_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            try { buttonAbout_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonAbout_DDE.ForeColor = Color.WhiteSmoke; } catch { }
-        }
-
-        private void buttonSave_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            try { buttonSave_DDE.BackColor = Color.DarkTurquoise; buttonSave_DDE.ForeColor = Color.Black; } catch { }
-        }
-
-        private void buttonSave_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            try { buttonSave_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonSave_DDE.ForeColor = Color.WhiteSmoke; } catch { }
-        }
-
-        private void buttonManagement_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            try { buttonManagement_DDE.BackColor = Color.DarkTurquoise; buttonManagement_DDE.ForeColor = Color.Black; } catch { }
-        }
-
-        private void buttonManagement_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            try { buttonManagement_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonManagement_DDE.ForeColor = Color.WhiteSmoke; } catch { }
-        }
-
-        private void buttonLoad_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            try { buttonLoad_DDE.BackColor = Color.DarkTurquoise; buttonLoad_DDE.ForeColor = Color.Black; } catch { }
-        }
-
-        private void buttonLoad_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            try { buttonLoad_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonLoad_DDE.ForeColor = Color.WhiteSmoke; } catch { }
-        }
-
-        private void buttonMenu_DDE_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FormMenu fmen = new FormMenu();
-                fmen.TopMost = true;
-                fmen.ShowDialog();
-            }
-            catch { }
-        }
-
-        private void buttonMenu_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            try { buttonMenu_DDE.BackColor = Color.DarkTurquoise; buttonMenu_DDE.ForeColor = Color.Black; } catch { }
-        }
-
-        private void buttonMenu_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            try { buttonMenu_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonMenu_DDE.ForeColor = Color.WhiteSmoke; } catch { }
-        }
-
-        private void pictureBoxSort_DDE_Click(object sender, EventArgs e)
-        {
-            // optional: toggle visibility of menuStripSort_DDE
-            try { menuStripSort_DDE.Visible = !menuStripSort_DDE.Visible; } catch { }
-        }
-
-        private void buttonReset_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            try { buttonReset_DDE.BackColor = Color.DarkTurquoise; } catch { }
-        }
-
-        private void buttonReset_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            try { buttonReset_DDE.BackColor = Color.FromArgb(60, 60, 60); } catch { }
-        }
-
         private void dataGridViewBase_DDE_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // placeholder
-        }
-
-        private void buttonGraph_DDE_Click(object sender, EventArgs e)
-        {
-            try { FormGraph fg = new FormGraph(); fg.Show(); } catch { }
-        }
-
-        private void buttonGraph_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            try { buttonGraph_DDE.BackColor = Color.DarkTurquoise; buttonGraph_DDE.ForeColor = Color.Black; } catch { }
-        }
-
-        private void buttonGraph_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            try { buttonGraph_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonGraph_DDE.ForeColor = Color.WhiteSmoke; } catch { }
-        }
-
-        private void buttonSearch_DDE_MouseEnter(object sender, EventArgs e)
-        {
-            try { buttonSearch_DDE.BackColor = Color.DarkTurquoise; buttonSearch_DDE.ForeColor = Color.Black; } catch { }
-        }
-
-        private void buttonSearch_DDE_MouseLeave(object sender, EventArgs e)
-        {
-            try { buttonSearch_DDE.BackColor = Color.FromArgb(40, 40, 40); buttonSearch_DDE.ForeColor = Color.WhiteSmoke; } catch { }
-        }
-
-        private void ButtonMinimize_DDE_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void ButtonTheme_DDE_Click(object sender, EventArgs e)
-        {
-            ToggleTheme();
-        }
-
-        private void ToggleTheme()
-        {
-            Theme.ToggleTheme(this);
+         
         }
     }
 }

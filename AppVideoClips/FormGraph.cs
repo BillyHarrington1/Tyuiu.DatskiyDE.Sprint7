@@ -14,10 +14,8 @@ namespace AppVideoClips
         public FormGraph()
         {
             InitializeComponent();
-
             Theme.ApplyTheme(this);
-
-            // add theme toggle button
+            
             try
             {
                 var existing = Controls.OfType<Button>().FirstOrDefault(b => b.Name == "buttonTheme_Added");
@@ -25,7 +23,6 @@ namespace AppVideoClips
                 {
                     var btn = new Button { Name = "buttonTheme_Added", Text = "Тема", Size = new Size(70, 28), BackColor = Color.Transparent, FlatStyle = FlatStyle.Flat, ForeColor = Theme.Foreground };
                     btn.Click += (s, e) => Theme.ToggleThemeGlobal();
-                    // place top-right
                     btn.Location = new Point(this.ClientSize.Width - 90, 8);
                     btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                     Controls.Add(btn);

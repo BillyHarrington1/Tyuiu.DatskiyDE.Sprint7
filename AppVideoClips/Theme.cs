@@ -1,6 +1,3 @@
-using System.Drawing;
-using System.Windows.Forms;
-
 namespace AppVideoClips
 {
     public static class Theme
@@ -12,7 +9,7 @@ namespace AppVideoClips
         public static readonly Color DarkPanel = Color.FromArgb(18, 24, 40);
         public static readonly Color DarkPanelAlt = Color.FromArgb(16, 22, 36);
         public static readonly Color DarkForeground = Color.FromArgb(230, 230, 230);
-        public static readonly Color DarkAccent = Color.FromArgb(48, 84, 145); 
+        public static readonly Color DarkAccent = Color.FromArgb(48, 84, 145);
         public static readonly Color DarkIcon = Color.FromArgb(240,240,240);
 
         // белая тема
@@ -59,10 +56,38 @@ namespace AppVideoClips
             foreach (Control c in parent.Controls)
             {
                 if (c is Panel) c.BackColor = Panel;
-                else if (c is Button) { c.BackColor = PanelAlt; c.ForeColor = Foreground; }
+                else if (c is Button b)
+                {
+                    b.BackColor = PanelAlt;
+                    b.ForeColor = Foreground;
+                    b.FlatStyle = FlatStyle.Flat;
+                    try
+                    {
+                        b.FlatAppearance.BorderSize = 0;
+                        b.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 60, 110);
+                        b.FlatAppearance.MouseDownBackColor = Color.FromArgb(30, 50, 90);
+                    }
+                    catch { }
+                }
                 else if (c is Label) c.ForeColor = Foreground;
                 else if (c is TextBox) { c.BackColor = PanelAlt; c.ForeColor = Foreground; }
-                else if (c is DataGridView dgv) { dgv.BackgroundColor = PanelAlt; dgv.DefaultCellStyle.BackColor = PanelAlt; dgv.DefaultCellStyle.ForeColor = Foreground; }
+                else if (c is DataGridView dgv)
+                {
+                    dgv.EnableHeadersVisualStyles = false;
+                    dgv.BackgroundColor = PanelAlt;
+                    dgv.DefaultCellStyle.BackColor = PanelAlt;
+                    dgv.DefaultCellStyle.ForeColor = Foreground;
+                    dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(15, 20, 35);
+                    dgv.AlternatingRowsDefaultCellStyle.ForeColor = Foreground;
+                    dgv.ColumnHeadersDefaultCellStyle.BackColor = Panel;
+                    dgv.ColumnHeadersDefaultCellStyle.ForeColor = Foreground;
+                    dgv.RowHeadersDefaultCellStyle.BackColor = Panel;
+                    dgv.RowHeadersDefaultCellStyle.ForeColor = Foreground;
+                    dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                    dgv.AllowUserToResizeColumns = true;
+                    dgv.AllowUserToResizeRows = true;
+                }
                 else c.BackColor = PanelAlt;
 
                 if (c is PictureBox pb) pb.BackColor = Color.Transparent;

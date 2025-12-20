@@ -83,20 +83,18 @@ namespace AppVideoClips.Lib
             return result.ToArray();
         }
 
-        // try parse numeric or timespan-like values to double for sorting
+ 
         private static double ParseSortableValue(string s)
         {
             if (string.IsNullOrWhiteSpace(s)) return double.NaN;
             s = s.Trim();
 
-            // Try TimeSpan parse (e.g., 0:02:30 or 00:02:30)
+            // парсы
             if (TimeSpan.TryParse(s, out var ts)) return ts.TotalSeconds;
-
-            // Normalize decimal separators then try double
+         
             var normalized = s.Replace(',', '.');
             if (double.TryParse(normalized, NumberStyles.Any, CultureInfo.InvariantCulture, out var d)) return d;
 
-            // Extract digits and dots if mixed with text (e.g., "750 KB")
             var digits = new string(s.Where(ch => char.IsDigit(ch) || ch == '.' || ch == ',').ToArray()).Replace(',', '.');
             if (!string.IsNullOrEmpty(digits) && double.TryParse(digits, NumberStyles.Any, CultureInfo.InvariantCulture, out d)) return d;
 
@@ -104,8 +102,7 @@ namespace AppVideoClips.Lib
         }
 
         public string[,] SortUbyv(string[,] basa, int column)
-        {
-            // descending
+        {      
             int rows = basa.GetLength(0);
             int cols = basa.GetLength(1);
             if (rows <= 1) return basa;
@@ -136,7 +133,6 @@ namespace AppVideoClips.Lib
 
         public string[,] SortVozr(string[,] basa, int column)
         {
-            // ascending
             int rows = basa.GetLength(0);
             int cols = basa.GetLength(1);
             if (rows <= 1) return basa;

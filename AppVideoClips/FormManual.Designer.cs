@@ -28,12 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormManual));
+            rich_DDE = new RichTextBox();
+            SuspendLayout();
+            // 
+            // rich_DDE
+            // 
+            rich_DDE.Font = new Font("Segoe Print", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
+            rich_DDE.ForeColor = Color.White;
+            rich_DDE.Location = new Point(12, 12);
+            rich_DDE.Name = "rich_DDE";
+            rich_DDE.Size = new Size(532, 530);
+            rich_DDE.TabIndex = 1;
+            rich_DDE.Text = resources.GetString("rich_DDE.Text");
+            // 
+            // FormManual
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(556, 550);
+            Controls.Add(rich_DDE);
+            Name = "FormManual";
+            Text = "Guide";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private RichTextBox rich_DDE;
     }
 }

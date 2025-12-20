@@ -5,7 +5,6 @@
         public FormMenu()
         {
             InitializeComponent();
-            // ensure this welcome form stays above other windows
             this.TopMost = true;
 
             Theme.ApplyTheme(this);
@@ -28,7 +27,6 @@
 
         private void buttonGo_GAM_Click(object sender, EventArgs e)
         {
-            // Signal to Program that user wants to open main workspace
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -50,8 +48,7 @@
         }
 
         private void buttonExit_GAM_Click(object sender, EventArgs e)
-        {
-            // Signal to Program to exit
+        {         
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
@@ -60,14 +57,11 @@
         {
 
         }
-
-        // Open the dedicated FormWatchVideo window instead of simple placeholder
         private void buttonWatch_GAM_Click(object sender, EventArgs e)
         {
             using (var watch = new FormWatchVideo())
             {
-                watch.TopMost = true;
-                // Hide the menu while watching
+                watch.TopMost = true;         
                 this.Hide();
                 watch.ShowDialog();
                 this.Show();

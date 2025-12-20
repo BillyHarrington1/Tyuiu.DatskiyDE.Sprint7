@@ -33,6 +33,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             openFileDialogMain_DDE = new OpenFileDialog();
             panelUpper_DDE = new Panel();
             buttonTheme_DDE = new Button();
@@ -632,6 +633,7 @@
             groupBoxBase_DDE.Controls.Add(dataGridViewBase_DDE);
             groupBoxBase_DDE.Dock = DockStyle.Fill;
             groupBoxBase_DDE.FlatStyle = FlatStyle.Popup;
+            groupBoxBase_DDE.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             groupBoxBase_DDE.ForeColor = SystemColors.ButtonHighlight;
             groupBoxBase_DDE.Location = new Point(0, 0);
             groupBoxBase_DDE.Margin = new Padding(4, 3, 4, 3);
@@ -644,15 +646,16 @@
             // 
             // dataGridViewBase_DDE
             // 
+            dataGridViewBase_DDE.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = Color.Silver;
-            dataGridViewCellStyle1.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle1.Font = new Font("Segoe Print", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             dataGridViewBase_DDE.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewBase_DDE.BackgroundColor = Color.Gray;
             dataGridViewBase_DDE.BorderStyle = BorderStyle.Fixed3D;
             dataGridViewBase_DDE.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(224, 224, 224);
-            dataGridViewCellStyle2.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle2.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             dataGridViewCellStyle2.ForeColor = SystemColors.Desktop;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -662,7 +665,7 @@
             dataGridViewBase_DDE.ColumnHeadersVisible = false;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(224, 224, 224);
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle3.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
             dataGridViewCellStyle3.ForeColor = SystemColors.ButtonHighlight;
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
@@ -670,11 +673,14 @@
             dataGridViewBase_DDE.DefaultCellStyle = dataGridViewCellStyle3;
             dataGridViewBase_DDE.Dock = DockStyle.Fill;
             dataGridViewBase_DDE.GridColor = Color.Gray;
-            dataGridViewBase_DDE.Location = new Point(4, 19);
+            dataGridViewBase_DDE.Location = new Point(4, 26);
             dataGridViewBase_DDE.Margin = new Padding(4, 3, 4, 3);
             dataGridViewBase_DDE.Name = "dataGridViewBase_DDE";
             dataGridViewBase_DDE.RowHeadersVisible = false;
-            dataGridViewBase_DDE.Size = new Size(926, 326);
+            dataGridViewBase_DDE.RowHeadersWidth = 200;
+            dataGridViewCellStyle4.Font = new Font("Segoe Print", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 204);
+            dataGridViewBase_DDE.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewBase_DDE.Size = new Size(926, 319);
             dataGridViewBase_DDE.TabIndex = 0;
             dataGridViewBase_DDE.CellContentClick += dataGridViewBase_DDE_CellContentClick;
             // 
